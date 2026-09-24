@@ -1,0 +1,55 @@
+# Lab environment for Introduction to Machine Learning
+# (Phase 1 of the Tahakom AI Early Careers Program).
+#
+# Pinned to compatible releases so a wheelhouse built weeks before the course
+# installs the same thing in the classroom. See OFFLINE.md for the
+# `pip download` / `--no-index` offline install.
+#
+# Unpinned lines come from the labs' own install cells and have not been
+# resolved together yet: pin them when you build and test the wheelhouse.
+
+# Every day.
+numpy~=2.1
+pandas~=2.2
+scipy~=1.14
+scikit-learn~=1.5
+matplotlib~=3.9
+seaborn~=0.13
+tqdm
+jupyterlab~=4.2
+ipywidgets~=8.1
+
+# Day 1: boosted trees, imbalanced data, and the Kaggle datasets.
+xgboost
+catboost
+imbalanced-learn
+kagglehub
+
+# Days 2-4. CPU build: the classroom laptops will not have CUDA, and a CPU
+# wheel is a much smaller wheelhouse.
+torch~=2.5
+torchvision
+
+# Day 3: text (the optional labs use transformers, NLTK and spaCy).
+gensim
+transformers
+nltk
+spacy
+
+# Day 4: reinforcement learning.
+gymnasium[classic-control,toy-text]
+flappy-bird-gymnasium
+imageio
+imageio-ffmpeg
+
+# Day 5: the MLOps lab. Compatible releases of the versions the notebook pins
+# and was tested with.
+mlflow-skinny~=3.16
+optuna~=5.0
+skops~=0.15
+huggingface_hub~=1.31
+datasets~=4.8
+gradio~=6.27
+gradio_client~=2.7
+pillow
+requests
