@@ -7,10 +7,10 @@ Program**, delivered by KAUST Academy at KAUST: five days, all participants.
 
 | Day | Topic |
 |---|---|
-| 1 | Model Development, Evaluation, and Experimentation |
-| 2 | Neural Network Foundations and Reproducible Development |
-| 3 | Deep Learning Architectures |
-| 4 | Reinforcement Learning |
+| 1 | Model Development and Neural Network Foundations |
+| 2 | Deep Learning Architectures |
+| 3 | Reinforcement Learning Foundations |
+| 4 | Policy Gradients and RL in the Real World |
 | 5 | Responsible AI and MLOps Foundations |
 
 Generated from
@@ -24,23 +24,29 @@ hand-edit, and hand-editing it is always wrong — the next build overwrites it.
 
 ## Where the material comes from
 
-**The Day 4 decks are built here**, from the LaTeX modules in
+**The Day 3 and Day 4 decks are built here**, from the LaTeX modules in
 [`LaTeX/`](LaTeX/README.md): edit a module, run `LaTeX/build.sh`, and the PDF in
 `Slides/Day_N/` is rebuilt. Never edit those PDFs directly; the next build
 overwrites them.
 
-The other decks, and all the notebooks, are copied with unchanged file names
-from `Phase_1_Introduction_to_Machine_Learning/` in the
+The other decks, and all the notebooks, are copied from
+`Phase_1_Introduction_to_Machine_Learning/` in the
 [`Tahakom_Early_Careers`](https://github.com/KAUST-Academy/Tahakom_Early_Careers)
-repository, which holds the LaTeX sources for Days 1 to 3. Change a deck or
-notebook there first, then copy it here:
+repository, which holds the LaTeX sources for its Days 1 to 3. Change a deck or
+notebook there first, then copy it here. The days here follow the schedule as
+taught, which is not the plan there: its Days 1 and 2 were taught together on
+Day 1, and its reinforcement learning day is split over Days 3 and 4.
 
 | `Tahakom_Early_Careers` | This repo |
 |---|---|
-| `Day_N_<Title>/Lectures/` | `Slides/Day_N/` |
-| `Day_N_<Title>/Labs/` | `Labs/Day_N/` |
-| `Day_N_<Title>/Optional/Lectures/` | `Slides/Day_N/Optional/` |
-| `Day_N_<Title>/Optional/Labs/` | `Labs/Day_N/Optional/` |
+| `Day_1_<Title>/` | Day 1, same file names |
+| `Day_2_<Title>/` | Day 1, numbered after Day 1's files: its `Labs/01_PyTorchBasics.ipynb` is `Labs/Day_1/04_PyTorchBasics.ipynb` |
+| `Day_3_<Title>/` | Day 2, same file names |
+| `Day_4_<Title>/` | Days 3 and 4, numbered across both: Labs 1 and 2 on Day 3, Lab 3 on Day 4; decks built from `LaTeX/` |
+| `Day_5_<Title>/` | Day 5, same file names |
+
+Within a day, `Lectures/` is `Slides/Day_N/`, `Labs/` is `Labs/Day_N/`, and
+`Optional/Lectures/` and `Optional/Labs/` are the `Optional/` subfolder of each.
 
 Files are numbered in teaching order within each day. Optional material is
 listed on its day's page, marked *Optional*.
@@ -59,7 +65,7 @@ The rest of this file is the template's manual.
 ├── build.py                    # the generator. Standard library only — no pip install.
 ├── requirements.txt            # the lab environment students install
 ├── OFFLINE.md                  # classroom delivery runbook (no internet)
-├── LaTeX/                      # sources of the Day 4 decks; LaTeX/build.sh builds them into Slides/
+├── LaTeX/                      # sources of the Day 3-4 decks; LaTeX/build.sh builds them into Slides/
 ├── theme/                      # the KAUST Academy theme. Copied to _site/assets/.
 │   ├── css/style.css           #   ported verbatim from the existing course sites
 │   ├── img/                    #   logo

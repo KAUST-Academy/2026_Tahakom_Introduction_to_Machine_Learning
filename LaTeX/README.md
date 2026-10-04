@@ -1,17 +1,17 @@
-# Lecture sources for Day 4
+# Lecture sources for Days 3 and 4
 
-The Day 4 decks are built from this folder. Change a slide by editing a
+The Day 3 and 4 decks are built from this folder. Change a slide by editing a
 module here and rebuilding, not by editing the PDF in `Slides/`.
 
 The modules are a fork of the LaTeX in
 [`Artificial-Intelligence-Courses`](https://github.com/KAUST-Academy/Artificial-Intelligence-Courses),
 taken so that Tahakom-specific changes do not leak into the other courses that
-share those modules. Days 1 to 3 still come from `Tahakom_Early_Careers` (see the
+share those modules. Days 1 and 2 still come from `Tahakom_Early_Careers` (see the
 top-level README).
 
 ```bash
 LaTeX/build.sh                                       # every deck
-LaTeX/build.sh Day_4/01_RL_Foundations.tex          # one deck (path relative to LaTeX/)
+LaTeX/build.sh Day_3/01_RL_Foundations.tex          # one deck (path relative to LaTeX/)
 LaTeX/build.sh --keep-logs ...                       # keep .log/.aux for debugging
 ```
 
@@ -53,7 +53,7 @@ No `-shell-escape`: every image is committed under `images/`, so the
 ```
 LaTeX/
 ├── build.sh
-├── Day_4/01_RL_Foundations.tex                   # one file per deck: the list of modules, in order
+├── Day_3/01_RL_Foundations.tex                   # one file per deck: the list of modules, in order
 ├── Day_4/02_Policy_Gradients_and_RL_in_the_Real_World.tex
 ├── preamble/  style_files/  beamer*.sty         # theme, unchanged from upstream
 ├── sections/<module>/*.tex                      # the slides
@@ -80,7 +80,7 @@ slides back.
 | What | From |
 |---|---|
 | Theme, preamble, and the `rl-foundations`, `rl-real-world`, `vanilla-policy-gradient` and `policy-optimization` modules | `Artificial-Intelligence-Courses` `main` at `696f2e0` (4 October 2026) |
-| `tahakom-rl` | written here: Day 4 agenda, part dividers, outcomes, the morning-to-afternoon hand-over, the advantage bridge, the Lab 3 map, summary |
+| `tahakom-rl` | written here: the two-day RL agenda, part dividers, outcomes, the hand-over from Day 3 to Day 4, the advantage bridge, the Lab 3 map, summary |
 
 Before any edit, the copied tree rebuilt both upstream RL decks with the same
 page counts and the same extracted text as the published PDFs. Each split was
@@ -89,11 +89,10 @@ deck rebuilt through the wrapper is unchanged.
 
 **What differs from upstream.**
 
-- **Day 4** is one day in three parts across two decks, matching the morning
-  and afternoon sessions. The morning deck is *RL Foundations* (Part I, before
-  Labs 1 and 2), ending on a hand-over slide instead of the RL course's road
-  map. The afternoon deck opens with a one-slide recap, then adds the
-  policy-gradient path (Part II: REINFORCE, PPO, GRPO, from the
+- **Reinforcement learning** runs over Days 3 and 4 in three parts, one deck
+  per day. Day 3 is *RL Foundations* (Part I, before Labs 1 and 2), ending on a
+  hand-over slide instead of the RL course's road map. Day 4 opens with a
+  one-slide recap of Day 3, then adds the policy-gradient path (Part II: REINFORCE, PPO, GRPO, from the
   `vanilla-policy-gradient` and `policy-optimization` modules, before Lab 3),
   then *RL in the Real World* (Part III: RLHF, RLAIF and RLVR, the DPO
   overview without its derivation, multi-agent RL and robotics).

@@ -11,10 +11,12 @@
 #   ready  -> renders as a button; `file` must exist or --check fails the build.
 #
 # Material comes from Tahakom_Early_Careers/Phase_1_Introduction_to_Machine_Learning,
-# with the same file names, so a deck or notebook updated there can be copied
-# straight over. Each day's Lectures/ is Slides/Day_N/, its Labs/ is
-# Labs/Day_N/, and its Optional/ material sits in an Optional/ subfolder of
-# each.
+# but the days follow the schedule as taught: its Days 1 and 2 are Day 1 here
+# (its Day 2 files renumbered after Day 1's), its Day 3 is Day 2, and its
+# reinforcement learning day is split over Days 3 and 4. README.md has the full
+# mapping. The Day 3 and 4 decks are built from LaTeX/. Each day's lectures are in
+# Slides/Day_N/, its labs in Labs/Day_N/, and Optional/ material in an Optional/
+# subfolder of each.
 # =============================================================================
 
 [course]
@@ -57,8 +59,8 @@ closes with responsible AI and taking a model to production.
 [[days]]
 slug  = "day1"
 label = "Day 1"
-title = "Model Development, Evaluation, and Experimentation"
-blurb = "Framing a problem, validating a model honestly, choosing the right metric, and preparing data without leakage."
+title = "Model Development and Neural Network Foundations"
+blurb = "Framing a problem, validating a model honestly, choosing the right metric and preparing data without leakage; then neurons, layers, backpropagation and optimizers, and training networks reliably in PyTorch."
 icon  = "ri-bar-chart-box-line"
 
   [[days.resources]]
@@ -73,6 +75,20 @@ icon  = "ri-bar-chart-box-line"
   detail = "Scaling, encoding, pipelines and information leakage, feature selection and engineering, missing values, imbalanced data"
   kind   = "slides"
   file   = "Slides/Day_1/02_Data_Preprocessing.pdf"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Fundamentals of Deep Learning"
+  detail = "The neuron, layers, training by backpropagation, optimizers, and the main network architectures"
+  kind   = "slides"
+  file   = "Slides/Day_1/03_Fundamentals_of_Deep_Learning.pdf"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Practical Deep Learning"
+  detail = "PyTorch implementation, data handling and augmentation, transfer learning, dropout, batch norm, reproducibility"
+  kind   = "slides"
+  file   = "Slides/Day_1/04_Practical_Deep_Learning.pdf"
   status = "ready"
 
   [[days.resources]]
@@ -100,6 +116,30 @@ icon  = "ri-bar-chart-box-line"
   status = "ready"
 
   [[days.resources]]
+  name   = "Lab 4: PyTorch Basics"
+  detail = "Tensors, shapes and operations: the building blocks every later lab uses"
+  kind   = "lab"
+  file   = "Labs/Day_1/04_PyTorchBasics.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_1/04_PyTorchBasics.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 5: Neural Network in NumPy"
+  detail = "Build and train a two-layer network on MNIST from scratch, implementing every step yourself"
+  kind   = "lab"
+  file   = "Labs/Day_1/05_NN_Numpy_MNIST.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_1/05_NN_Numpy_MNIST.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 6: Neural Network in PyTorch"
+  detail = "The same MNIST classifier in PyTorch, with softmax and batch gradient descent"
+  kind   = "lab"
+  file   = "Labs/Day_1/06_NN_Pytorch_MNIST.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_1/06_NN_Pytorch_MNIST.ipynb"
+  status = "ready"
+
+  [[days.resources]]
   name   = "Optional: Classification (Advanced)"
   detail = "A second full classification workflow on weather-type data, from EDA questions to boosted trees"
   kind   = "lab"
@@ -115,70 +155,25 @@ icon  = "ri-bar-chart-box-line"
   colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_1/Optional/02_R_Squared.ipynb"
   status = "ready"
 
-[[days]]
-slug  = "day2"
-label = "Day 2"
-title = "Neural Network Foundations and Reproducible Development"
-blurb = "Neurons, layers, backpropagation and optimizers, then the practice of training networks reliably in PyTorch."
-icon  = "ri-node-tree"
-
-  [[days.resources]]
-  name   = "Fundamentals of Deep Learning"
-  detail = "The neuron, layers, training by backpropagation, optimizers, and the main network architectures"
-  kind   = "slides"
-  file   = "Slides/Day_2/01_Fundamentals_of_Deep_Learning.pdf"
-  status = "ready"
-
-  [[days.resources]]
-  name   = "Practical Deep Learning"
-  detail = "PyTorch implementation, data handling and augmentation, transfer learning, dropout, batch norm, reproducibility"
-  kind   = "slides"
-  file   = "Slides/Day_2/02_Practical_Deep_Learning.pdf"
-  status = "ready"
-
-  [[days.resources]]
-  name   = "Lab 1: PyTorch Basics"
-  detail = "Tensors, shapes and operations: the building blocks every later lab uses"
-  kind   = "lab"
-  file   = "Labs/Day_2/01_PyTorchBasics.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/01_PyTorchBasics.ipynb"
-  status = "ready"
-
-  [[days.resources]]
-  name   = "Lab 2: Neural Network in NumPy"
-  detail = "Build and train a two-layer network on MNIST from scratch, implementing every step yourself"
-  kind   = "lab"
-  file   = "Labs/Day_2/02_NN_Numpy_MNIST.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/02_NN_Numpy_MNIST.ipynb"
-  status = "ready"
-
-  [[days.resources]]
-  name   = "Lab 3: Neural Network in PyTorch"
-  detail = "The same MNIST classifier in PyTorch, with softmax and batch gradient descent"
-  kind   = "lab"
-  file   = "Labs/Day_2/03_NN_Pytorch_MNIST.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/03_NN_Pytorch_MNIST.ipynb"
-  status = "ready"
-
   [[days.resources]]
   name   = "Optional: Images with PyTorch"
   detail = "A complete MNIST pipeline: data preparation, model class, training and validation loops"
   kind   = "lab"
-  file   = "Labs/Day_2/Optional/01_Images_with_PyTorch.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/Optional/01_Images_with_PyTorch.ipynb"
+  file   = "Labs/Day_1/Optional/03_Images_with_PyTorch.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_1/Optional/03_Images_with_PyTorch.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Optional: Tabular Data with PyTorch"
   detail = "A neural network for weather-type classification on tabular data"
   kind   = "lab"
-  file   = "Labs/Day_2/Optional/02_Tabular_With_Pytorch.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/Optional/02_Tabular_With_Pytorch.ipynb"
+  file   = "Labs/Day_1/Optional/04_Tabular_With_Pytorch.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_1/Optional/04_Tabular_With_Pytorch.ipynb"
   status = "ready"
 
 [[days]]
-slug  = "day3"
-label = "Day 3"
+slug  = "day2"
+label = "Day 2"
 title = "Deep Learning Architectures"
 blurb = "CNNs for images, RNNs, LSTMs and GRUs for sequences, and the attention mechanism behind transformers."
 icon  = "ri-stack-line"
@@ -187,137 +182,144 @@ icon  = "ri-stack-line"
   name   = "Introduction to Computer Vision and CNNs"
   detail = "Why CNNs, kernels and filters, padding and strides, pooling, and industry use cases"
   kind   = "slides"
-  file   = "Slides/Day_3/01_Introduction_to_Computer_Vision_and_CNNs.pdf"
+  file   = "Slides/Day_2/01_Introduction_to_Computer_Vision_and_CNNs.pdf"
   status = "ready"
 
   [[days.resources]]
   name   = "Recurrent Neural Networks"
   detail = "RNNs, LSTM and GRU, sequence-to-sequence models, captioning with attention, and their limitations"
   kind   = "slides"
-  file   = "Slides/Day_3/02_Recurrent_Neural_Networks.pdf"
+  file   = "Slides/Day_2/02_Recurrent_Neural_Networks.pdf"
   status = "ready"
 
   [[days.resources]]
   name   = "Transformers"
   detail = "General attention, self-attention, permutation invariance, and the transformer compared with RNNs"
   kind   = "slides"
-  file   = "Slides/Day_3/03_Transformers.pdf"
+  file   = "Slides/Day_2/03_Transformers.pdf"
   status = "ready"
 
   [[days.resources]]
   name   = "Lab 1: CNN from Scratch on Fashion-MNIST"
   detail = "Exercise: write the dataset class, the CNN and the training loop yourself"
   kind   = "lab"
-  file   = "Labs/Day_3/01_Fashin_MNIST_CNN_From_Scratch_Exercise.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/01_Fashin_MNIST_CNN_From_Scratch_Exercise.ipynb"
+  file   = "Labs/Day_2/01_Fashin_MNIST_CNN_From_Scratch_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/01_Fashin_MNIST_CNN_From_Scratch_Exercise.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Lab 2: Image Classification on CIFAR-10"
   detail = "Train and validate a CNN on colour images"
   kind   = "lab"
-  file   = "Labs/Day_3/02_Image_Classification_CNN_CIFAR10.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/02_Image_Classification_CNN_CIFAR10.ipynb"
+  file   = "Labs/Day_2/02_Image_Classification_CNN_CIFAR10.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/02_Image_Classification_CNN_CIFAR10.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Lab 3: RNN, LSTM and GRU"
   detail = "Classify Stack Overflow posts with LSTM and GRU models on GloVe embeddings"
   kind   = "lab"
-  file   = "Labs/Day_3/03_RNN_LSTM_GRU.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/03_RNN_LSTM_GRU.ipynb"
+  file   = "Labs/Day_2/03_RNN_LSTM_GRU.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/03_RNN_LSTM_GRU.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Lab 4: Self-Attention and Multi-Head Attention"
   detail = "Why self-attention, how it works, and how multiple heads see the same sequence differently"
   kind   = "lab"
-  file   = "Labs/Day_3/04_Self_Attention_&_MHA.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/04_Self_Attention_%26_MHA.ipynb"
+  file   = "Labs/Day_2/04_Self_Attention_&_MHA.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/04_Self_Attention_%26_MHA.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Optional: Vector Space and Word Embeddings"
   detail = "Similarity measures, one-hot versus dense vectors, word2vec, GloVe and fastText"
   kind   = "slides"
-  file   = "Slides/Day_3/Optional/01_Vector_Space_and_Word_Embeddings.pdf"
+  file   = "Slides/Day_2/Optional/01_Vector_Space_and_Word_Embeddings.pdf"
   status = "ready"
 
   [[days.resources]]
   name   = "Optional: Pre-trained VGG for Image Classification"
   detail = "Exercise: classify images with a pre-trained VGG network"
   kind   = "lab"
-  file   = "Labs/Day_3/Optional/01_Pre_trained_CNN_with_VGG_for_Image_Classification_Exercise.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/Optional/01_Pre_trained_CNN_with_VGG_for_Image_Classification_Exercise.ipynb"
+  file   = "Labs/Day_2/Optional/01_Pre_trained_CNN_with_VGG_for_Image_Classification_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/Optional/01_Pre_trained_CNN_with_VGG_for_Image_Classification_Exercise.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Optional: Pre-trained VGG (Solution)"
   detail = "Worked solution to the VGG exercise"
   kind   = "lab"
-  file   = "Labs/Day_3/Optional/02_Pre_trained_CNN_with_VGG_for_Image_Classification_Exercise_Solution.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/Optional/02_Pre_trained_CNN_with_VGG_for_Image_Classification_Exercise_Solution.ipynb"
+  file   = "Labs/Day_2/Optional/02_Pre_trained_CNN_with_VGG_for_Image_Classification_Exercise_Solution.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/Optional/02_Pre_trained_CNN_with_VGG_for_Image_Classification_Exercise_Solution.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Optional: Fine-tuning on Cats and Dogs"
   detail = "Fine-tune a pre-trained EfficientNet, and why ImageNet normalization values matter"
   kind   = "lab"
-  file   = "Labs/Day_3/Optional/03_Finetuning_CatsAndDogs.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/Optional/03_Finetuning_CatsAndDogs.ipynb"
+  file   = "Labs/Day_2/Optional/03_Finetuning_CatsAndDogs.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/Optional/03_Finetuning_CatsAndDogs.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Optional: Text Pre-Processing"
   detail = "Tokenization, stop-word removal and normalization with NLTK and spaCy"
   kind   = "lab"
-  file   = "Labs/Day_3/Optional/04_Text_Pre_Processing.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/Optional/04_Text_Pre_Processing.ipynb"
+  file   = "Labs/Day_2/Optional/04_Text_Pre_Processing.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/Optional/04_Text_Pre_Processing.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Optional: Word Embeddings (GloVe)"
   detail = "Sparse versus dense vectors, and exploring pre-trained GloVe embeddings"
   kind   = "lab"
-  file   = "Labs/Day_3/Optional/05_WordEmbedding(GloVe).ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/Optional/05_WordEmbedding%28GloVe%29.ipynb"
+  file   = "Labs/Day_2/Optional/05_WordEmbedding(GloVe).ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/Optional/05_WordEmbedding%28GloVe%29.ipynb"
   status = "ready"
 
 [[days]]
-slug  = "day4"
-label = "Day 4"
-title = "Reinforcement Learning"
-blurb = "Markov decision processes and Q-learning, then policy gradients from REINFORCE to PPO and GRPO, and where RL runs in the real world."
+slug  = "day3"
+label = "Day 3"
+title = "Reinforcement Learning Foundations"
+blurb = "Agents, environments and rewards, Markov decision processes, value functions and the Bellman equation, and Q-learning."
 icon  = "ri-gamepad-line"
 
   [[days.resources]]
   name   = "RL Foundations"
-  detail = "Morning: the agent-environment loop, Markov decision processes, value functions, the Bellman equation and Q-learning (Labs 1 and 2)"
+  detail = "The agent-environment loop, Markov decision processes, value functions, the Bellman equation and Q-learning (Labs 1 and 2)"
   kind   = "slides"
-  file   = "Slides/Day_4/01_RL_Foundations.pdf"
-  status = "ready"
-
-  [[days.resources]]
-  name   = "Policy Gradients and RL in the Real World"
-  detail = "Afternoon: REINFORCE, PPO and GRPO (Lab 3), then RLHF, multi-agent RL and robotics"
-  kind   = "slides"
-  file   = "Slides/Day_4/02_Policy_Gradients_and_RL_in_the_Real_World.pdf"
+  file   = "Slides/Day_3/01_RL_Foundations.pdf"
   status = "ready"
 
   [[days.resources]]
   name   = "Lab 1: Introduction to Reinforcement Learning"
   detail = "Environments, agents, rewards and returns, and policies in Gymnasium"
   kind   = "lab"
-  file   = "Labs/Day_4/01_Introduction_to_Reinforcement_Learning.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/01_Introduction_to_Reinforcement_Learning.ipynb"
+  file   = "Labs/Day_3/01_Introduction_to_Reinforcement_Learning.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/01_Introduction_to_Reinforcement_Learning.ipynb"
   status = "ready"
 
   [[days.resources]]
   name   = "Lab 2: Q-Learning"
   detail = "Build a Q-table, balance exploration and exploitation, and apply the Bellman update"
   kind   = "lab"
-  file   = "Labs/Day_4/02_Q_Table_Learning.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/02_Q_Table_Learning.ipynb"
+  file   = "Labs/Day_3/02_Q_Table_Learning.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/02_Q_Table_Learning.ipynb"
+  status = "ready"
+
+[[days]]
+slug  = "day4"
+label = "Day 4"
+title = "Policy Gradients and RL in the Real World"
+blurb = "Learning the policy directly, from REINFORCE to PPO and GRPO, then where RL runs in the real world: RLHF for language models, multi-agent RL and robotics."
+icon  = "ri-robot-line"
+
+  [[days.resources]]
+  name   = "Policy Gradients and RL in the Real World"
+  detail = "REINFORCE, PPO and GRPO (Lab 3), then RLHF, multi-agent RL and robotics"
+  kind   = "slides"
+  file   = "Slides/Day_4/02_Policy_Gradients_and_RL_in_the_Real_World.pdf"
   status = "ready"
 
   [[days.resources]]
