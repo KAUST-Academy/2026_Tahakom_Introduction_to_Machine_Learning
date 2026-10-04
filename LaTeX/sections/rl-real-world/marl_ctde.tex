@@ -1,0 +1,45 @@
+% ================================================================ 4.2
+% CTDE - TikZ
+\begin{frame}{Centralized Training, Decentralized Execution (CTDE)}
+\centering
+\resizebox{0.78\linewidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize,
+    ag/.style={draw, rounded corners, minimum width=1.8cm, minimum height=0.9cm, align=center, fill=sysblue},
+    cr/.style={draw, rounded corners, minimum width=4.2cm, minimum height=1.0cm, align=center, fill=boxtan},
+    ar/.style={-{Stealth[length=2.2mm]}, thick}]
+
+  % ---- training ----
+  \node[font=\bfseries] at (2.2,3.4) {Training (centralized)};
+  \node[ag] (t1) at (0.6,1.4) {Actor 1};
+  \node[ag] (t2) at (3.4,1.4) {Actor 2};
+  \node[cr] (cc) at (2.0,-0.2) {Centralized critic\\\scriptsize sees all obs.\ \& actions};
+  \draw[ar] (t1) -- (cc);
+  \draw[ar] (t2) -- (cc);
+  \draw[ar] (cc.west) to[bend left=20] (t1.south west);
+  \draw[ar] (cc.east) to[bend right=20] (t2.south east);
+
+  % divider
+  \draw[gray, dashed] (6.0,-0.9) -- (6.0,3.6);
+
+  % ---- execution ----
+  \node[font=\bfseries] at (9.8,3.4) {Execution (decentralized)};
+  \node[ag] (e1) at (8.2,1.4) {Actor 1};
+  \node[ag] (e2) at (11.4,1.4) {Actor 2};
+  \node[draw, rounded corners, dashed, gray, minimum width=4.2cm, minimum height=1.0cm,
+        align=center] (gone) at (9.8,-0.2) {\textcolor{gray}{critic removed}};
+  \node[font=\scriptsize, above=0.05cm of e1] {local obs.};
+  \node[font=\scriptsize, above=0.05cm of e2] {local obs.};
+\end{tikzpicture}%
+}
+\vspace{0.4em}
+\begin{itemize}\itemsep0.2em\small
+    \item \textbf{At training:} a centralized critic sees every agent's
+          observations and actions. Because it accounts for what the others did,
+          each agent's learning signal becomes \emph{stationary}, defusing the
+          non-stationarity problem from the last slide.
+    \item \textbf{At execution:} each agent keeps only its \emph{own actor} acting
+          on its \emph{local observation}; the critic is gone.
+    \item This is the dominant MARL paradigm, the key idea to remember.
+\end{itemize}
+\end{frame}
+

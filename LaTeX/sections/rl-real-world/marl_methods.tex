@@ -1,0 +1,23 @@
+% ================================================================ 4.3
+% Methods (table)
+\begin{frame}{MARL Methods (Named, Not Derived)}
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}p{3.4cm} p{3.0cm} p{5.0cm}@{}}
+\toprule
+\textbf{Method} & \textbf{Family} & \textbf{What it solves} \\
+\midrule
+Independent learners & each runs own DQN & simple baseline; \emph{ignores}
+        non-stationarity \\
+MADDPG \scriptsize(Lowe 2017) & CTDE actor--critic & centralized critic
+        \emph{per agent}; mixed coop/compete \\
+VDN / QMIX \scriptsize(2018) & value decomposition & factor a joint value into
+        per-agent utilities (QMIX: monotonic mixing) for cooperative tasks \\
+\bottomrule
+\end{tabular}
+\vfill
+{\footnotesize The progression: from pretending other agents are part of the
+environment, to explicitly modelling the joint value during training.}
+\srcnote{\scriptsize Lowe et al.\ 2017 (MADDPG); Sunehag et al.\ 2018 (VDN); Rashid et al.\ 2018 (QMIX).}
+\end{frame}
+

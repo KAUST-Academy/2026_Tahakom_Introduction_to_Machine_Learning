@@ -1,0 +1,36 @@
+\section{Summary}
+
+% ---------------------------------------------------------------- Closer
+\begin{frame}{Summary: Three Threads}
+\begin{itemize}\itemsep0.45em
+    \item \textbf{RLHF (the focus).} When reward is hard to specify, learn it:
+          \textbf{SFT $\rightarrow$ RM $\rightarrow$ PPO/GRPO}. Comparisons become a
+          loss through \textbf{Bradley--Terry}; the KL leash exists because the RM is
+          a \emph{proxy} (reward hacking). Solving ``reward minus $\beta$-KL'' gives
+          $\pi_{\text{ref}}$ tilted by $e^{\,r/\beta}$, and reading that tilt
+          backwards is \textbf{DPO}: no RM, no RL loop, the same
+          $-\log\sigma(\Delta)$ loss. The frontier climbs the oversight spectrum:
+          \textbf{RLHF $\rightarrow$ RLAIF $\rightarrow$ RLVR} (verifiable rewards,
+          how reasoning models like DeepSeek-R1 are trained).
+    \item \textbf{Multi-Agent RL.} The environment is \emph{non-stationary} as
+          others learn; \textbf{CTDE} is the dominant fix; \textbf{self-play}
+          builds an automatic curriculum.
+    \item \textbf{Robotics.} Sample cost, safety, resets, and the reality gap;
+          \textbf{domain randomization} and max-entropy methods (SAC $\to$ SERL)
+          make real-hardware RL practical.
+\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- Forward hook
+\begin{frame}{What's Next}
+\textbf{RL Frontiers:} Meta-RL, Multi-task RL, Hierarchical RL.
+\begin{itemize}\itemsep0.4em
+    \item \empr{Do not confuse them:} \textbf{multi-\emph{agent}} RL (today, many
+          agents sharing one environment) is \emph{not} \textbf{multi-\emph{task}}
+          RL (next time, one agent across many tasks).
+    \item Self-play's emergent curriculum (today) is one route to the
+          \textbf{emergent complexity} we explore next.
+    \item The verifiable-reward recipe (RLVR) is the current frontier for training
+          general reasoning agents.
+\end{itemize}
+\end{frame}

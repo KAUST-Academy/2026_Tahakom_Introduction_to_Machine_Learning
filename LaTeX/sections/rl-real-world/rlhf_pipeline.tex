@@ -1,0 +1,113 @@
+% ================================================================ 3.3a  Vocabulary
+\begin{frame}{First, the Vocabulary: an LLM Is a Policy}
+Everything that follows is just the familiar RL language, applied to text.
+\vfill
+\begin{itemize}\itemsep0.4em\small
+    \item \textbf{Prompt $x$}, the input (a question or instruction).
+          \hfill \emph{the \textbf{state}}
+    \item \textbf{Response $y$}, the model's full answer.
+          \hfill \emph{the \textbf{action}}
+    \item \textbf{Policy $\pi_\theta(y \mid x)$}, the language model itself:
+          given a prompt, it assigns a probability to possible responses and
+          samples one. The weights $\theta$ are what we train.
+    \item It writes the answer one \emph{token} (word-piece) at a time; at each step
+          a final layer, the \textbf{LM head}, outputs a probability over the
+          next token.
+\end{itemize}
+\vfill
+\begin{center}
+\empr{So ``train the policy'' simply means ``adjust the language model's weights
+$\theta$.''}
+\end{center}
+\end{frame}
+
+% ================================================================ 3.3  Roadmap (plain English)
+\begin{frame}{The RLHF Pipeline: The Map}
+Three stages. We build each one up over the next slides; for now, just the plain
+English.
+\vfill
+\centering
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize,
+    box/.style={draw, rounded corners, minimum width=3.6cm, minimum height=1.7cm, align=center, fill=sysblue},
+    ar/.style={-{Stealth[length=2.8mm]}, very thick}]
+  \node[box] (s1) at (0, 0)  {\textbf{1.\ Imitate}\\[0.25em]\scriptsize teach it to\\\scriptsize follow instructions};
+  \node[box] (s2) at (5.2, 0){\textbf{2.\ Score}\\[0.25em]\scriptsize learn what\\\scriptsize people prefer};
+  \node[box] (s3) at (10.4, 0){\textbf{3.\ Optimize}\\[0.25em]\scriptsize push toward\\\scriptsize preferred answers};
+  \draw[ar] (s1) -- (s2);
+  \draw[ar] (s2) -- (s3);
+\end{tikzpicture}%
+}
+\vfill
+\begin{itemize}\itemsep0.25em\small
+    \item \textbf{Start:} a raw language model that can produce text but doesn't
+          reliably do what you ask.
+    \item \textbf{End:} a model that follows instructions \emph{and} leans toward
+          the answers people actually want.
+\end{itemize}
+\srcnote{\scriptsize Standard pipeline: Ouyang et al.\ (InstructGPT), 2022; Stiennon et al.\ 2020; Bai et al.\ 2022.}
+\end{frame}
+
+% ================================================================ 3.3 Stage 1: SFT
+\begin{frame}{Stage 1 (Imitate): Supervised Fine-Tuning (SFT)}
+\begin{itemize}\itemsep0.5em
+    \item \textbf{Problem:} a raw pretrained model can \emph{continue} text, but
+          doesn't reliably answer questions or follow instructions.
+    \item \textbf{Fix: show it examples.} Collect prompts paired with
+          \emph{human-written ideal answers}, and train the model to imitate them.
+          This is ordinary supervised learning (next-token prediction), no RL
+          yet.
+    \item The result is a decent instruction-follower. We \textbf{freeze a copy of
+          it} and call it the \empr{reference model $\pi_{\text{ref}}$}; it will
+          be our anchor in Stages 2 and 3.
+\end{itemize}
+\vspace{0.5em}
+\begin{center}\footnotesize
+SFT can only \emph{copy} the demonstrations it was given. To go \emph{beyond} them,
+we need to capture what people \emph{prefer}. That is Stage 2.
+\end{center}
+\end{frame}
+
+% ---------------------------------------------------------------- 3.3 Stage 2a: the RM in words
+\begin{frame}{Stage 2 (Score): A Model That Rates Answers}
+\begin{itemize}\itemsep0.5em
+    \item We want a \textbf{reward model} $r_\phi$: a network (its own weights
+          $\phi$) that reads a (prompt, response) and outputs \emph{a single
+          number} (\emph{how good is this answer?}). Higher means better.
+    \item \textbf{Where does its training data come from?} Comparisons. For one
+          prompt $x$, show a human two candidate responses; they pick the better
+          one. We label the pair:
+    \begin{itemize}\footnotesize\itemsep0.15em
+        \item $y^+$, the response the human \textbf{preferred},
+        \item $y^-$, the response they \textbf{rejected}.
+    \end{itemize}
+    \item \textbf{What we want from $r_\phi$:} give $y^+$ a higher score than $y^-$,
+          on every pair. Next slide: how to turn ``preferred'' into a trainable
+          loss.
+\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- 3.3 Stage 2b: Bradley-Terry loss
+\begin{frame}{Turning Comparisons into a Loss: Bradley--Terry}
+How likely is a person to prefer $y^+$ over $y^-$? It should grow with the
+\textbf{gap in their scores}, squeezed into a probability by the sigmoid $\sigma$
+(``$\succ$'' reads \emph{``is preferred over''}):
+\[
+    \underbrace{P\big(y^+ \succ y^- \mid x\big)}_{\text{chance the human picks } y^+}
+    \;=\; \sigma\big(\, r(y^+) - r(y^-) \, \big),
+    \qquad \sigma(z) = \frac{1}{1 + e^{-z}}
+\]
+Train $r_\phi$ to make these probabilities match the human labels (maximum
+likelihood). The negative log-likelihood is the \textbf{reward-model loss}:
+\[
+    L_{\mathrm{RM}} \;=\; -\log\sigma\big(\, r_\phi(y^+) - r_\phi(y^-) \, \big)
+\]
+\begin{itemize}\itemsep0.2em\small
+    \item In plain words: \empr{push the preferred answer's score above the rejected
+          one's.}
+    \item Remember this $-\log\sigma(\Delta)$ shape: the \textbf{exact same form}
+          comes back when we reach DPO.
+    \item Only the \emph{gap} between scores matters; the absolute scale is free.
+\end{itemize}
+\end{frame}
+

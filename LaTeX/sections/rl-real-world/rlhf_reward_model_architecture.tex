@@ -1,0 +1,44 @@
+% ---------------------------------------------------------------- 3.3 RM architecture aside
+\begin{frame}{What Is the Reward Model, Concretely?}
+\vspace{0.8em}
+\begin{center}\small
+We've said \emph{what} the reward model does (rates answers) and \emph{how} it's
+trained (the Bradley--Terry loss). \textbf{Here is what it physically is.}
+\end{center}
+\vspace{0.6em}
+\begin{columns}[c]
+\begin{column}{0.54\textwidth}
+\begin{itemize}\itemsep0.35em\small
+    \item Start from the SFT model $\pi_{\text{ref}}$, the same transformer
+          backbone.
+    \item A \textbf{head} is the small output layer stacked on top of that backbone.
+          The \textbf{LM head} turns the backbone's features into a probability over
+          the next token.
+    \item Swap it for a \textbf{scalar head}: a layer that emits \emph{one number},
+          $r_\phi(x, y)$, for the whole (prompt, response). Train it with the
+          Bradley--Terry loss from the last slide.
+    \item So the reward model is \emph{``the same network, one number out instead
+          of a token distribution.''}
+\end{itemize}
+\end{column}
+\begin{column}{0.46\textwidth}
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize,
+    box/.style={draw, rounded corners, minimum width=2.8cm, minimum height=0.9cm, align=center},
+    ar/.style={-{Stealth[length=2.2mm]}, thick}]
+  \node[box, fill=sysblue, minimum height=1.4cm] (body) at (0, 0) {Transformer body\\\scriptsize (init.\ from SFT)};
+  \node[box, fill=gray!25] (lm)  at (-1.5, 2.0) {LM head};
+  \node[box, fill=mlgreen] (sc)  at ( 1.6, 2.0) {scalar head};
+  \draw[ar, gray] (body) -- (lm);
+  \draw[ar] (body) -- (sc);
+  \node[font=\large, gray] at (-1.5, 2.0) {};
+  \draw[red, thick] (-2.5, 1.5) -- (-0.5, 2.5);
+  \draw[red, thick] (-2.5, 2.5) -- (-0.5, 1.5);
+  \node[above=0.05cm of sc, font=\scriptsize] {$r_\phi(x, y)\in\mathbb{R}$};
+\end{tikzpicture}%
+}
+\end{column}
+\end{columns}
+\end{frame}
+

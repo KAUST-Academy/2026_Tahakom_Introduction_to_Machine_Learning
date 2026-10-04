@@ -1,0 +1,20 @@
+% Shared colour palette for this lecture's hand-built diagrams.
+% (No theme colour macros exist in the preamble; we use plain xcolor names
+%  plus this small section-local palette throughout the new TikZ.)
+\definecolor{sysblue}{RGB}{189,215,238}   % model / policy boxes
+\definecolor{mlgreen}{RGB}{169,208,142}   % positive / verifiable
+\definecolor{boxgreen}{RGB}{197,224,180}
+\definecolor{boxblue}{RGB}{180,199,231}
+\definecolor{boxred}{RGB}{244,177,177}    % warning / fragile
+\definecolor{boxtan}{RGB}{248,203,173}    % human / preference inputs
+\definecolor{accentred}{RGB}{192,0,0}     % punchline callouts
+
+% Source/citation footnote with no visible mark (suppresses the stray "0"
+% that \footnote[0] leaves behind). Counter is restored so numbering is unaffected.
+\newcommand{\srcnote}[1]{%
+  \begingroup
+  \renewcommand{\thefootnote}{}%
+  \footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup}
+

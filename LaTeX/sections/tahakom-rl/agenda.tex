@@ -1,0 +1,21 @@
+% The day at a glance: three parts of the lecture and the lab each one feeds.
+\begin{frame}{Today: Three Parts, Three Labs}
+\renewcommand{\arraystretch}{1.6}
+\small
+\centering
+% 0.9: at full \textwidth the theme's right margin makes tabularx overflow by 30pt.
+\begin{tabularx}{0.9\textwidth}{@{}>{\raggedright\arraybackslash}p{0.2\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.24\textwidth}@{}}
+\toprule
+\textbf{Part} & \textbf{What we cover} & \textbf{Lab} \\
+\midrule
+I.\ Foundations & The agent--environment loop, Markov decision processes, value functions, the Bellman equation, Q-learning & 1.\ Gymnasium basics \newline 2.\ Q-learning \\
+II.\ Learning a policy directly & Policy gradients, REINFORCE, baselines and advantages, PPO, GRPO & 3.\ GRPO on Flappy Bird \\
+III.\ RL in the real world & RLHF and verifiable rewards for language models, multi-agent RL, robotics & --- \\
+\bottomrule
+\end{tabularx}
+\vfill
+\begin{center}
+\itshape Part I learns what every action is worth and acts on it.\\
+Part II skips the values and improves the policy itself.
+\end{center}
+\end{frame}

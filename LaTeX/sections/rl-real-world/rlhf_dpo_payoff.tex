@@ -1,0 +1,27 @@
+% ---------------------------------------------------------------- 3.6 payoff: the identity
+\begin{frame}{The Payoff: Your LM Is Secretly a Reward Model}
+Put the DPO loss next to the \emph{reward-model} loss from Stage 2. They are the \textbf{same shape}:
+\begin{align*}
+    L_{\mathrm{RM}}  &= -\log\sigma\big(\, r_\phi(y^+) - r_\phi(y^-) \, \big) \\[0.3em]
+    L_{\mathrm{DPO}} &= -\log\sigma\big(\, \hat{r}(y^+) - \hat{r}(y^-) \, \big),
+        \qquad \hat{r}(y) = \beta \log\frac{\pi_\theta(y)}{\pi_{\text{ref}}(y)}
+\end{align*}
+\begin{itemize}\itemsep0.25em\small
+    \item The only change: the learned reward $r_\phi$ is replaced by the
+          \emph{implicit} reward $\hat{r} = \beta\log\pi_\theta/\pi_{\text{ref}}$,
+          read straight off the policy. \empr{So the policy \emph{is} the reward
+          model}; that is why ``your LM is secretly a reward model.''
+    \item \textbf{Honesty caveat:} the equivalence is exact only if the reward model
+          were Bradley--Terry-optimal. In practice \textbf{DPO $\neq$ PPO}: DPO
+          gives up the RL loop's fresh on-policy samples.
+\end{itemize}
+\vspace{0.2em}
+\begin{center}
+\setlength{\fboxsep}{6pt}%
+\colorbox{boxgreen!50}{\parbox{0.9\textwidth}{\centering\small
+The same Bradley--Terry loss, with the reward read off the policy itself:
+no reward model and no RL loop. \empr{That's the whole trick.}}}
+\end{center}
+\srcnote{\scriptsize Rafailov et al. \href{https://arxiv.org/abs/2305.18290}{Direct Preference Optimization}, NeurIPS 2023 (full author list in References). Variants: IPO, KTO, ORPO.}
+\end{frame}
+

@@ -4,6 +4,24 @@
 /dist/
 /wheelhouse/
 
+# LaTeX intermediates: LaTeX/build.sh deletes them unless run with --keep-logs.
+/LaTeX/*.aux
+/LaTeX/*.bbl
+/LaTeX/*.bcf
+/LaTeX/*.blg
+/LaTeX/*.fdb_latexmk
+/LaTeX/*.fls
+/LaTeX/*.log
+/LaTeX/*.nav
+/LaTeX/*.out
+/LaTeX/*.pdf
+/LaTeX/*.run.xml
+/LaTeX/*.snm
+/LaTeX/*.synctex.gz
+/LaTeX/*.toc
+/LaTeX/*.vrb
+/LaTeX/build/
+
 # Python
 __pycache__/
 *.py[cod]

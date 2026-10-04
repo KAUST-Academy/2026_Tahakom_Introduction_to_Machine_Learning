@@ -1,0 +1,49 @@
+\section{Policy Gradients}
+\begin{frame}{}
+    \LARGE Reinforcement Learning: \textbf{Policy Gradients}
+\end{frame}
+
+\begin{frame}{Policy Gradients: Why Learn a Policy Directly?}
+    \begin{itemize}
+        \setlength{\itemsep}{0.9em}
+        \item {\large \textbf{To act well, you don't need the exact worth of every option --- you only need to pick the best one.}}
+        \item $Q(s,a)$ answers the \textbf{hard} question: \textit{``How much total future reward will I get for every action, in every state?''} --- a detailed, complicated function of the whole world.
+        \item $\pi(s)$ answers the \textbf{easy} question: \textit{``What should I do right now?''} --- often a simple rule.
+        \pause
+        \item \textbf{Grasping:} figuring out the exact long-term payoff of every possible gripper motion is hard. But the actual behavior --- ``close the hand once it's around the object'' --- is simple.
+        \item[$\Rightarrow$] So why solve the hard problem ($Q$) just to act? \textbf{Learn the policy directly.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Policy Gradients}
+    \begin{itemize}
+        \item Formally, let us define a class of parameterized policies: 
+        $$\Pi = \{ \pi_\theta \mid \theta \in \mathbb{R}^m \}$$
+        \item For each policy, we can define its expected return:
+        $$\mathcal{J}(\theta) = \mathbb{E} \left [ \sum_{t \geq 0} \gamma^t r_t \mid \pi_\theta \right ]$$
+        \pause
+        \item Our goal is to find the optimal policy: $\theta^{\star} = \arg \max_\theta \mathcal{J}(\theta)$
+        \item How can we achieve this?
+        \pause
+        \item \textbf{Solution}: Perform gradient ascent on the policy parameters!
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Policy Parameterization: What Does $\pi_\theta$ Look Like?}
+    \begin{itemize}
+        \item \textbf{Discrete actions} --- Softmax policy:
+        \[
+            \pi_\theta(a \mid s) = \frac{e^{\phi(s,a)^\top \theta}}{\sum_{a'} e^{\phi(s,a')^\top \theta}}
+        \]
+        The network outputs one logit per action; softmax converts them to probabilities.
+        \pause
+        \item \textbf{Continuous actions} --- Gaussian policy:
+        \[
+            \pi_\theta(a \mid s) = \mathcal{N}\!\left(\mu_\theta(s),\, \sigma_\theta(s)^2\right)
+        \]
+        The network outputs a mean and standard deviation; actions are sampled from the resulting Gaussian.
+        \pause
+        \item Gaussian policies are the standard choice for continuous control (e.g.\ robot joint torques).
+        \item Both are differentiable w.r.t.\ $\theta$, which is what makes gradient ascent possible.
+    \end{itemize}
+\end{frame}

@@ -1,0 +1,14 @@
+% Lab 3 (GRPO on Flappy Bird): what each TASK blank computes, and what result to expect.
+\begin{frame}{Lab 3: GRPO on Flappy Bird}
+One update: play a \textbf{group} of $G = 8$ episodes with the current policy, score each episode by its return $R_i$, then take a few PPO-Clip gradient steps on that data.
+\vspace{0.3em}
+\begin{itemize}\itemsep0.5em
+    \item \textbf{TASK 1, the group advantage:} $\hat{A}_i = \dfrac{R_i - \mathrm{mean}(R)}{\mathrm{std}(R)}$, shared by every step of episode $i$.
+    \item \textbf{TASK 2, the probability ratio:} $r_t(\theta) = \exp\!\big(\log \pi_\theta(a_t|s_t) - \log \pi_{\theta_\text{old}}(a_t|s_t)\big)$.
+    \item \textbf{TASK 3, the clipped surrogate:} loss $= -\,\mathrm{mean}\big[\min\big(r_t \hat{A},\ \mathrm{clip}(r_t, 1-\varepsilon, 1+\varepsilon)\, \hat{A}\big)\big]$, minus a small entropy bonus that keeps the policy exploring.
+\end{itemize}
+\vspace{0.3em}
+\begin{block}{What to expect}
+The bird learns to flap and clears the first pipe or two, not a high score. One number per episode is coarse credit assignment: every flap in a run gets the same advantage, which is the variance problem from the REINFORCE section. A critic (PPO) or per-step advantages would learn faster.
+\end{block}
+\end{frame}

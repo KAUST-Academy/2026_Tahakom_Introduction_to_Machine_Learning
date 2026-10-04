@@ -1,0 +1,20 @@
+% Opens the afternoon deck: the morning in one slide, ending on the advantage,
+% which the policy-gradient part builds on.
+\section{This Morning}
+\begin{frame}{This Morning in One Slide}
+\begin{itemize}\itemsep0.7em
+    \item \textbf{The problem.} An MDP $(\mathcal{S}, \mathcal{A}, R, P, \gamma)$; a policy
+          $\pi$ maps states to actions; the goal is the largest expected discounted return.
+    \item \textbf{Values.} $V^{\pi}(s)$: how good a state is. $Q^{\pi}(s,a)$: how good an
+          action is in that state. The \textbf{advantage}
+          $A^{\pi}(s,a) = Q^{\pi}(s,a) - V^{\pi}(s)$: how much better that action is than
+          the policy's average.
+    \item \textbf{Q-learning.} Nudge $Q(s,a)$ toward the Bellman target
+          $r + \gamma \max_{a'} Q(s',a')$, and act $\varepsilon$-greedily.
+\end{itemize}
+\vfill
+\begin{center}
+\itshape This afternoon: skip the values and improve the policy itself.\\
+The advantage is how we will decide which actions to make more likely.
+\end{center}
+\end{frame}

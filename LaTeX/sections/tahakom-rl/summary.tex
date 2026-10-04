@@ -1,0 +1,20 @@
+\section{Summary}
+\begin{frame}{Summary}
+\begin{itemize}\itemsep0.6em
+    \item \textbf{The language.} An MDP $(\mathcal{S}, \mathcal{A}, R, P, \gamma)$; a
+          policy maps states to actions; the goal is the largest expected discounted
+          return.
+    \item \textbf{Value-based RL.} Nudge $Q(s,a)$ toward the Bellman target
+          $r + \gamma \max_{a'} Q(s',a')$ and act greedily, with some
+          $\varepsilon$-exploration. Q-learning needs no model of the environment.
+    \item \textbf{Policy-based RL.} Step along
+          $\sum_t \hat{A}_t\, \nabla_\theta \log \pi_\theta(a_t|s_t)$: make
+          better-than-average actions more likely. Baselines and advantages cut the
+          variance; PPO clips each step; GRPO takes its baseline from a group of
+          attempts.
+    \item \textbf{The real world.} Often the reward is the hard part. RLHF learns it
+          from comparisons and needs a KL leash against reward hacking; verifiable
+          rewards remove the learned judge; robots add safety and the sim-to-real
+          gap.
+\end{itemize}
+\end{frame}

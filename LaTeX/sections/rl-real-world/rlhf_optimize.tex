@@ -1,0 +1,111 @@
+% ================================================================ 3.3 Stage 3 bridge
+\begin{frame}{Stage 3 (Optimize): Finally, Reinforcement Learning}
+\begin{itemize}\itemsep0.5em
+    \item We now have a reward model $r_\phi$ that scores answers. \textbf{The RL
+          loop:} the policy generates a response, $r_\phi$ scores it, and we update
+          the policy's weights to earn higher scores, with PPO or GRPO.
+    \item The policy starts as $\pi_{\text{ref}}$ (the frozen SFT model) and
+          improves from there.
+    \item \empr{One catch:} $r_\phi$ is only a \emph{learned proxy} for human taste,
+          not the real thing. Optimize it too hard and the model learns to
+          \emph{game} it. The next slide shows how that happens, and the fix.
+\end{itemize}
+\end{frame}
+
+% ================================================================ 3.4
+% Reward hacking / why the KL term exists (NEW) - TikZ Goodhart curve
+\begin{frame}{Why the KL Penalty Exists: Reward Over-Optimization}
+The RL objective is the reward-model score minus a leash to the reference policy
+($\beta$ sets how hard we pull back toward $\pi_{\text{ref}}$):
+\[
+    r_{\text{total}} \;=\; r_\phi
+        \;-\; \beta\, D_{\text{KL}}\!\left(\pi_\theta \, \|\, \pi_{\text{ref}}\right)
+\]
+\vspace{-0.8em}
+\begin{columns}[c]
+\begin{column}{0.54\textwidth}
+\centering
+\resizebox{0.88\linewidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize]
+  % axes
+  \draw[-{Stealth[length=2mm]}] (0, 0) -- (7, 0) node[right]{\scriptsize KL from $\pi_{\text{ref}}$};
+  \draw[-{Stealth[length=2mm]}] (0, 0) -- (0, 5)  node[above]{\scriptsize reward};
+  % proxy reward: monotonically increasing
+  \draw[thick, blue, smooth] plot coordinates
+    {(0, 0.3) (1, 1.4) (2, 2.4) (3, 3.2) (4, 3.8) (5, 4.2) (6, 4.5)};
+  \node[blue, right] at (6, 4.6) {\scriptsize proxy (RM)};
+  % true reward: rises then falls
+  \draw[thick, accentred, smooth] plot coordinates
+    {(0, 0.3) (1, 1.5) (2, 2.6) (3, 3.2) (3.2, 3.25) (4, 2.9) (5, 2.0) (6, 1.0)};
+  \node[accentred, right] at (6, 1.0) {\scriptsize true (human-intended)};
+  % KL operating point
+  \draw[dashed, gray] (3.2, 0) -- (3.2, 3.25);
+  \node[gray, align=center, font=\tiny] at (3.2, -0.5) {KL penalty\\keeps us here};
+  % reward-hacking gap
+  \draw[<->, gray] (5, 4.2) -- (5, 2.0);
+  \node[align=center, font=\tiny] at (5.95, 3.1) {reward\\hacking};
+\end{tikzpicture}%
+}
+\end{column}
+\begin{column}{0.46\textwidth}
+\footnotesize
+The reward model is a \textbf{proxy}. Optimize it too hard and you climb the proxy
+while the \emph{real} objective collapses, \empr{Goodhart's law}.
+\vspace{0.5em}
+\begin{itemize}\itemsep0.2em
+    \item Proxy reward (RM) keeps rising.
+    \item True reward rises, then \emph{falls}.
+    \item \textbf{Why the leash works:} the penalty grows with KL distance, so each
+          step away from $\pi_{\text{ref}}$ costs more. Past the peak, the extra
+          proxy gain is outweighed by the penalty, so the best-scoring policy sits
+          \emph{near the peak}, not in the hacked region.
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{-0.3em}
+\srcnote{\scriptsize Gao, Schulman, Hilton. \href{https://arxiv.org/abs/2210.10760}{Scaling Laws for Reward Model Overoptimization}, 2022.}
+\end{frame}
+
+% ================================================================ 3.5
+% PPO -> GRPO (pays off the Policy Optimization deck) - TikZ side by side
+\begin{frame}{The RL Back-End: PPO $\rightarrow$ GRPO}
+\centering
+\resizebox{0.96\linewidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize,
+    box/.style={draw, rounded corners, minimum width=2.4cm, minimum height=1.0cm, align=center},
+    ar/.style={-{Stealth[length=2.2mm]}, thick}]
+
+  % ---- PPO panel ----
+  \node[font=\bfseries] at (1.6, 3.5) {PPO};
+  \node[box, fill=sysblue] (actor) at (1.6, 2.3) {Actor $\pi_\theta$};
+  \node[box, fill=boxred]  (critic) at (1.6, 0.6) {Critic $V_\phi$};
+  \draw[ar] (actor) -- node[right, font=\scriptsize]{advantage} (critic);
+  \draw[ar] (critic) -- (actor);
+  \node[align=center, font=\tiny, accentred] at (1.6, -0.7)
+        {the fragile, expensive\\half of PPO};
+
+  % divider
+  \draw[gray, dashed] (4.0, -1.1) -- (4.0, 3.8);
+
+  % ---- GRPO panel ----
+  \node[font=\bfseries] at (8.5, 3.5) {GRPO};
+  \node[box, fill=sysblue] (gactor) at (8.5, 2.3) {Actor $\pi_\theta$};
+  \node[draw, rounded corners, fill=boxgreen, align=center, minimum width=3.6cm]
+        (grp) at (8.5, 0.6) {samples $\{y_1, \dots, y_G\}$\\for the same prompt};
+  \node[box, fill=boxtan, minimum width=3.0cm] (base) at (8.5, -0.9)
+        {group-mean baseline};
+  \draw[ar] (gactor) -- (grp);
+  \draw[ar] (grp) -- (base);
+  \draw[ar] (base.east) -- ++(0.5, 0) |- (gactor.east);
+  \node[align=center, font=\tiny] at (12.6, 1.5)
+        {$\hat{A}_i = \dfrac{r_i - \mathrm{mean}(r)}{\mathrm{std}(r)}$\\[0.3em]\textbf{no critic}};
+\end{tikzpicture}%
+}
+\vfill
+{\footnotesize \empr{The critic estimates a response's expected reward to form the
+advantage: PPO's brittle, expensive component.} GRPO deletes it: the baseline is
+just the average reward over a group of samples for the same prompt. PPO was the
+original RLHF back-end; \textbf{GRPO is now common for LLM RL.}}
+\srcnote{\scriptsize Shao et al. \href{https://arxiv.org/abs/2402.03300}{DeepSeekMath} (GRPO), 2024; DeepSeek-AI, \href{https://arxiv.org/abs/2501.12948}{DeepSeek-R1}, 2025.}
+\end{frame}
+

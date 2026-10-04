@@ -1,0 +1,19 @@
+% ---------------------------------------------------------------- 3.6 B3: DPO in practice
+\begin{frame}{DPO in Practice: What You Give Up}
+DPO's simplicity has a cost: you lose the control knobs the RL loop gave you.
+\begin{itemize}\itemsep0.5em\small
+    \item \textbf{It constrains only the \emph{gap}, nothing else.} The loss just
+          pushes the preferred answer's favoring above the rejected one's. With no
+          on-policy sampling to pin down absolute behaviour, it can push \emph{both}
+          down, leaking probability onto unrelated answers it never saw. RLHF's
+          RL loop and ``don't-drift'' anchor would catch that; DPO has neither.
+    \item \textbf{Length bias (shared, but harder to patch).} If the data favours
+          long answers, \emph{both} RLHF and DPO turn verbose. RLHF lets you subtract
+          an explicit length penalty from the reward; DPO has no separate reward to
+          adjust, so length control must be bolted on as extra loss terms.
+    \item \textbf{No fresh samples.} The policy only ever sees the fixed preference
+          pairs, so it can drift off that distribution, the price of dropping the
+          RL loop.
+\end{itemize}
+\end{frame}
+

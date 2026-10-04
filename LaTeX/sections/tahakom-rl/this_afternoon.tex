@@ -1,0 +1,17 @@
+% Closes the morning deck: where Q-learning runs out, and what the afternoon does about it.
+\begin{frame}{This Afternoon: Learning the Policy Directly}
+\begin{itemize}\itemsep0.7em
+    \item Q-learning learns what every action is worth, then acts greedily. That needs a
+          $\max$ over actions, which gets hard when actions are many or continuous, and
+          the policy it gives is always deterministic.
+    \item \textbf{Policy gradients} skip the values and adjust the policy itself:
+          REINFORCE $\rightarrow$ PPO $\rightarrow$ GRPO. You implement GRPO in Lab 3.
+    \item Then \textbf{RL in the real world}: RLHF for language models, multi-agent RL and
+          robotics.
+\end{itemize}
+\vfill
+\begin{center}
+\itshape Bring one idea from this morning: the advantage
+$A^{\pi}(s,a) = Q^{\pi}(s,a) - V^{\pi}(s)$.
+\end{center}
+\end{frame}

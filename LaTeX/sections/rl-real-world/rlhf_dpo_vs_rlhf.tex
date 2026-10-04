@@ -1,0 +1,41 @@
+% ---------------------------------------------------------------- 3.6 minimal contrast
+\begin{frame}{RLHF vs DPO}
+\centering
+\resizebox{0.92\linewidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize,
+    b/.style={draw, rounded corners, minimum width=1.9cm, minimum height=0.85cm, align=center},
+    ar/.style={-{Stealth[length=2mm]}, thick}]
+  % RLHF row
+  \node[font=\bfseries] at (-1.2, 1.2) {RLHF};
+  \node[b, fill=boxtan]  (p1) at (1.0, 1.2) {prefs};
+  \node[b, fill=sysblue] (rm) at (3.4, 1.2) {RM $r_\phi$};
+  \node[b, fill=boxgreen](rl) at (5.9, 1.2) {RL loop};
+  \node[b, fill=sysblue] (po) at (8.4, 1.2) {policy};
+  \draw[ar] (p1)--(rm); \draw[ar] (rm)--(rl); \draw[ar] (rl)--(po);
+  % DPO row
+  \node[font=\bfseries] at (-1.2, -0.6) {DPO};
+  \node[b, fill=boxtan]  (p2) at (1.0, -0.6) {prefs};
+  \node[b, fill=boxgreen](ls) at (4.0, -0.6) {one loss $L_{\mathrm{DPO}}$};
+  \node[b, fill=sysblue] (po2)at (8.4, -0.6) {policy};
+  \draw[ar] (p2)--(ls); \draw[ar] (ls)--(po2);
+\end{tikzpicture}%
+}
+\vfill
+\begin{center}
+\setlength{\fboxsep}{6pt}%
+\colorbox{boxred!50}{\parbox{0.8\textwidth}{\centering
+\textbf{DPO is the offline RL of alignment.}}}
+\end{center}
+\vspace{0.4em}
+{\footnotesize \empr{Frame it as an analogy, not an identity.} The shared property
+is \emph{offline optimization without distribution coverage} (same family, not
+the same mechanism):
+\begin{itemize}\itemsep0.1em\footnotesize
+    \item \textbf{Offline RL:} the \emph{value function} extrapolates on
+          out-of-distribution (OOD) \emph{actions}.
+    \item \textbf{DPO:} the \emph{policy / implicit reward} is unconstrained on OOD
+          \emph{responses}, because it never samples on-policy.
+\end{itemize}}
+\srcnote{\scriptsize Cf.\ Xu et al., \href{https://arxiv.org/abs/2404.10719}{Is DPO Superior to PPO for LLM Alignment?}, ICML 2024.}
+\end{frame}
+

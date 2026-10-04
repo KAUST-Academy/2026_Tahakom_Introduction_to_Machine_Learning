@@ -1,0 +1,63 @@
+% Day 4, afternoon lecture: Parts II and III of the day (Lab 3 follows Part II).
+% The policy-gradient path (REINFORCE -> PPO -> GRPO) from the RL course's
+% policy-gradient and policy-optimization modules, then RL in the Real World
+% without its multi-lecture recap and without the DPO derivation.
+\documentclass[10pt, aspectratio=169]{beamer}
+
+% Include preamble files
+\input{preamble/packages}
+\input{preamble/commands}
+\input{preamble/beamer_settings}
+
+\title[Policy Gradients \& RL in the Real World]{Policy Gradients and RL in the Real World}
+
+\usetikzlibrary{positioning,fit,shapes.geometric,arrows.meta,calc,backgrounds}
+
+\begin{document}
+
+\input{sections/cover}
+\input{sections/tahakom-rl/agenda}
+% Colours and \srcnote for the Part III diagrams; no frames.
+\input{sections/rl-real-world/palette}
+\input{sections/tahakom-rl/morning_recap}
+\input{sections/tahakom-rl/learning_outcomes_afternoon}
+
+% ---------------------------------------------------------------- Part II: Learning a policy directly
+\input{sections/tahakom-rl/part2}
+\input{sections/vanilla-policy-gradient/value_vs_policy_based}
+\input{sections/vanilla-policy-gradient/policy_gradient}
+\input{sections/vanilla-policy-gradient/reinforce_algorithm}
+\input{sections/vanilla-policy-gradient/variance_reduction}
+\input{sections/vanilla-policy-gradient/pg_vs_q_learning}
+\input{sections/tahakom-rl/advantage_sources}
+\input{sections/policy-optimization/step_size_matters}
+\input{sections/policy-optimization/surrogate_objective}
+\input{sections/policy-optimization/ppo_idea}
+\input{sections/policy-optimization/ppo_clipped_objective}
+\input{sections/policy-optimization/ppo_clip_visualization}
+\input{sections/policy-optimization/grpo}
+\input{sections/tahakom-rl/lab3_map}
+
+% ---------------------------------------------------------------- Part III: RL in the real world
+\input{sections/tahakom-rl/part3}
+\input{sections/tahakom-rl/real_world_intro}
+\input{sections/rl-real-world/rlhf_reward_problem}
+\input{sections/rl-real-world/rlhf_pipeline}
+\input{sections/rl-real-world/rlhf_reward_model_architecture}
+\input{sections/rl-real-world/rlhf_optimize}
+\input{sections/rl-real-world/rlhf_dpo_overview}
+\input{sections/rl-real-world/rlhf_dpo_payoff}
+\input{sections/rl-real-world/rlhf_dpo_in_practice}
+\input{sections/rl-real-world/rlhf_scaling_oversight}
+\input{sections/rl-real-world/marl_intro}
+\input{sections/rl-real-world/marl_ctde}
+\input{sections/rl-real-world/marl_self_play}
+\input{sections/rl-real-world/robotics_challenges}
+\input{sections/rl-real-world/systems-survey}
+
+% ---------------------------------------------------------------- Wrap-up
+\input{sections/tahakom-rl/summary}
+\input{sections/rl-real-world/references}
+\input{sections/tahakom-rl/references_pg}
+
+\end{document}

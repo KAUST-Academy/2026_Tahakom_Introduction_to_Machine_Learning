@@ -1,0 +1,46 @@
+% ================================================================ 3.6 intro: what is DPO
+\begin{frame}{A Simpler Path: Direct Preference Optimization (DPO)}
+\begin{itemize}\itemsep0.45em\small
+    \item \textbf{The pain.} The full pipeline is heavy: Stage 2 trains a
+          \emph{separate} reward model, and Stage 3 runs an RL loop juggling several
+          models at once (policy, reference, reward model, and, for PPO, a
+          critic), which is finicky to tune.
+    \item \textbf{The question.} The reward model exists only to score the
+          preferences we \emph{already collected}. What if we skip it, and the RL
+          loop, and tune the policy \emph{straight from the preference pairs}
+          $(y^+, y^-)$?
+    \item \textbf{DPO (Rafailov et al., 2023):} exactly that, a single
+          supervised-style loss on preference pairs, applied directly to
+          \textbf{the policy $\pi_\theta$} (the SFT model we are fine-tuning).
+          \empr{No reward model. No RL loop.}
+\end{itemize}
+\vspace{0.4em}
+\begin{center}\small
+\setlength{\fboxsep}{5pt}%
+\colorbox{boxblue!40}{\parbox{0.92\textwidth}{\centering
+\textbf{RLHF:}\; preferences $\to$ train reward model $\to$ RL loop $\to$ policy\\[0.3em]
+\textbf{DPO:}\;\; preferences $\to$ one loss $\to$ policy}}
+\end{center}
+\vspace{0.3em}
+{\footnotesize But how can you train toward a reward you never built? The plain-English
+idea is on the next slide, then the loss it leads to. The derivation, a page of algebra starting from the RLHF objective, is in Rafailov et al.\ (2023).}
+\end{frame}
+
+% ---------------------------------------------------------------- 3.6 intuition (plain English)
+\begin{frame}{The DPO Trick, in Plain English}
+\textbf{Delete the judge: the chatbot is already its own judge.}
+\begin{itemize}\itemsep0.55em
+    \item Look at how much \textbf{more likely} the current chatbot is to give an
+          answer than the \emph{original} (starting) model was. If it has become much
+          more likely to say answer A, that \emph{is} the chatbot ``rating A
+          highly.'' \empr{That ratio, ``how much more do I favour this than I used
+          to'', is the score.}
+    \item So DPO throws away the separate judge \emph{and} the practice loop, and
+          trains the chatbot directly so that, for each comparison, \textbf{its own
+          favouring of the preferred answer beats its favouring of the rejected
+          one.} One model, one training step, no loop.
+    \item Rafailov et al.\ make this exact. The next slide shows the loss, and why
+          their paper is titled \empr{``your LM is secretly a reward model.''}
+\end{itemize}
+\end{frame}
+

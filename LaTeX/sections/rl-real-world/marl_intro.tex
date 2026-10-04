@@ -1,0 +1,53 @@
+\section{Multi-Agent Reinforcement Learning}
+
+% ---------------------------------------------------------------- Thread transition
+\begin{frame}{}
+\vfill
+\centering
+{\large Thread 2 of 3}\\[0.5em]
+{\LARGE \textbf{Multi-Agent RL}}\\[0.8em]
+{\footnotesize\itshape The RLHF deep dive is done. A shorter overview now: what
+changes when \emph{other learning agents} share your environment.}
+\vfill
+\end{frame}
+
+% ================================================================ 4.1
+% Why MARL is hard (non-stationarity) - TikZ
+\begin{frame}{Why Multi-Agent RL Is Hard: Non-Stationarity}
+\centering
+\resizebox{0.92\linewidth}{!}{%
+\begin{tikzpicture}[font=\footnotesize,
+    box/.style={draw, rounded corners, minimum width=2.2cm, minimum height=1.0cm, align=center},
+    ar/.style={-{Stealth[length=2.2mm]}, thick}]
+
+  % ---- single-agent ----
+  \node[font=\bfseries] at (1.6,3.2) {Single-agent};
+  \node[box, fill=sysblue] (a1) at (0,1.6) {Agent};
+  \node[box, fill=boxgreen](e1) at (3.2,1.6){Environment\\\scriptsize stationary};
+  \draw[ar] (a1.north) to[bend left=35] node[above,font=\scriptsize]{action} (e1.north);
+  \draw[ar] (e1.south) to[bend left=35] node[below,font=\scriptsize]{state, reward} (a1.south);
+
+  % divider
+  \draw[gray, dashed] (5.4,-0.6) -- (5.4,3.4);
+
+  % ---- multi-agent ----
+  \node[font=\bfseries] at (9.5,3.2) {Multi-agent};
+  \node[box, fill=sysblue] (a2) at (7.0,1.6) {Agent $i$};
+  \node[draw, rounded corners, fill=boxred, align=center, minimum width=3.6cm, minimum height=1.7cm]
+        (e2) at (11.0,1.6) {Environment\\\scriptsize \emph{contains other}\\\scriptsize \emph{learning agents}\\\scriptsize non-stationary};
+  \draw[ar] (a2.north) to[bend left=25] node[above,font=\scriptsize]{action} (e2.north west);
+  \draw[ar] (e2.south west) to[bend left=25] node[below,font=\scriptsize]{state, reward} (a2.south);
+\end{tikzpicture}%
+}
+\vfill
+\begin{itemize}\itemsep0.25em\small
+    \item Each agent's environment is \textbf{non-stationary}: the others are
+          updating their policies at the same time, so the ground shifts as they
+          learn; single-agent convergence guarantees break.
+    \item Formalized as a \textbf{Markov game} (stochastic game), the multi-agent
+          generalization of the MDP.
+    \item Three regimes along one axis: \textbf{cooperative} / \textbf{competitive}
+          / \textbf{mixed}.
+\end{itemize}
+\end{frame}
+

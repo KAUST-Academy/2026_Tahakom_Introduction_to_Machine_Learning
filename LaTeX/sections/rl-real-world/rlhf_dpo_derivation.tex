@@ -1,0 +1,195 @@
+% ---------------------------------------------------------------- 3.6 derivation: Step 1
+\begin{frame}{Where DPO Comes From (Step 1 of 5): The RLHF Objective}
+We start from the goal Stage 3 already gave us: earn reward, but stay near the
+reference model.
+\[
+    \max_{\pi}\;\; \mathbb{E}_{y\sim\pi(\cdot\mid x)}\big[\, r(y)\, \big]
+    \;-\; \beta\, D_{\mathrm{KL}}\!\big(\pi(\cdot\mid x)\, \big\|\, \pi_{\text{ref}}(\cdot\mid x)\big)
+\]
+\begin{itemize}\itemsep0.45em\small
+    \item \textbf{What:} $\pi$ is the policy we optimize; $r(y)$ is the reward for a
+          response $y$; $D_{\mathrm{KL}}(\pi\|\pi_{\text{ref}})$ measures how far
+          $\pi$ has drifted from the frozen SFT model $\pi_{\text{ref}}$; $\beta$
+          sets the strength of that leash.
+    \item \textbf{Why:} maximize reward \emph{without} drifting into the
+          reward-hacking region: this is exactly the Goodhart trade-off from a few
+          slides back, written as one objective.
+    \item \textbf{How:} nothing new yet: this is just the Stage-3 RLHF objective.
+          Everything that follows is solving it on paper.
+\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- 3.6 derivation: Step 1 -> 2
+\begin{frame}{Step 1 $\rightarrow$ Step 2, part (a): Setting It Up}
+Fix one prompt $x$ and just \emph{solve} Step 1: maximize over the numbers
+$\pi(y)$. But $\pi$ is not free, it must be a distribution: $\sum_y \pi(y) = 1$.
+\vspace{0.4em}
+\begin{itemize}\itemsep0.25em\small
+    \item \textbf{Where the $\lambda$ term comes from.} The standard tool for
+          ``maximize $f$ \emph{subject to} $g=0$'' is a \textbf{Lagrange multiplier}:
+          add $\lambda\, g$ to the objective, then set derivatives to zero. Here
+          $g(\pi) = \sum_y \pi(y) - 1$, which is zero exactly when $\pi$ is a valid
+          distribution.
+    \item \textbf{Why that is allowed:} on the feasible set $g=0$, so
+          $\lambda\,g$ adds \emph{nothing} to the objective, whatever $\lambda$ is.
+          We lose nothing; what we gain is that the constraint now appears in the
+          derivative. ($\lambda$ is an unknown number, and we will never need its
+          value.)
+\end{itemize}
+\vspace{0.3em}
+So we maximize, written out as sums:
+\vspace{-0.2em}
+\[
+    J(\pi) \;=\; \sum_y \pi(y)\, r(y)
+    \;-\; \beta \sum_y \pi(y)\log\frac{\pi(y)}{\pi_{\text{ref}}(y)}
+    \;+\; \lambda\Big(\sum_y \pi(y) - 1\Big)
+\]
+\vspace{-0.6em}
+
+Differentiate with respect to one $\pi(y)$ and set to zero, using
+$\frac{d}{dp}\big[p\log\frac{p}{q}\big] = \log\frac{p}{q} + 1$:
+\vspace{-0.3em}
+\[
+    r(y) \;-\; \beta\Big[\log\tfrac{\pi(y)}{\pi_{\text{ref}}(y)} + 1\Big] \;+\; \lambda
+    \;=\; 0
+\]
+\end{frame}
+
+% ---------------------------------------------------------------- 3.6 derivation: Step 1 -> 2 (b)
+\begin{frame}{Step 1 $\rightarrow$ Step 2, part (b): Solving It}
+Rearrange to get $\pi(y)$ \emph{alone on the left}, no $\pi$ on the right: that
+is what ``solve for the policy'' means.
+\begin{align*}
+    \beta\log\frac{\pi(y)}{\pi_{\text{ref}}(y)} &= r(y) + \lambda - \beta
+        && \text{\scriptsize(collect the log on one side)}\\[0.05em]
+    \log\frac{\pi(y)}{\pi_{\text{ref}}(y)} &= \frac{r(y)}{\beta}
+        \;+\; \underbrace{\Big(\tfrac{\lambda}{\beta} - 1\Big)}_{\textstyle \triangleq\, c}
+        && \text{\scriptsize(divide \emph{both sides} by $\beta$)}\\[0.05em]
+    \pi(y) &= \pi_{\text{ref}}(y)\; e^{\,r(y)/\beta}\cdot e^{\,c}
+        && \text{\scriptsize(exponentiate both sides)}
+\end{align*}
+\vspace{-1.6em}
+\begin{itemize}\itemsep0.1em\footnotesize
+    \item \textbf{Nothing went missing.} $r(y)$ became $r(y)/\beta$ when we divided
+          through by $\beta$, which is also why $\beta$ lands in a denominator; and
+          $\lambda$ folded into $c=\lambda/\beta-1$. Neither has a $y$ in it, so
+          neither can depend on the response.
+    \item \empr{That is where the exponential is born:} the KL made us solve for a
+          \emph{log}-probability, so undoing the log puts $r/\beta$ in an exponent.
+    \item $e^{\,c}$ is one number per prompt, pinned by the constraint
+          $\sum_y\pi(y)=1$:
+          $e^{\,c} = 1/\sum_y \pi_{\text{ref}}(y)e^{\,r(y)/\beta} \triangleq 1/Z(x)$.
+          \textbf{That is all $Z$ ever is.}
+    \item This $\pi$ is \emph{the} maximizer, so Step 2 renames it
+          \empr{$\pi^\star$}: the star only means ``the optimal one''.
+\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- 3.6 derivation: Step 2
+\begin{frame}{Where DPO Comes From (Step 2 of 5): The Optimal Policy}
+So the \textbf{Step-1 objective} (maximize reward minus the $\beta$-KL leash) has a
+closed-form maximizer, the one we just built:
+\[
+    \pi^\star(y\mid x) \;=\; \frac{1}{Z(x)}\;\pi_{\text{ref}}(y\mid x)\;
+        e^{\, r(y)/\beta},
+    \qquad
+    Z(x) \;=\; \sum_{y}\pi_{\text{ref}}(y\mid x)\, e^{\, r(y)/\beta}
+\]
+\begin{itemize}\itemsep0.3em\small
+    \item \textbf{What:} $\pi^\star$ is the policy that \emph{maximizes Step 1}, the
+          one we just solved for; the star is only notation for ``the optimal one'',
+          as opposed to a generic candidate $\pi$.
+          $Z(x)$ is the \emph{normalizer} (partition function) that makes the
+          probabilities sum to 1; it depends \emph{only} on the prompt $x$.
+          Remember that. Equivalently
+          $Z(x)=\mathbb{E}_{y\sim\pi_{\text{ref}}}\big[e^{\,r(y)/\beta}\big]$:
+          intractable, but not mysterious.
+    \item \textbf{How / reading the formula:} take the reference policy and reweight
+          each response by $e^{\, r(y)/\beta}$: higher-reward responses get
+          up-weighted, and $\beta$ sets how sharply. $\beta\!\to\!\infty$ gives
+          $\pi^\star\!=\!\pi_{\text{ref}}$ (leash tight, don't move);
+          $\beta\!\to\!0$ collapses onto the single best response.
+    \item \textbf{Nothing here is specific to language.} This $\pi_{\text{ref}}\cdot
+          e^{\,r/\beta}$ shape (Gibbs/Boltzmann) is what ``reward minus KL''
+          \emph{always} produces, whatever the policy is over.
+\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- 3.6 derivation: Step 3
+\begin{frame}{Where DPO Comes From (Step 3 of 5): Invert for the Reward}
+Take $\log$ of Step 2's formula, then solve for $r(y)$ (just algebra):
+\begin{align*}
+    \log\pi^\star(y\mid x)
+        &= \log\pi_{\text{ref}}(y\mid x) \;+\; \frac{r(y)}{\beta} \;-\; \log Z(x)
+        && \text{\scriptsize($\log$ of a product)}\\[0.3em]
+    \Longrightarrow\quad
+    r(y) &= \beta\log\frac{\pi^\star(y\mid x)}{\pi_{\text{ref}}(y\mid x)}
+        \;+\; \beta\log Z(x)
+        && \text{\scriptsize(move terms, multiply by $\beta$)}
+\end{align*}
+\begin{itemize}\itemsep0.15em\small
+    \item \textbf{What:} $r(y)$ is the same \emph{reward} as in Steps 1--2, \emph{not}
+          a probability ratio; and $\pi_{\text{ref}}$ is the \textbf{frozen SFT
+          model}, \emph{not} PPO's $\pi_{\text{old}}$ (total displacement from the
+          base model, not one trust-region step).
+    \item \textbf{Intuition, and it is the whole idea:} Step 2 said the optimum is
+          $\pi_{\text{ref}}$ \emph{tilted} by $e^{\,r/\beta}$, so \empr{the tilt is
+          the reward}: see how much $\pi^\star$ up-weighted a response, take the log,
+          multiply by $\beta$. Behaviour reveals the objective: \textbf{inverse RL}
+          again, now in closed form.
+    \item \textbf{Scale check ($\beta=0.1$):} a response made $e^{10}\!\approx\!
+          22{,}000\times$ more likely $\Rightarrow$ reward $+1.0$; one \emph{halved}
+          $\Rightarrow$ $-0.07$. Nothing moved $\Rightarrow$ $r$ constant: nothing is
+          preferred over anything.
+    \item \textbf{How:} the snag is $\beta\log Z(x)$, impossible to compute. Step 4
+          removes it.
+\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- 3.6 derivation: Step 4
+\begin{frame}{Where DPO Comes From (Step 4 of 5): The $Z(x)$ Cancels}
+Feed Step 3's reward into the Bradley--Terry model
+$P(y^+\!\succ y^-\mid x)=\sigma\big(r(y^+)-r(y^-)\big)$. Only the \emph{difference}
+of rewards appears:
+\[
+    r(y^+) - r(y^-) =
+    \beta\log\frac{\pi^\star(y^+)}{\pi_{\text{ref}}(y^+)}
+    - \beta\log\frac{\pi^\star(y^-)}{\pi_{\text{ref}}(y^-)}
+    + \underbrace{\beta\log Z(x) - \beta\log Z(x)}_{=\, 0}
+\]
+\begin{itemize}\itemsep0.45em\small
+    \item \textbf{What:} Bradley--Terry scores a \emph{pair} by the gap in rewards,
+          never the absolute values.
+    \item \textbf{Why:} $Z(x)$ depends only on the prompt $x$, so it is identical
+          for $y^+$ and $y^-$; in the difference it \textbf{cancels exactly}.
+    \item \textbf{How:} that single cancellation is the whole reason DPO is
+          possible: the intractable term vanishes, leaving an expression in
+          $\pi^\star$ and $\pi_{\text{ref}}$ only.
+    \item \textbf{Not luck.} $\beta\log Z(x)$ is a per-prompt constant, so absolute
+          reward was never recoverable from a policy in the first place: the same
+          ``\emph{only the gap matters, the scale is free}'' we saw in
+          Bradley--Terry. The term \emph{had} to cancel.
+\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- 3.6 derivation: Step 5
+\begin{frame}{Where DPO Comes From (Step 5 of 5): The DPO Loss}
+$\pi^\star$ is unknown; it is the optimum we are trying to reach. Replace it with
+our trainable policy $\pi_\theta$ and fit the human labels by maximum likelihood:
+\[
+    L_{\mathrm{DPO}} = -\log\sigma\!\Big(
+        \beta\log\tfrac{\pi_\theta(y^+)}{\pi_{\text{ref}}(y^+)}
+        - \beta\log\tfrac{\pi_\theta(y^-)}{\pi_{\text{ref}}(y^-)}\Big)
+\]
+\begin{itemize}\itemsep0.45em\small
+    \item \textbf{What:} the final DPO loss, depending only on $\pi_\theta$,
+          the frozen $\pi_{\text{ref}}$, and the preference pair $(y^+, y^-)$.
+    \item \textbf{Why:} no reward model and no RL loop, just a supervised loss on
+          preference pairs, applied directly to $\pi_\theta$.
+    \item \textbf{How:} the same Bradley--Terry maximum likelihood as the reward
+          model, but with the \emph{implicit} reward
+          $\hat r(y)=\beta\log\pi_\theta(y)/\pi_{\text{ref}}(y)$ in place of a
+          learned $r_\phi$.
+\end{itemize}
+\end{frame}
+

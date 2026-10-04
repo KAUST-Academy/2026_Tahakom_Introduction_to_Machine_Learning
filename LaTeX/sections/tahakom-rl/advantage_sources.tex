@@ -1,0 +1,17 @@
+% Bridge from REINFORCE to PPO and GRPO: all three take the same policy-gradient
+% step; they differ only in how they estimate the advantage.
+\begin{frame}{Where Does $\hat{A}_t$ Come From? Three Answers}
+Every method from here on takes the same step, $\theta \leftarrow \theta + \alpha \sum_t \hat{A}_t\, \nabla_\theta \log \pi_\theta(a_t|s_t)$. They differ only in how they estimate the advantage $\hat{A}_t$:
+\vspace{0.3em}
+\begin{block}{REINFORCE: a sampled return minus a baseline}
+$\hat{A}_t = \sum_{t' \geq t} \gamma^{t'-t} r_{t'} - b(s_t)$. Unbiased, but it rests on a single noisy rollout.
+\end{block}
+\pause
+\begin{block}{Actor--critic (PPO): learn a second network, the critic}
+A \textbf{critic} $V_\phi(s)$ is trained to predict returns. One real reward plus the critic's guess for the rest gives $\hat{A}_t \approx r_t + \gamma V_\phi(s_{t+1}) - V_\phi(s_t)$. Lower variance, but now two networks train together.
+\end{block}
+\pause
+\begin{block}{Group baseline (GRPO): compare attempts at the same task}
+Make $G$ attempts from the same start (or answer the same prompt $G$ times) and score each against the group: $\hat{A}_i = R_i - \mathrm{mean}(R_1, \dots, R_G)$. No critic at all.
+\end{block}
+\end{frame}

@@ -287,21 +287,21 @@ icon  = "ri-stack-line"
 slug  = "day4"
 label = "Day 4"
 title = "Reinforcement Learning"
-blurb = "Agents, environments and rewards, Markov decision processes, Q-learning, and policy optimization with GRPO."
+blurb = "Markov decision processes and Q-learning, then policy gradients from REINFORCE to PPO and GRPO, and where RL runs in the real world."
 icon  = "ri-gamepad-line"
 
   [[days.resources]]
   name   = "RL Foundations"
-  detail = "Types of RL, Markov decision processes, policies, value functions and Q-learning"
+  detail = "Morning: the agent-environment loop, Markov decision processes, value functions, the Bellman equation and Q-learning (Labs 1 and 2)"
   kind   = "slides"
   file   = "Slides/Day_4/01_RL_Foundations.pdf"
   status = "ready"
 
   [[days.resources]]
-  name   = "RL in the Real World"
-  detail = "Reinforcement learning applied beyond toy environments"
+  name   = "Policy Gradients and RL in the Real World"
+  detail = "Afternoon: REINFORCE, PPO and GRPO (Lab 3), then RLHF, multi-agent RL and robotics"
   kind   = "slides"
-  file   = "Slides/Day_4/02_RL_in_real_world.pdf"
+  file   = "Slides/Day_4/02_Policy_Gradients_and_RL_in_the_Real_World.pdf"
   status = "ready"
 
   [[days.resources]]

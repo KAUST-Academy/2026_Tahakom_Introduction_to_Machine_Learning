@@ -24,10 +24,15 @@ hand-edit, and hand-editing it is always wrong — the next build overwrites it.
 
 ## Where the material comes from
 
-The decks and notebooks are copied, with unchanged file names, from
-`Phase_1_Introduction_to_Machine_Learning/` in the
+**The Day 4 decks are built here**, from the LaTeX modules in
+[`LaTeX/`](LaTeX/README.md): edit a module, run `LaTeX/build.sh`, and the PDF in
+`Slides/Day_N/` is rebuilt. Never edit those PDFs directly; the next build
+overwrites them.
+
+The other decks, and all the notebooks, are copied with unchanged file names
+from `Phase_1_Introduction_to_Machine_Learning/` in the
 [`Tahakom_Early_Careers`](https://github.com/KAUST-Academy/Tahakom_Early_Careers)
-repository, which holds the LaTeX sources and the day plans. Change a deck or
+repository, which holds the LaTeX sources for Days 1 to 3. Change a deck or
 notebook there first, then copy it here:
 
 | `Tahakom_Early_Careers` | This repo |
@@ -54,6 +59,7 @@ The rest of this file is the template's manual.
 ├── build.py                    # the generator. Standard library only — no pip install.
 ├── requirements.txt            # the lab environment students install
 ├── OFFLINE.md                  # classroom delivery runbook (no internet)
+├── LaTeX/                      # sources of the Day 4 decks; LaTeX/build.sh builds them into Slides/
 ├── theme/                      # the KAUST Academy theme. Copied to _site/assets/.
 │   ├── css/style.css           #   ported verbatim from the existing course sites
 │   ├── img/                    #   logo

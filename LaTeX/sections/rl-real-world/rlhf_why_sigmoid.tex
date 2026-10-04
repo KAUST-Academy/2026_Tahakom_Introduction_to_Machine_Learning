@@ -1,0 +1,23 @@
+% ---------------------------------------------------------------- 3.3 aside: why the sigmoid
+\begin{frame}{Why a Sigmoid? Why Not Just Subtract the Scores?}
+\textbf{Because we need a probability, and the gap is not one.}
+\vspace{0.6em}
+\begin{itemize}\itemsep0.45em\small
+    \item Each label is a \emph{binary event}: the human clicked $y^+$. Fitting by
+          \textbf{maximum likelihood} means choosing $\phi$ to make the clicks we
+          actually observed as likely as possible under the model, i.e.\ maximizing
+          \[
+              \prod_{\text{comparisons}} P_\phi(\text{the choice the human made})
+          \]
+    \item \empr{Every factor in that product has to be a probability.} If the model
+          emits an unbounded number instead, the product is not a likelihood of
+          anything: it has no maximum (push the number up forever), and its $\log$ is
+          undefined once it goes negative. There is nothing to fit.
+    \item So the model must output $P\in[0,1]$ per comparison, while the score gap
+          $r(y^+)-r(y^-)$ is a free real number. $\sigma$ is the monotone map
+          $\mathbb{R}\to(0,1)$ with the right endpoints: gap $0 \to 0.5$
+          (a coin flip, the model is indifferent), gap $\to+\infty \to 1$,
+          gap $\to-\infty \to 0$.
+\end{itemize}
+\end{frame}
+

@@ -1,0 +1,63 @@
+\section{Learning Rewards from Feedback: RLHF}
+
+% ================================================================ 3.1a  The wall
+\begin{frame}{First, a Reward We Cannot Write Down}
+\begin{itemize}\itemsep0.5em
+    \item Every method so far assumed a reward function $r$ we could
+          \emph{write down}: the game score, $-$distance to a target, $+1$ for a
+          win.
+    \item Now suppose the goal is \empr{``be a helpful, honest, harmless
+          assistant.''} What number measures that? There is no formula.
+\end{itemize}
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}\centering
+\setlength{\fboxsep}{6pt}%
+\colorbox{boxgreen!50}{\parbox{0.92\linewidth}{\footnotesize
+\textbf{Answer A.} ``It's the force that pulls things down. It's why a ball
+falls when you let go of it.''}}
+\end{column}
+\begin{column}{0.5\textwidth}\centering
+\setlength{\fboxsep}{6pt}%
+\colorbox{boxred!40}{\parbox{0.92\linewidth}{\footnotesize
+\textbf{Answer B.} ``Gravity is the curvature of spacetime sourced by the
+stress--energy tensor, $G_{\mu\nu} = 8\pi T_{\mu\nu}$\dots''}}
+\end{column}
+\end{columns}
+\vspace{0.5em}
+\begin{center}\small
+\emph{Prompt: ``Explain gravity to a 6-year-old.''}\\
+Almost everyone prefers \textbf{A}, yet \empr{no one can write the formula that
+says so.}
+\end{center}
+\end{frame}
+
+% ================================================================ 3.1b  The idea
+\begin{frame}{The Idea: Don't Write the Reward, Learn It}
+\begin{itemize}\itemsep0.45em
+    \item \empr{When you cannot write the reward, recover it from data.} This is
+          called \emph{inverse RL}, and RLHF is its most consequential example.
+    \item People are bad at giving a \emph{number} (``this answer is a 7.3'') but
+          good at \emph{comparing}: ``A is better than B.'' Comparisons are cheap
+          and consistent.
+    \item \textbf{The plan, in three moves:}
+    \begin{enumerate}\footnotesize\itemsep0.2em
+        \item Collect many human \emph{comparisons} of model answers.
+        \item Train a model to predict those comparisons; this learned model
+              \emph{becomes our reward signal}.
+        \item Use RL to push the policy toward answers that score well under it.
+    \end{enumerate}
+    \item This is \textbf{Reinforcement Learning from Human Feedback (RLHF)}, the
+          method behind ChatGPT-style assistants.
+\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- Divider: into LLMs
+\begin{frame}{}
+\vfill
+\centering
+{\LARGE Reinforcement Learning \textbf{from} Human Feedback}\\[0.4em]
+{\large for Language Models}
+\vfill
+\end{frame}
+

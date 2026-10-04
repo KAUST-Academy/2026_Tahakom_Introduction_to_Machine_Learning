@@ -1,0 +1,56 @@
+% ---------------------------------------------------------------- Recap opener
+\begin{frame}{Where We Are: The Algorithms So Far}
+\begin{itemize}\itemsep0.5em
+    \item So far we have built the \emph{machinery}: value-based methods, policy
+          gradients, actor--critic, continuous control, exploration, model-based
+          RL, and offline RL.
+    \item \textbf{Model-based \& offline RL closed on one spine:} \emph{optimism} explores,
+          \emph{pessimism} stays safe; the sign of the uncertainty bonus was
+          the whole story. Offline RL learned a policy from a \emph{fixed dataset}
+          with no environment interaction.
+    \item Every method so far assumed one thing for free: \textbf{a reward
+          function we could write down.}
+\end{itemize}
+\vfill
+\begin{center}
+\itshape Today: where does all of this actually get deployed, and what breaks
+when the reward itself is the hard part?
+\end{center}
+\end{frame}
+
+% ---------------------------------------------------------------- Today's map
+\begin{frame}{RL in the Real World: Three Threads}
+\begin{itemize}\itemsep0.6em
+    \item \textbf{RLHF (the focus).} When reward is hard to specify, \emph{learn}
+          it from human (or AI, or verifiable) feedback. This is how modern
+          LLMs are aligned, the deep dive for today.
+    \item \textbf{Multi-Agent RL (overview).} What changes when other learning
+          agents share your environment and the ground keeps shifting underneath
+          you.
+    \item \textbf{Robotics (overview).} What breaks when the environment is
+          physical: sample cost, safety, resets, and the sim-to-real gap.
+\end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------- Learning outcomes
+\begin{frame}{Learning Outcomes}
+\textbf{RLHF: the deep dive.} By the end you should be able to:
+\begin{itemize}\itemsep0.2em\small
+    \item explain the RLHF pipeline: \textbf{SFT $\rightarrow$ reward model
+          $\rightarrow$ PPO/GRPO}, and the role of the KL-to-reference penalty;
+    \item turn human comparisons into a trainable loss with \textbf{Bradley--Terry},
+          and say why the preference model needs a \emph{sigmoid} rather than a raw
+          score gap;
+    \item explain \textbf{reward hacking} (over-optimization) and why the KL leash
+          exists;
+    \item show that ``reward minus $\beta$-KL'' is maximized by $\pi_{\text{ref}}$
+          \emph{tilted} by $e^{\,r/\beta}$, and \textbf{derive} the
+          \textbf{RM $\leftrightarrow$ DPO} identity from it, so ``your LM is
+          secretly a reward model'';
+    \item place \textbf{RLHF $\rightarrow$ RLAIF $\rightarrow$ RLVR} on the
+          scaling-oversight spectrum.
+\end{itemize}
+\vspace{0.5em}
+\textbf{MARL \& robotics: conceptual overviews.} Know \emph{why each is hard}
+and name 2--3 methods for each.
+\end{frame}

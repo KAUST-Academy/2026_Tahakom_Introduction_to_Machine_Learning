@@ -1,0 +1,37 @@
+% ---------------------------------------------------------------- 3.5b GRPO objective
+\begin{frame}[allowframebreaks]{GRPO, Written Out}
+For each prompt, sample a \textbf{group} of $G$ responses
+$\{y_1, \dots, y_G\}\sim\pi_{\text{old}}$ ($\pi_{\text{old}}$ = the policy from the
+\emph{previous} update step, which we sample from, not the frozen
+$\pi_{\text{ref}}$) and score each: $r_i = r_\phi(y_i)$ (or a verifiable check). The
+\textbf{group-relative advantage} replaces the critic:
+\[
+    \hat{A}_i \;=\; \frac{r_i - \operatorname{mean}(r_1, \dots, r_G)}
+                          {\operatorname{std}(r_1, \dots, r_G)}
+\]
+($\hat{A}_i$ = how much better response $i$ scored than the group average, in
+standard-deviation units: positive $\to$ reinforce it, negative $\to$ suppress it.)
+\vspace{0.2em}
+
+\framebreak
+
+Same clipped ratio as PPO, now driven by $\hat{A}_i$ and leashed to
+$\pi_{\text{ref}}$:
+\[
+    J_{\mathrm{GRPO}} =
+    \mathbb{E}\!\left[ \tfrac{1}{G}\sum_{i=1}^{G}
+        \min\!\big(\rho_i \hat{A}_i, \;
+        \operatorname{clip}(\rho_i, 1{-}\varepsilon, 1{+}\varepsilon)\, \hat{A}_i\big)
+    \right]
+    - \beta\, D_{\mathrm{KL}}\!\left(\pi_\theta \, \|\, \pi_{\text{ref}}\right),
+    \quad \rho_i = \frac{\pi_\theta(y_i)}{\pi_{\text{old}}(y_i)}
+\]
+\begin{itemize}\itemsep0.15em\small
+    \item Every response in the group shares \textbf{one baseline} (the group mean):
+          no learned value network.
+    \item Same machinery as PPO: $\rho_i$ is PPO's probability ratio
+          $r_t(\theta)$, and the clip is identical. Only the advantage source changed.
+\end{itemize}
+\srcnote{\scriptsize Shao et al. \href{https://arxiv.org/abs/2402.03300}{DeepSeekMath} (GRPO), 2024. Token-level clipping omitted for clarity.}
+\end{frame}
+
