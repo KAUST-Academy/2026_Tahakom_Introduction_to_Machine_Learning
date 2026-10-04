@@ -185,7 +185,10 @@ def resource_row(r: dict) -> str:
         btns = []
         if r.get("file"):
             label = "Notebook" if r.get("kind") == "lab" else "Open"
-            btns.append(f'<a href="{url(r["file"])}" class="table-btn">{e(label)}</a>')
+            # GitHub Pages serves .ipynb as application/x-ipynb+json, which
+            # browsers show as raw JSON; `download` makes them save the file.
+            dl = " download" if r["file"].lower().endswith(".ipynb") else ""
+            btns.append(f'<a href="{url(r["file"])}" class="table-btn"{dl}>{e(label)}</a>')
         if r.get("colab"):
             # Kept alongside the local file, not instead of it: this course is
             # delivered with no internet, and Colab needs some.
