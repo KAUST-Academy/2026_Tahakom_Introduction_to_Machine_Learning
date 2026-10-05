@@ -232,6 +232,22 @@ icon  = "ri-stack-line"
   status = "ready"
 
   [[days.resources]]
+  name   = "Lab 5: Image Captioning with an RNN"
+  detail = "Pair a pre-trained ResNet encoder with an LSTM decoder that writes captions"
+  kind   = "lab"
+  file   = "Labs/Day_2/05_RNN_Image_Captioning.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/05_RNN_Image_Captioning.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 6: Image Captioning with a Transformer"
+  detail = "Swap the RNN for a Transformer decoder on top of a ResNet-50 encoder"
+  kind   = "lab"
+  file   = "Labs/Day_2/06_Transformer_Image_Captioning.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/06_Transformer_Image_Captioning.ipynb"
+  status = "ready"
+
+  [[days.resources]]
   name   = "Optional: Vector Space and Word Embeddings"
   detail = "Similarity measures, one-hot versus dense vectors, word2vec, GloVe and fastText"
   kind   = "slides"
