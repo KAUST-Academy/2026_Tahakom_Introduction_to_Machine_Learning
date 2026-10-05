@@ -224,11 +224,11 @@ icon  = "ri-stack-line"
   status = "ready"
 
   [[days.resources]]
-  name   = "Lab 4: Self-Attention and Multi-Head Attention"
-  detail = "Why self-attention, how it works, and how multiple heads see the same sequence differently"
+  name   = "Lab 4: Arabic-English Seq2Seq Translation"
+  detail = "An LSTM encoder-decoder that translates Arabic to English, and why Arabic text is hard"
   kind   = "lab"
-  file   = "Labs/Day_2/04_Self_Attention_&_MHA.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/04_Self_Attention_%26_MHA.ipynb"
+  file   = "Labs/Day_2/04_Arabic-English_Seq2Seq_Translation.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/04_Arabic-English_Seq2Seq_Translation.ipynb"
   status = "ready"
 
   [[days.resources]]
@@ -240,11 +240,19 @@ icon  = "ri-stack-line"
   status = "ready"
 
   [[days.resources]]
-  name   = "Lab 6: Image Captioning with a Transformer"
+  name   = "Lab 6: Self-Attention and Multi-Head Attention"
+  detail = "Why self-attention, how it works, and how multiple heads see the same sequence differently"
+  kind   = "lab"
+  file   = "Labs/Day_2/06_Self_Attention_&_MHA.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/06_Self_Attention_%26_MHA.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 7: Image Captioning with a Transformer"
   detail = "Swap the RNN for a Transformer decoder on top of a ResNet-50 encoder"
   kind   = "lab"
-  file   = "Labs/Day_2/06_Transformer_Image_Captioning.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/06_Transformer_Image_Captioning.ipynb"
+  file   = "Labs/Day_2/07_Transformer_Image_Captioning.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/07_Transformer_Image_Captioning.ipynb"
   status = "ready"
 
   [[days.resources]]
@@ -292,6 +300,14 @@ icon  = "ri-stack-line"
   kind   = "lab"
   file   = "Labs/Day_2/Optional/05_WordEmbedding(GloVe).ipynb"
   colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/Optional/05_WordEmbedding%28GloVe%29.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: Vanilla RNN in NumPy"
+  detail = "An IMDB sentiment classifier with backpropagation through time derived and written by hand"
+  kind   = "lab"
+  file   = "Labs/Day_2/Optional/06_Numpy_Vanilla_RNN.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_2/Optional/06_Numpy_Vanilla_RNN.ipynb"
   status = "ready"
 
 [[days]]
