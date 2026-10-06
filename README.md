@@ -42,11 +42,17 @@ Day 1, and its reinforcement learning day is split over Days 3 and 4.
 | `Day_1_<Title>/` | Day 1, same file names |
 | `Day_2_<Title>/` | Day 1, numbered after Day 1's files: its `Labs/01_PyTorchBasics.ipynb` is `Labs/Day_1/04_PyTorchBasics.ipynb` |
 | `Day_3_<Title>/` | Day 2, same file names |
-| `Day_4_<Title>/` | Days 3 and 4, numbered across both: Labs 1 and 2 on Day 3, Lab 3 on Day 4; decks built from `LaTeX/` |
+| `Day_4_<Title>/` | Days 3 and 4, with labs numbered across both days: its Labs 1 and 2 are Labs 1 and 3 here, its Lab 3 is Lab 4; decks built from `LaTeX/` |
 | `Day_5_<Title>/` | Day 5, same file names |
 
 Within a day, `Lectures/` is `Slides/Day_N/`, `Labs/` is `Labs/Day_N/`, and
 `Optional/Lectures/` and `Optional/Labs/` are the `Optional/` subfolder of each.
+
+Lab 2 (policies by hand), Lab 5 (RLHF) and the optional REINFORCE and DPO labs
+come instead from `Labs/Reinforcement_Learning/` in
+[`Artificial-Intelligence-Courses`](https://github.com/KAUST-Academy/Artificial-Intelligence-Courses),
+with their references to that course's other lectures pointed at this one. Lab 2
+adds two challenges to that course's policy demo.
 
 Files are numbered in teaching order within each day. Optional material is
 listed on its day's page, marked *Optional*.

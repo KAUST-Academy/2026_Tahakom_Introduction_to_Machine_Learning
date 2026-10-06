@@ -319,7 +319,7 @@ icon  = "ri-gamepad-line"
 
   [[days.resources]]
   name   = "RL Foundations"
-  detail = "The agent-environment loop, Markov decision processes, value functions, the Bellman equation and Q-learning (Labs 1 and 2)"
+  detail = "The agent-environment loop, Markov decision processes, value functions, the Bellman equation and Q-learning (Labs 1 to 3)"
   kind   = "slides"
   file   = "Slides/Day_3/01_RL_Foundations.pdf"
   status = "ready"
@@ -333,11 +333,27 @@ icon  = "ri-gamepad-line"
   status = "ready"
 
   [[days.resources]]
-  name   = "Lab 2: Q-Learning"
+  name   = "Lab 2: Writing Policies by Hand"
+  detail = "Write rule-based policies for CartPole and FrozenLake and score them by average return, then two challenges: balance the pole for all 500 steps, and cross the slippery lake"
+  kind   = "lab"
+  file   = "Labs/Day_3/02_Policies_by_Hand_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/02_Policies_by_Hand_Exercise.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 3: Q-Learning"
   detail = "Build a Q-table, balance exploration and exploitation, and apply the Bellman update"
   kind   = "lab"
-  file   = "Labs/Day_3/02_Q_Table_Learning.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/02_Q_Table_Learning.ipynb"
+  file   = "Labs/Day_3/03_Q_Table_Learning.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/03_Q_Table_Learning.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: Writing Policies by Hand (Solution)"
+  detail = "Worked solution to Lab 2"
+  kind   = "lab"
+  file   = "Labs/Day_3/Optional/01_Policies_by_Hand_Solution.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_3/Optional/01_Policies_by_Hand_Solution.ipynb"
   status = "ready"
 
 [[days]]
@@ -349,17 +365,25 @@ icon  = "ri-robot-line"
 
   [[days.resources]]
   name   = "Policy Gradients and RL in the Real World"
-  detail = "REINFORCE, PPO and GRPO (Lab 3), then RLHF, multi-agent RL and robotics"
+  detail = "REINFORCE, PPO and GRPO (Lab 4), then RLHF (Lab 5), multi-agent RL and robotics"
   kind   = "slides"
   file   = "Slides/Day_4/02_Policy_Gradients_and_RL_in_the_Real_World.pdf"
   status = "ready"
 
   [[days.resources]]
-  name   = "Lab 3: GRPO on Flappy Bird"
+  name   = "Lab 4: GRPO on Flappy Bird"
   detail = "Exercise: implement Group Relative Policy Optimization in PyTorch and train it to play Flappy Bird"
   kind   = "lab"
-  file   = "Labs/Day_4/03_GRPO_Flappy_Bird_Exercise.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/03_GRPO_Flappy_Bird_Exercise.ipynb"
+  file   = "Labs/Day_4/04_GRPO_Flappy_Bird_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/04_GRPO_Flappy_Bird_Exercise.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 5: RLHF from Scratch"
+  detail = "Exercise: fit a reward model to pairwise preferences, optimise it with GRPO under a KL leash, and watch the policy game the reward when the leash comes off"
+  kind   = "lab"
+  file   = "Labs/Day_4/05_RLHF_RewardModel_GRPO_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/05_RLHF_RewardModel_GRPO_Exercise.ipynb"
   status = "ready"
 
   [[days.resources]]
@@ -368,6 +392,46 @@ icon  = "ri-robot-line"
   kind   = "lab"
   file   = "Labs/Day_4/Optional/01_GRPO_Flappy_Bird_Solution.ipynb"
   colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/Optional/01_GRPO_Flappy_Bird_Solution.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: RLHF from Scratch (Solution)"
+  detail = "Worked solution to Lab 5"
+  kind   = "lab"
+  file   = "Labs/Day_4/Optional/02_RLHF_RewardModel_GRPO_Solution.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/Optional/02_RLHF_RewardModel_GRPO_Solution.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: REINFORCE on CartPole"
+  detail = "Exercise: policy gradients from scratch, then the causality trick and a baseline, and how each one cuts the variance of the gradient"
+  kind   = "lab"
+  file   = "Labs/Day_4/Optional/03_Reinforce_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/Optional/03_Reinforce_Exercise.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: REINFORCE on CartPole (Solution)"
+  detail = "Worked solution to the REINFORCE exercise"
+  kind   = "lab"
+  file   = "Labs/Day_4/Optional/04_Reinforce_Solution.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/Optional/04_Reinforce_Solution.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: DPO on a Tiny Language Model"
+  detail = "Exercise: preference-tune a tiny GPT with DPO, with no reward model and no RL loop, then read the implicit reward off the policy"
+  kind   = "lab"
+  file   = "Labs/Day_4/Optional/05_DPO_TinyLM_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/Optional/05_DPO_TinyLM_Exercise.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: DPO on a Tiny Language Model (Solution)"
+  detail = "Worked solution to the DPO exercise"
+  kind   = "lab"
+  file   = "Labs/Day_4/Optional/06_DPO_TinyLM_Solution.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/Optional/06_DPO_TinyLM_Solution.ipynb"
   status = "ready"
 
 [[days]]
