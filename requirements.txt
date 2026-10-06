@@ -25,18 +25,18 @@ catboost
 imbalanced-learn
 kagglehub
 
-# Days 2-4. CPU build: the classroom laptops will not have CUDA, and a CPU
+# Days 1-4. CPU build: the classroom laptops will not have CUDA, and a CPU
 # wheel is a much smaller wheelhouse.
 torch~=2.5
 torchvision
 
-# Day 3: text (the optional labs use transformers, NLTK and spaCy).
+# Day 2: text (the optional labs use transformers, NLTK and spaCy).
 gensim
 transformers
 nltk
 spacy
 
-# Day 4: reinforcement learning.
+# Days 3-4: reinforcement learning.
 gymnasium[classic-control,toy-text]
 flappy-bird-gymnasium
 imageio
