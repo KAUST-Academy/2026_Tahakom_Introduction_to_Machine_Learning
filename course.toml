@@ -457,11 +457,66 @@ icon  = "ri-shield-check-line"
   status = "ready"
 
   [[days.resources]]
-  name   = "Lab 1: Deploy, Monitor and Retire a Model"
-  detail = "Train, track, tune, register, deploy, monitor, roll back and tear down a model with MLflow, Optuna, Hugging Face and Gradio"
+  name   = "Lab 1: Quantisation, Fewer Bits per Number"
+  detail = "Exercise: quantise Day 2's Fashion-MNIST CNN by hand (symmetric vs affine, per tensor vs per channel, 8 bits down to 2), run it in int8 with ONNX Runtime, then quantise YOLO11 and find out why quantising everything breaks it"
   kind   = "lab"
-  file   = "Labs/Day_5/01_MLOps_Deploy_Monitor_and_Retire_a_Model.ipynb"
-  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_5/01_MLOps_Deploy_Monitor_and_Retire_a_Model.ipynb"
+  file   = "Labs/Day_5/01_Quantisation_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_5/01_Quantisation_Exercise.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 2: Pruning and Distillation, Then Ship One"
+  detail = "Exercise: prune the CNN to 95% sparsity and recover it, distil it into a 4x smaller student from 1,000 labels, then pick the release through a gate on per-class accuracy, size and latency"
+  kind   = "lab"
+  file   = "Labs/Day_5/02_Pruning_and_Distillation_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_5/02_Pruning_and_Distillation_Exercise.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Live Demo: Compressed YOLO on Your Webcam"
+  detail = "On your own laptop, not Colab: YOLO11m at float32 and int8, the smaller YOLO11n, and float16 on a GPU, switched live with keys 1 to 4. Run python yolo_live_demo.py"
+  kind   = "demo"
+  file   = "Labs/Day_5/yolo_live_demo.py"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: Quantisation (Solution)"
+  detail = "Worked solution to Lab 1"
+  kind   = "lab"
+  file   = "Labs/Day_5/Optional/01_Quantisation_Solution.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_5/Optional/01_Quantisation_Solution.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: Pruning and Distillation (Solution)"
+  detail = "Worked solution to Lab 2"
+  kind   = "lab"
+  file   = "Labs/Day_5/Optional/02_Pruning_and_Distillation_Solution.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_5/Optional/02_Pruning_and_Distillation_Solution.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: Audit, Explain and Document a Model"
+  detail = "Exercise: audit a credit pre-screening model on UCI Adult: per-group metrics with error bars, the fairness conflict, a proxy test, threshold mitigation, SHAP and LIME, and a generated model card"
+  kind   = "lab"
+  file   = "Labs/Day_5/Optional/03_Responsible_AI_Audit_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_5/Optional/03_Responsible_AI_Audit_Exercise.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: Audit, Explain and Document a Model (Solution)"
+  detail = "Worked solution to the audit exercise"
+  kind   = "lab"
+  file   = "Labs/Day_5/Optional/04_Responsible_AI_Audit_Solution.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_5/Optional/04_Responsible_AI_Audit_Solution.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: Deploy, Monitor and Retire a Model"
+  detail = "Train, track, tune, register, deploy, monitor, roll back and retire a model with MLflow, Optuna and Gradio, entirely on your own machine: no accounts"
+  kind   = "lab"
+  file   = "Labs/Day_5/Optional/05_MLOps_Deploy_Monitor_and_Retire_a_Model.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_5/Optional/05_MLOps_Deploy_Monitor_and_Retire_a_Model.ipynb"
   status = "ready"
 
   [[days.resources]]

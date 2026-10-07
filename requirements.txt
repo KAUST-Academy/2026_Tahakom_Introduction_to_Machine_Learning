@@ -25,7 +25,7 @@ catboost
 imbalanced-learn
 kagglehub
 
-# Days 1-4. CPU build: the classroom laptops will not have CUDA, and a CPU
+# Days 1-5. CPU build: the classroom laptops will not have CUDA, and a CPU
 # wheel is a much smaller wheelhouse.
 torch~=2.5
 torchvision
@@ -42,7 +42,19 @@ flappy-bird-gymnasium
 imageio
 imageio-ffmpeg
 
-# Day 5: the MLOps lab. Compatible releases of the versions the notebook pins
+# Day 5: the compression labs and the YOLO webcam demo (tested with these
+# versions, October 2026). Ultralytics brings OpenCV, which draws the demo's window.
+onnx~=1.23
+onnxruntime~=1.30
+onnxslim~=0.1.97
+ultralytics~=8.4
+
+# Day 5, optional: the Responsible AI lab (tested with these versions, October 2026).
+fairlearn~=0.14.0
+shap~=0.52.0
+lime==0.2.0.1
+
+# Day 5, optional: the MLOps lab. Compatible releases of the versions the notebook pins
 # and was tested with.
 mlflow-skinny~=3.16
 optuna~=5.0

@@ -38,3 +38,16 @@ Thumbs.db
 
 # Claude Code local settings (machine-specific, never share)
 .claude/
+
+# What the labs download or write when run from a clone
+Labs/**/data/FashionMNIST/
+Labs/Day_5/yolo_models/
+datasets/
+runs/
+yolo11*.pt
+*.onnx
+Labs/**/video/
+Labs/**/*.gif
+mlflow.db
+mlartifacts/
+mlruns/
