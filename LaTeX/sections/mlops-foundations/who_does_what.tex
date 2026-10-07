@@ -1,0 +1,35 @@
+% --- SLIDE 4: WHO DOES WHAT ---
+\begin{frame}{Who Does What}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \small
+            \begin{itemize}
+                \setlength\itemsep{0.45em}
+                \item \textbf{Data engineer} --- pipelines, warehouses, schemas. Owns whether the data
+                      \emph{arrives} and is well-formed.
+                \item \textbf{Data scientist} --- framing, features, models, evaluation. Owns whether the
+                      model is \emph{right}.
+                \item \textbf{ML engineer} --- packaging, serving, retraining. Owns whether the model
+                      \emph{runs}.
+                \item \textbf{Platform / SRE} --- infrastructure, capacity, on-call. Owns whether the service
+                      \emph{stays up}.
+                \item \textbf{Product owner} --- the decision the prediction supports. Owns whether the model
+                      is \emph{worth} running.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \begin{tcolorbox}[colback=yellow!8, colframe=yellow!50!black, boxrule=0.5pt]
+                \small In a small team one person wears all five hats. That is fine --- but the
+                \emph{handoffs} still exist, and they still need to be written down.
+            \end{tcolorbox}
+            \vspace{0.6em}
+            \begin{alertblock}{The handoff that kills projects}
+                \small ``The data scientist throws a notebook over the wall to the engineer.'' The engineer
+                rewrites the preprocessing, the numbers change, and nobody can say which version is correct.
+            \end{alertblock}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+

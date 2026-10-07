@@ -1,0 +1,32 @@
+
+% --- SLIDE 7: CPU VS GPU ---
+\begin{frame}{CPU or GPU? The Serving Economics}
+
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    {\scriptsize
+    \begin{tabular}{p{3.4cm}|p{4.2cm}|p{4.2cm}}
+        \toprule
+                          & \textbf{CPU serving} & \textbf{GPU serving} \\
+        \midrule
+        Fits              & Trees, linear models, small nets, most tabular ML & Large nets, transformers,
+                            image and audio models \\
+        Cost profile      & Cheap, scales horizontally, scale-to-zero is easy & Expensive per hour;
+                            idle time is pure waste \\
+        Wins when         & Requests are small and sporadic & Requests are large or can be \emph{batched} \\
+        Watch out for     & Thread oversubscription inside the container & Low utilisation --- a GPU at 5\%
+                            is a very costly CPU \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.27em}
+    \begin{itemize}
+        \item \textbf{For the classical ML in this course, CPU is almost always right.} A gradient-boosted
+              tree does not benefit from a GPU at inference.
+        \item Before buying a GPU, try: fewer features, a smaller model, ONNX Runtime, or simply caching
+              repeated inputs. These are usually larger wins than new hardware.
+        \item \textit{Next:} when the model itself is the bottleneck --- on a device, or a large network
+              at high volume --- make it smaller: quantisation, pruning and distillation.
+    \end{itemize}
+
+\end{frame}

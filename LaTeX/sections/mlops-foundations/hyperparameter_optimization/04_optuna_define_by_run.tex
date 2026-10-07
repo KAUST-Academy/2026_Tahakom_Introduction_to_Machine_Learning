@@ -1,0 +1,39 @@
+
+% --- SLIDE 4: OPTUNA CODE ---
+\begin{frame}[fragile]{Optuna: Define-by-Run}
+
+    \begin{lstlisting}[language=Python, basicstyle=\ttfamily\scriptsize]
+import optuna
+
+def objective(trial):
+    # the search space is *built by running Python*, so it can branch
+    model_name = trial.suggest_categorical("model", ["rf", "gbm"])
+    if model_name == "rf":
+        clf = RandomForestClassifier(
+            n_estimators = trial.suggest_int("n_estimators", 100, 1000, step=100),
+            max_depth    = trial.suggest_int("max_depth", 2, 32, log=True),
+            random_state = 42)
+    else:
+        clf = HistGradientBoostingClassifier(
+            learning_rate = trial.suggest_float("lr", 1e-3, 3e-1, log=True),
+            max_leaf_nodes= trial.suggest_int("leaves", 8, 256, log=True),
+            random_state  = 42)
+    return cross_val_score(clf, X, y, cv=5, scoring="f1_macro").mean()
+
+study = optuna.create_study(direction="maximize")   # default sampler: TPE
+study.optimize(objective, n_trials=100)
+print(study.best_params, study.best_value)
+    \end{lstlisting}
+
+    \vspace{0.09em}
+    \begin{itemize}
+        \scriptsize
+        \item \textbf{Define-by-run} is Optuna's headline design principle: the search space is constructed
+              dynamically as the objective executes, so an \texttt{if} statement gives you a conditional
+              space for free.
+        \item \texttt{log=True} for anything spanning orders of magnitude (learning rate, regularisation
+              strength). Sampling learning rate uniformly in $[10^{-5}, 10^{-1}]$ wastes 99\% of your budget
+              above $10^{-2}$.
+    \end{itemize}
+
+\end{frame}

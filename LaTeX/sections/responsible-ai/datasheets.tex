@@ -1,0 +1,60 @@
+\begin{frame}[allowframebreaks]{Datasheets for Datasets}
+
+    Seven groups of questions, answered by whoever created the dataset:
+
+    \vspace{0.18em}
+
+    \begin{columns}[T]
+        \begin{column}{0.49\textwidth}
+            \begin{enumerate}\scriptsize
+                \setlength\itemsep{0.1em}
+                \item \textbf{Motivation.} Why was it created, by whom, funded by whom?
+                \item \textbf{Composition.} What is an instance? How many? What is missing? Does it
+                      contain data about people, or confidential/sensitive content?
+                \item \textbf{Collection process.} How was it acquired, by whom, over what period?
+                      Were the people informed, and did they consent?
+                \item \textbf{Preprocessing / cleaning / labelling.} What was done, and is the raw
+                      version still available?
+            \end{enumerate}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \begin{enumerate}\scriptsize
+                \setlength\itemsep{0.1em}
+                \setcounter{enumi}{4}
+                \item \textbf{Uses.} What has it been used for; what should it \textbf{not} be used
+                      for?
+                \item \textbf{Distribution.} Who gets it, under what licence, with what
+                      restrictions?
+                \item \textbf{Maintenance.} Who maintains it, how are errors fixed, is there
+                      versioning, is there a retention limit?
+            \end{enumerate}
+
+            \vspace{0.15em}
+            \begin{tcolorbox}[colback=raiAmber!5, colframe=raiAmber!70, boxrule=0.6pt]
+                \scriptsize The questions are deliberately uncomfortable. ``We do not know'' is a
+                valid answer --- and is itself the finding.
+            \end{tcolorbox}
+
+            \vspace{0.12em}
+            \begin{tcolorbox}[colback=raiGreen!5, colframe=raiGreen!60, boxrule=0.6pt]
+                \scriptsize \textbf{Where these live.} Hugging Face model and dataset cards are
+                exactly this format. Keep the card in the \emph{same repository as the training
+                code}, generate its quantitative table \emph{from the evaluation script}, and make
+                it a merge requirement --- a hand-copied table is stale within a week.
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.12em}
+    \begin{block}{Exercise (15 minutes)}
+        \centering
+        \scriptsize Take the last model you trained. Write its \textbf{intended use}, its
+        \textbf{out-of-scope uses}, and one \textbf{quantitative table with slices}.
+        Most people discover they cannot fill in the second one.
+    \end{block}
+
+    \vspace{0.09em}
+    {\scriptsize T.~Gebru, J.~Morgenstern, B.~Vecchione, J.~W.~Vaughan, H.~Wallach, H.~Daum\accent19 e~III
+    and K.~Crawford, ``Datasheets for Datasets,'' \emph{Communications of the ACM} 64(12):86--92,
+    2021, \href{https://arxiv.org/abs/1803.09010v8}{arXiv:1803.09010v8}.}
+\end{frame}

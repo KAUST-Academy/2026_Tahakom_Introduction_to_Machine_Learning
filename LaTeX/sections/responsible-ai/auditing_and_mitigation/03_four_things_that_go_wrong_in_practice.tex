@@ -1,0 +1,23 @@
+
+\begin{frame}{Four Things That Go Wrong in Practice}
+
+    \begin{itemize}
+        \setlength\itemsep{0.65em}
+        \item \textbf{Small slices are noisy.} A TPR of $0.44$ estimated from 180 positive cases
+              carries a 95\% interval of about $\pm 0.07$; from 40 cases, about $\pm 0.15$. Report
+              intervals, or you will chase noise and ``fix'' gaps that were never there.
+              A bootstrap is fine here.
+
+        \item \textbf{Multiple comparisons.} Slice by 8 attributes and some slice will look bad by
+              chance. Pre-register the slices you care about; treat the rest as exploratory.
+
+        \item \textbf{You may not have the group labels.} They are often unavailable --- never
+              collected, or deliberately not stored. Options: a consented subset for audit only, an
+              independently collected audit set, or proxy-based estimates --- each with its own
+              error, which must be stated.
+
+        \item \textbf{Intersections multiply.} Four binary attributes give 16 cells and most will
+              be tiny. Choose the intersections that correspond to a plausible harm, rather than
+              enumerating everything.
+    \end{itemize}
+\end{frame}

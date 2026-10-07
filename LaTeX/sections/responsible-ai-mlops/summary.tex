@@ -1,0 +1,21 @@
+% Day 5's single deck: what to take away from both lectures.
+\begin{frame}{What to Take Away}
+    \begin{itemize}
+        \setlength\itemsep{0.25em}
+        \small
+        \item \textbf{Bias enters at every stage}, from the data to the deployment loop. Dropping the sensitive column
+              does not remove it; disaggregated evaluation finds it.
+        \item \textbf{Fairness definitions conflict.} Choose one for the decision at hand, say why, and write it in the
+              model card.
+        \item \textbf{Explanations are models of the model.} Check them before trusting them: permutation importance
+              over built-in importance, and sanity checks for heatmaps.
+        \item \textbf{Governance is a process:} review before release, documentation, contestability and a re-audit
+              date, within SDAIA's principles and the PDPL.
+        \item \textbf{The ML code is the small box.} Reproducible runs, a tracker and a registry turn experiments into
+              versions you can ship and roll back.
+        \item \textbf{A deployed model decays.} Monitor its inputs and predictions before the labels arrive, and never
+              flip the switch: shadow first, then canary.
+        \item \textbf{Compression is a model change.} Quantise first, then prune or distil; re-measure per class, on
+              the target hardware, and gate it like any release.
+    \end{itemize}
+\end{frame}

@@ -1,0 +1,48 @@
+
+\begin{frame}{The Object Everything Is Computed From}
+
+    \centering
+    \textit{One confusion matrix per group. Every definition below is a constraint tying two cells
+    of these tables together across groups.}
+
+    \vspace{0.6em}
+
+    \begin{columns}[c]
+        \begin{column}{0.48\textwidth}
+            \centering \textbf{Group A}
+            \begin{tikzpicture}[scale=0.72]
+                \draw[fill=raiGreen!15, thick] (0,0)  rectangle (2.4,2.4);
+                \draw[fill=raiRed!15, thick]   (2.4,0) rectangle (4.8,2.4);
+                \draw[fill=raiRed!15, thick]   (0,-2.4) rectangle (2.4,0);
+                \draw[fill=raiGreen!15, thick] (2.4,-2.4) rectangle (4.8,0);
+                \node[font=\bfseries] at (1.2,1.2)  {TP};
+                \node[font=\bfseries] at (3.6,1.2)  {FN};
+                \node[font=\bfseries] at (1.2,-1.2) {FP};
+                \node[font=\bfseries] at (3.6,-1.2) {TN};
+                \node[font=\scriptsize\bfseries] at (1.2,2.8) {$\Yhat=1$};
+                \node[font=\scriptsize\bfseries] at (3.6,2.8) {$\Yhat=0$};
+                \node[font=\scriptsize\bfseries, rotate=90] at (-0.45,1.2)  {$Y=1$};
+                \node[font=\scriptsize\bfseries, rotate=90] at (-0.45,-1.2) {$Y=0$};
+            \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \small
+            \begin{itemize}
+                \setlength\itemsep{0.45em}
+                \item \textbf{Selection rate} $= \Pr(\Yhat = 1)$
+                \item \textbf{TPR / recall} $= \Pr(\Yhat=1 \mid Y=1)$
+                \item \textbf{FPR} $= \Pr(\Yhat=1 \mid Y=0)$
+                \item \textbf{FNR} $= 1 - \text{TPR}$
+                \item \textbf{PPV / precision} $= \Pr(Y=1 \mid \Yhat=1)$
+                \item \textbf{Prevalence} $p = \Pr(Y=1)$
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.8em}
+    \begin{block}{}
+        \centering
+        \small A fairness \emph{audit} is: build this table per group, then compare a chosen cell
+        across groups. The hard part is choosing which cell.
+    \end{block}
+\end{frame}

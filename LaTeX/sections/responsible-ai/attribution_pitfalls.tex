@@ -1,0 +1,81 @@
+\begin{frame}[allowframebreaks]{Pitfalls You Must Know Before Using Either}
+
+    \begin{itemize}
+        \setlength\itemsep{0.5em}
+        \item \textbf{Correlated features.} Both methods perturb features independently, producing
+              rows that could not exist. Attribution then gets spread arbitrarily among correlated
+              features, and can be assigned to a feature the model barely uses. Group correlated
+              features and attribute to the group.
+
+        \item \textbf{The background / neighbourhood is a choice.} SHAP values are relative to the
+              background dataset; LIME weights depend on the kernel width and the perturbation
+              scheme. Report what you used --- otherwise the numbers are not reproducible.
+
+        \item \textbf{Instability.} Re-running LIME with a different seed can reorder the top
+              features. Always run it several times and check the explanation is stable before
+              you show it to anyone.
+
+        \item \textbf{Explanations can be attacked.} Slack et al.\ (2020) built classifiers that
+              behave in a biased way on real data but detect the synthetic perturbation
+              distributions used by LIME and SHAP, and answer innocuously there --- so the
+              explanation hides the bias.
+    \end{itemize}
+
+    \vspace{0.5em}
+    \begin{block}{}
+        \centering
+        \small \textbf{Optional lab:} run SHAP and LIME on the same tabular model, and watch LIME's top features
+        change from one run to the next.
+    \end{block}
+
+    \vspace{0.3em}
+    {\scriptsize D.~Slack, S.~Hilgard, E.~Jia, S.~Singh and H.~Lakkaraju, ``Fooling LIME and SHAP:
+    Adversarial Attacks on Post hoc Explanation Methods,'' AIES 2020,
+    \href{https://arxiv.org/abs/1911.02508v2}{arXiv:1911.02508v2}.}
+\end{frame}
+
+\begin{frame}{Explaining the Model vs Explaining the World}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=raiBlue!5, colframe=raiBlue!60, title=What SHAP answers]
+                \scriptsize ``How does \emph{this fitted function} distribute its output across the
+                inputs I gave it?''
+
+                \vspace{0.12em}
+                A statement about the model. Correct as far as it goes.
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=raiRed!5, colframe=raiRed!70, title=What people hear]
+                \scriptsize ``Which factors \emph{cause} this outcome, and what should this person
+                change?''
+
+                \vspace{0.12em}
+                A causal statement. Not supported by the attribution.
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.24em}
+
+    \begin{itemize}\scriptsize
+        \setlength\itemsep{0.1em}
+        \item Kumar et al.\ (2020) argue that the mathematical appeal of Shapley values does not
+              transfer to the human goals people bring to explanations, and that closing the gap
+              requires causal assumptions the method does not make.
+        \item If the user needs \textbf{recourse} (``what do I change?''), the right tool is a
+              \textbf{counterfactual explanation} --- the nearest feasible input that flips the
+              decision --- not a feature attribution.
+        \item \textbf{Not unique, and not a defence.} Different methods, backgrounds and seeds give
+              different attributions for the same prediction; a reviewer finding an explanation
+              satisfying is not evidence the model is correct.
+        \item \textbf{Rule of thumb:} use explanations to \textbf{generate hypotheses}, then test
+              each one by intervention --- an ablation, a re-fit without the feature, a fresh slice.
+    \end{itemize}
+
+    \vspace{0.09em}
+    {\scriptsize I.~E.~Kumar, S.~Venkatasubramanian, C.~Scheidegger and S.~Friedler, ``Problems with
+    Shapley-value-based explanations as feature importance measures,'' ICML 2020,
+    \href{https://arxiv.org/abs/2002.11097v2}{arXiv:2002.11097v2}.}
+\end{frame}

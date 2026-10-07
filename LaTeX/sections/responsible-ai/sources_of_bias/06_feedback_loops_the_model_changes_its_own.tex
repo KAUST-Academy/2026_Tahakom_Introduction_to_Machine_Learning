@@ -1,0 +1,32 @@
+
+\begin{frame}{Feedback Loops: The Model Changes Its Own Training Data}
+
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.7cm and 2.4cm,
+        box/.style={rectangle, draw, rounded corners, minimum height=1.0cm, text width=3.0cm,
+                    align=center, font=\small},
+        arr/.style={-{Latex[length=2.5mm]}, thick}
+    ]
+        \node[box, fill=raiBlue!12] (model)  {Model predicts high risk in area A};
+        \node[box, fill=gray!12, right=of model] (action) {More patrols sent to area A};
+        \node[box, fill=raiRed!12, below=of action] (record) {More arrests recorded in area A};
+        \node[box, fill=raiRed!20, below=of model]  (retrain) {Retraining confirms area A is high risk};
+
+        \draw[arr] (model)  -- (action);
+        \draw[arr] (action) -- (record);
+        \draw[arr] (record) -- (retrain);
+        \draw[arr] (retrain) -- (model);
+    \end{tikzpicture}
+
+    \vspace{0.8em}
+
+    \begin{itemize}\small
+        \setlength\itemsep{0.35em}
+        \item The loop is self-confirming: the prediction generates the evidence for itself.
+        \item Same shape in recommenders (you only observe clicks on what you showed),
+              in credit (you only observe repayment for approved applicants), and in hiring.
+        \item \textbf{Detection:} hold out a slice from the policy, or log what the model
+              \emph{suppressed}, not just what it surfaced.
+    \end{itemize}
+\end{frame}

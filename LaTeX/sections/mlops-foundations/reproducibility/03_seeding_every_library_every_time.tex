@@ -1,0 +1,34 @@
+
+% --- SLIDE 3: SEEDING ---
+\begin{frame}[fragile]{Seeding: Every Library, Every Time}
+
+    \begin{lstlisting}[language=Python, basicstyle=\ttfamily\scriptsize]
+# PYTHONHASHSEED must be set BEFORE the interpreter starts, so it goes in the
+# launcher, not in the script:   export PYTHONHASHSEED=42
+import random, numpy as np, torch
+
+def set_seed(seed: int = 42):
+    random.seed(seed)          # Python stdlib
+    np.random.seed(seed)       # NumPy legacy global RNG
+    torch.manual_seed(seed)    # CPU *and* all CUDA devices
+
+set_seed(42)
+
+# scikit-learn: pass random_state explicitly -- never rely on the global seed
+train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+RandomForestClassifier(n_estimators=500, random_state=42)
+    \end{lstlisting}
+
+    \vspace{0.3em}
+    \begin{itemize}
+        \small
+        \item \textbf{Never rely on the global NumPy seed for scikit-learn.} Anything left at
+              \texttt{random\_state=None} falls back to NumPy's \emph{global} RNG, so its result depends on
+              whatever consumed random numbers first. Pass \texttt{random\_state} explicitly, everywhere.
+        \item Any subprocess gets a fresh interpreter and therefore a fresh RNG state --- PyTorch
+              \texttt{DataLoader} workers, \texttt{joblib} parallel jobs, Spark executors. Each needs its
+              own seeding hook.
+        \item \textbf{Log the seed as a tracked parameter.} A seed you cannot look up later is not a seed.
+    \end{itemize}
+
+\end{frame}

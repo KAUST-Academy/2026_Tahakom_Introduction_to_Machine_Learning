@@ -1,0 +1,39 @@
+\subsection{MLOps Maturity}
+
+% --- SLIDE 5: MATURITY OVERVIEW ---
+\begin{frame}{MLOps Maturity: Three Levels}
+
+    \centering
+    \textit{Google's framing. Useful mostly because it names what you are allowed to \emph{not} have yet.}
+    \vspace{0.21em}
+
+    \begin{tikzpicture}[
+        lvl/.style={rectangle, draw, rounded corners=3pt, text width=3.0cm, align=center,
+                    minimum height=1.6cm, font=\scriptsize},
+        arr/.style={-{Latex[length=2.2mm]}, very thick, gray!60!black}
+    ]
+        \node[lvl, fill=red!10]    (l0) at (0,0)    {\textbf{Level 0}\\Manual process};
+        \node[lvl, fill=orange!12] (l1) at (5.0,0)  {\textbf{Level 1}\\ML pipeline\\automation};
+        \node[lvl, fill=green!12]  (l2) at (10.0,0) {\textbf{Level 2}\\CI/CD pipeline\\automation};
+
+        \draw[arr] (l0) -- node[above=2pt, font=\scriptsize, align=center] {automate\\\emph{training}} (l1);
+        \draw[arr] (l1) -- node[above=2pt, font=\scriptsize, align=center] {automate\\\emph{the pipeline}} (l2);
+    \end{tikzpicture}
+
+    \vspace{0.21em}
+    \begin{itemize}
+        \scriptsize
+        \item \textbf{Level 0} deploys a \emph{model}. \textbf{Level 1} deploys a \emph{training pipeline}.
+              \textbf{Level 2} deploys \emph{changes to that pipeline}, automatically and tested.
+        \item Most organisations that believe they are at level 2 are at level 0 with a scheduled job.
+        \item \textbf{Maturity is a cost, not a virtue.} Buy the level your problem justifies: how often must
+              the answer change, what does a wrong prediction cost, and how many people must be able to
+              reproduce the result?
+    \end{itemize}
+
+    \vspace{0.12em}
+    {\scriptsize Source: Google Cloud, ``MLOps: Continuous delivery and automation pipelines in machine learning,''
+    \href{https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning}{Cloud Architecture Center}, 2020.}
+
+\end{frame}
+

@@ -1,0 +1,53 @@
+
+% --- SLIDE 4: BATCH VS ONLINE VS STREAMING ---
+\begin{frame}{Batch, Online, Streaming}
+
+    \centering
+    \begin{tikzpicture}[
+        b/.style={rectangle, draw, rounded corners=2pt, minimum height=0.55cm, text width=2.6cm,
+                  align=center, font=\tiny, inner sep=2pt},
+        hd/.style={font=\scriptsize\bfseries},
+        arr/.style={-{Latex[length=1.6mm]}, thick, gray!70!black}
+    ]
+        % Batch
+        \node[hd] at (0,0.7) {Batch};
+        \node[b, fill=green!12]  (bd) at (0,0)     {warehouse table};
+        \node[b, fill=blue!12]   (bm) at (0,-0.9)  {scoring job (nightly)};
+        \node[b, fill=orange!12] (bo) at (0,-1.8)  {table of predictions};
+        \draw[arr] (bd) -- (bm); \draw[arr] (bm) -- (bo);
+
+        % Online
+        \node[hd] at (4.3,0.7) {Online};
+        \node[b, fill=green!12]  (od) at (4.3,0)    {user request};
+        \node[b, fill=blue!12]   (om) at (4.3,-0.9) {model service (API)};
+        \node[b, fill=orange!12] (oo) at (4.3,-1.8) {response in ms};
+        \draw[arr] (od) -- (om); \draw[arr] (om) -- (oo);
+
+        % Streaming
+        \node[hd] at (8.6,0.7) {Streaming};
+        \node[b, fill=green!12]  (sd) at (8.6,0)    {event stream};
+        \node[b, fill=blue!12]   (sm) at (8.6,-0.9) {consumer scores events};
+        \node[b, fill=orange!12] (so) at (8.6,-1.8) {output topic / alert};
+        \draw[arr] (sd) -- (sm); \draw[arr] (sm) -- (so);
+    \end{tikzpicture}
+
+    \vspace{0.6em}
+    \renewcommand{\arraystretch}{1.15}
+    {\scriptsize
+    \begin{tabular}{p{1.5cm}|p{2.9cm}|p{3.1cm}|p{3.1cm}}
+        \toprule
+                 & \textbf{Batch} & \textbf{Online} & \textbf{Streaming} \\
+        \midrule
+        Latency  & Hours & Milliseconds & Seconds \\
+        Cost     & Lowest --- one big job & Highest --- always-on capacity & In between \\
+        Failure  & Rerun the job & Users see errors & Backlog grows \\
+        Use when & The input exists before the question & The input arrives with the question &
+                   Continuous events, bounded delay \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.6em}
+    {\small \textbf{Default to batch.} If a nightly table of predictions solves the problem, build that:
+    an order of magnitude cheaper to run and to operate, and it fails without waking anyone.}
+
+\end{frame}

@@ -1,0 +1,40 @@
+\section{Testing \& Continuous Delivery}
+
+% --- SLIDE 1: WHY ML TESTING IS DIFFERENT ---
+\begin{frame}{Why You Cannot Just Write Unit Tests}
+
+    \centering
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=blue!5, colframe=blue!50, title=\small Ordinary software]
+                \small
+                \begin{itemize}
+                    \item The correct output is \textbf{specified in advance}.
+                    \item \texttt{assert add(2,2) == 4}
+                    \item A test failing means the code is wrong.
+                    \item Behaviour changes only when code changes.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=red!5, colframe=red!50, title=\small Machine learning]
+                \small
+                \begin{itemize}
+                    \item The correct output is \textbf{learned}, and only known statistically.
+                    \item \texttt{assert model.predict(x) == ?}
+                    \item A metric dropping might mean the code is wrong, the data changed, or the seed
+                          differed.
+                    \item Behaviour changes when \emph{data} changes, with no commit at all.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.9em}
+    \begin{block}{So you test three separate things}
+        \textbf{(1)} the \emph{code} around the model, with ordinary unit tests;
+        \textbf{(2)} the \emph{data} going in, with schema and quality checks;
+        \textbf{(3)} the \emph{model's behaviour}, with properties and thresholds rather than exact values.
+    \end{block}
+
+\end{frame}

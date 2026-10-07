@@ -1,0 +1,36 @@
+\section{Fairness Definitions}
+
+\begin{frame}{Turning ``Fair'' into Something You Can Measure}
+
+    \begin{block}{Notation for this section}
+        \begin{itemize}
+            \item $A$ --- the group attribute (e.g.\ $A \in \{\GrpA, \GrpB\}$).
+            \item $Y \in \{0,1\}$ --- the true outcome (repaid the loan, re-offended, was ill).
+            \item $R \in [0,1]$ --- the score the model outputs.
+            \item $\Yhat = \mathbf{1}[R > t]$ --- the decision after thresholding.
+        \end{itemize}
+    \end{block}
+
+    \vspace{0.8em}
+
+    Almost every group-fairness definition is one of three statements:
+
+    \vspace{0.4em}
+    \centering
+    \small
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{Family} & \textbf{Statement} & \textbf{Plain reading} \\
+        \midrule
+        Independence & $\Yhat \perp A$ & the decision rate is the same for every group \\
+        Separation   & $\Yhat \perp A \mid Y$ & the error rates are the same for every group \\
+        Sufficiency  & $Y \perp A \mid R$ & a score means the same thing for every group \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{1em}
+    \raggedright
+    {\scriptsize Framing after S.~Barocas, M.~Hardt and A.~Narayanan, \emph{Fairness and Machine
+    Learning: Limitations and Opportunities}, MIT Press, 2023,
+    \href{https://fairmlbook.org/}{fairmlbook.org}, Chapter 3.}
+\end{frame}

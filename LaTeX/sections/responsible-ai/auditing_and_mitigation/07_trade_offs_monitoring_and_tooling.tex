@@ -1,0 +1,42 @@
+
+\begin{frame}{Trade-offs, Monitoring, and Tooling}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \textbf{Expect to give something up}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item Constraining a metric usually costs some accuracy. Report the curve
+                      (disparity vs accuracy), not one point --- it turns an argument into a
+                      decision.
+                \item Sometimes the cost is near zero, which is worth discovering.
+                \item ``Levelling down'' --- degrading the strong group to close the gap ---
+                      satisfies the metric and helps nobody. Say explicitly whether it is acceptable.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \textbf{After deployment}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item Re-run the disaggregated report on production traffic on a schedule.
+                \item Alert on disparity, not only on accuracy drift.
+                \item Keep a channel for people to contest a decision, and log contested cases ---
+                      they are your best source of failure modes.
+            \end{itemize}
+            \vspace{0.5em}
+            \textbf{Libraries}
+            \begin{itemize}\small
+                \item \texttt{fairlearn} (metrics, reductions, threshold optimiser)
+                \item \texttt{AIF360} (a wide catalogue of algorithms)
+                \item \texttt{aequitas} (audit reports)
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.7em}
+    \begin{block}{}
+        \centering
+        \small \textbf{Optional lab:} disaggregate on UCI Adult, show the parity/odds tension, apply
+        threshold post-processing, and measure what it cost.
+    \end{block}
+\end{frame}

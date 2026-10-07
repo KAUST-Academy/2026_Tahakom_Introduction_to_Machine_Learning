@@ -1,0 +1,69 @@
+\section{Model Cards and Datasheets}
+
+\begin{frame}{Documentation Is Part of the Model}
+
+    A model that ships without documentation forces every downstream user to rediscover its limits
+    --- usually in production.
+
+    \vspace{0.8em}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=raiBlue!5, colframe=raiBlue!60, title=Model card]
+                \small
+                Travels \textbf{with the trained model}. Answers: what is it for, who is it for,
+                where does it fail, and how well does it work \emph{per group}.
+
+                \vspace{0.4em}
+                Mitchell et al., FAT* 2019.
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=raiGreen!5, colframe=raiGreen!60, title=Datasheet]
+                \small
+                Travels \textbf{with the dataset}. Answers: why was it collected, from whom, with
+                what consent, how was it cleaned, and what should it not be used for.
+
+                \vspace{0.4em}
+                Gebru et al., CACM 2021.
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{1em}
+
+    \begin{block}{Both are borrowed ideas}
+        \centering
+        \small A model card is a \textbf{datasheet for a component}, as in electronics; a dataset
+        datasheet is the same idea one step upstream. Neither is a research artefact --- they are
+        engineering hygiene, and increasingly they are what a customer or a partner asks to see
+        before they will build on your model.
+    \end{block}
+\end{frame}
+
+\begin{frame}{What Goes in a Model Card}
+
+    \centering
+    \scriptsize
+    \begin{tabular}{p{3.2cm} p{8.6cm}}
+        \toprule
+        \textbf{Section} & \textbf{Content} \\
+        \midrule
+        Model details      & Owner, date, version, model type, training algorithm, licence, citation, contact. \\
+        Intended use       & Primary intended uses and users; \textbf{out-of-scope} uses stated explicitly. \\
+        Factors            & Groups, instrumentation, and environments the performance is expected to vary over. \\
+        Metrics            & Which measures, which decision threshold, and how uncertainty was estimated. \\
+        Evaluation data    & Which datasets, why they were chosen, and how they were preprocessed. \\
+        Training data      & Distribution over the same factors, as far as it can be disclosed. \\
+        Quantitative analyses & Results \textbf{unitary} (per factor) and \textbf{intersectional} (per combination). \\
+        Ethical considerations & Sensitive data, risks to people, mitigations applied, known problematic uses. \\
+        Caveats \& recommendations & Untested groups, open concerns, what testing should happen next. \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{0.9em}
+    \raggedright
+    {\scriptsize M.~Mitchell, S.~Wu, A.~Zaldivar, P.~Barnes, L.~Vasserman, B.~Hutchinson, E.~Spitzer,
+    I.~D.~Raji and T.~Gebru, ``Model Cards for Model Reporting,'' FAT* 2019, Section 4,
+    \href{https://arxiv.org/abs/1810.03993v2}{arXiv:1810.03993v2}.}
+\end{frame}

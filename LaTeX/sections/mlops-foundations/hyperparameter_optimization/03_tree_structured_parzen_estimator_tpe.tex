@@ -1,0 +1,42 @@
+
+% --- SLIDE 3: TPE ---
+\begin{frame}{Tree-structured Parzen Estimator (TPE)}
+
+    \begin{block}{The trick}
+        Instead of modelling $p(y \mid x)$ --- ``how good is this configuration?'' --- TPE models
+        $p(x \mid y)$: ``what do \emph{good} configurations look like?''
+    \end{block}
+
+    \vspace{0.12em}
+    \begin{columns}[T]
+        \begin{column}{0.52\textwidth}
+            \scriptsize
+            \begin{enumerate}
+                \item Split the finished trials into a \textbf{good} group (the best objective values) and the
+                      \textbf{rest}.
+                \item For each parameter, fit a density $\ell(x)$ to the good group and $g(x)$ to the rest ---
+                      in Optuna these are Gaussian mixture models.
+                \item Sample candidates and keep the $x$ that maximises the ratio
+                      \[ \frac{\ell(x)}{g(x)}. \]
+                \item ``Looks like the winners, unlike the losers.''
+            \end{enumerate}
+        \end{column}
+        \begin{column}{0.44\textwidth}
+            \begin{tcolorbox}[colback=gray!8, colframe=gray!60, title=\scriptsize Practical notes]
+                \scriptsize
+                \begin{itemize}
+                    \item Optuna's default sampler for single-objective studies.
+                    \item Its first \texttt{n\_startup\_trials} (default \textbf{10}) are \emph{random} ---
+                          it has nothing to model yet.
+                    \item Documented sweet spot: roughly \textbf{100--1000 trials}.
+                    \item Handles float, int and categorical parameters, and conditional spaces.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.15em}
+    {\scriptsize Sources: Bergstra et al., ``Algorithms for Hyper-Parameter Optimization,'' NIPS 2011;
+    Optuna documentation, \href{https://optuna.readthedocs.io/en/stable/reference/samplers/generated/optuna.samplers.TPESampler.html}{\texttt{TPESampler}}.}
+
+\end{frame}

@@ -1,0 +1,42 @@
+
+\begin{frame}{Group Fairness Is Not the Only Framing}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \textbf{Individual fairness}
+            \vspace{0.3em}
+
+            ``Similar individuals should receive similar predictions'' (Dwork et al., 2012).
+
+            \vspace{0.5em}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item Attractive, and it catches cases group parity misses.
+                \item Requires a task-specific \textbf{similarity metric} --- which is the whole
+                      problem, moved somewhere else.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \textbf{Causal / counterfactual fairness}
+            \vspace{0.3em}
+
+            ``Would the decision change if this person had belonged to another group, holding
+            everything else fixed?'' (Kusner et al., 2017).
+
+            \vspace{0.5em}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item Directly expresses what most people mean by discrimination.
+                \item Needs a causal graph you are willing to defend, and the attribute is often
+                      not manipulable in the required sense.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+    \vspace{1em}
+    \begin{block}{}
+        \centering
+        \small For an introductory course: use group metrics because you can compute them, and
+        remember that they are a screening tool, not a certificate.
+    \end{block}
+\end{frame}

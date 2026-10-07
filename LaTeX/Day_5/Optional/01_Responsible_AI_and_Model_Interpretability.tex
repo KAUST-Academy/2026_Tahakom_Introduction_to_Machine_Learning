@@ -1,0 +1,68 @@
+% Day 5, optional reading: the full Responsible AI deck. Day 5's lecture deck,
+% Day_5/01_Responsible_AI_and_MLOps_Foundations.tex, keeps most of it. The Responsible AI deck with the Saudi and international
+% regulatory frame added to its governance section, and two slides trimmed for
+% time (the Shapley axioms, and "attention is not explanation").
+\documentclass[10pt,aspectratio=169]{beamer}
+
+% Include preamble files
+\input{preamble/packages}
+\input{preamble/commands}
+\input{preamble/beamer_settings}
+
+% Deck-specific packages and macros
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+% Do not load algorithm/algpseudocode here: the shared preamble already loads
+% algorithm2e, and algorithm.sty redefines \listofalgorithms, which is a hard error.
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage[utf8]{inputenc}
+\usepackage{pifont}
+\usepackage{newunicodechar}
+\newunicodechar{✓}{\ding{51}}
+\newunicodechar{✗}{\ding{55}}
+
+% Local palette. Colours are defined here rather than relied upon from the theme,
+% because the Stanford colour theme does not define a plain "darkred".
+\definecolor{raiRed}{RGB}{160,32,40}
+\definecolor{raiBlue}{RGB}{0,96,158}
+\definecolor{raiGreen}{RGB}{0,120,90}
+\definecolor{raiAmber}{RGB}{168,101,12}
+
+% Group A / group B shorthand used throughout the fairness section
+\newcommand{\Yhat}{\hat{Y}}
+\newcommand{\GrpA}{\text{A}}
+\newcommand{\GrpB}{\text{B}}
+
+\title[Responsible AI \& Interpretability]{Responsible AI and Model Interpretability}
+
+\begin{document}
+
+% Include sections
+\input{sections/cover}
+
+\input{sections/responsible-ai/learning_outcomes}
+\input{sections/responsible-ai/motivation}
+\input{sections/responsible-ai/sources_of_bias}
+\input{sections/responsible-ai/fairness_definitions}
+\input{sections/responsible-ai/auditing_and_mitigation}
+\input{sections/responsible-ai/interpretability_landscape}
+% feature_attribution without the Shapley-axioms slide
+\input{sections/responsible-ai/feature_attribution_basics}
+\input{sections/responsible-ai/shap_plots_and_lime}
+\input{sections/responsible-ai/lime_text_and_images}
+\input{sections/responsible-ai/attribution_pitfalls}
+% explaining_deep_models without "Attention Is Not Explanation"
+\input{sections/responsible-ai/saliency_gradcam_sanity}
+\input{sections/responsible-ai/model_cards_and_datasheets}
+% governance_in_practice, with the regulatory frame between its two slides
+\input{sections/responsible-ai/organisational_practice}
+\input{sections/responsible-ai/regulatory_landscape}
+\input{sections/responsible-ai/agents_and_llms}
+\input{sections/responsible-ai/summary}
+\input{sections/responsible-ai/references}
+
+\end{document}

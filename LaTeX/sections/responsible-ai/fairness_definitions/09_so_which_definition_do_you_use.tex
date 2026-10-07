@@ -1,0 +1,27 @@
+
+\begin{frame}{So Which Definition Do You Use?}
+
+    This is a decision about \textbf{harms}, not a hyperparameter search. Four questions, in order:
+
+    \vspace{0.8em}
+
+    \begin{enumerate}
+        \setlength\itemsep{0.55em}
+        \item \textbf{Who is affected, and what is the harm?} Being wrongly \emph{denied}
+              something (allocative) or being wrongly \emph{flagged} (punitive) point to different
+              error rates.
+        \item \textbf{Do you trust the label $Y$?} If the label encodes past discrimination,
+              definitions that condition on $Y$ inherit it --- lean towards independence.
+        \item \textbf{Is the score read by a human?} If yes, calibration within groups is close to
+              mandatory, or you are misinforming the decision-maker.
+        \item \textbf{Can you measure it?} A criterion you cannot estimate --- no group labels, or
+              slices too small --- is a wish, not a criterion (see the next section).
+    \end{enumerate}
+
+    \vspace{0.9em}
+    \begin{block}{}
+        \centering
+        Write the chosen criterion, and the criteria you consciously gave up, into the model card.
+        An unstated choice is still a choice.
+    \end{block}
+\end{frame}

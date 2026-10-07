@@ -1,0 +1,48 @@
+
+\begin{frame}{Historical and Representation Bias}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \textbf{Historical bias}
+            \vspace{0.3em}
+
+            Present even with perfect sampling and perfect measurement, because the world the data
+            records is itself unequal.
+
+            \vspace{0.6em}
+            \begin{itemize}\small
+                \setlength\itemsep{0.35em}
+                \item An image search for ``CEO'' that reflects who currently holds the job.
+                \item A loan model trained on approvals from an era of discriminatory lending.
+            \end{itemize}
+
+            \vspace{0.6em}
+            \begin{tcolorbox}[colback=gray!8, boxrule=0pt]
+                \small More data does not fix this. It is a question about the objective, not
+                the sample.
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \textbf{Representation bias}
+            \vspace{0.3em}
+
+            The development sample under-represents part of the use population, so the model
+            generalises poorly there.
+
+            \vspace{0.6em}
+            \begin{itemize}\small
+                \setlength\itemsep{0.35em}
+                \item A dermatology model trained mostly on light skin.
+                \item A speech model trained on one accent.
+                \item Gender Shades: existing face benchmarks were 79.6\% and 86.2\%
+                      lighter-skinned subjects.
+            \end{itemize}
+
+            \vspace{0.6em}
+            \begin{tcolorbox}[colback=gray!8, boxrule=0pt]
+                \small More \emph{targeted} data does help --- but you must first know the
+                composition of your data.
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+\end{frame}

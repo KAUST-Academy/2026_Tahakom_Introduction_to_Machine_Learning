@@ -1,0 +1,50 @@
+
+\begin{frame}{Post-processing: Group-Specific Thresholds}
+
+    \begin{columns}[T]
+        \begin{column}{0.52\textwidth}
+            Hardt et al.\ (2016) show that if you keep the score $R$ and choose a
+            \textbf{separate threshold per group}, you can achieve equalised odds --- and they give
+            the optimal choice.
+
+            \vspace{0.6em}
+            \begin{itemize}\scriptsize
+                \setlength\itemsep{0.3em}
+                \item Each group's ROC curve gives the achievable (FPR, TPR) pairs.
+                \item Equalised odds requires landing on the \textbf{same point} for both groups,
+                      so the feasible set is the intersection.
+                \item The best you can do is the intersection point that maximises utility ---
+                      which is generally \emph{worse} than either group's own optimum.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \centering
+            \begin{tikzpicture}[scale=2.6]
+                \draw[->] (0,0) -- (1.12,0) node[right, font=\scriptsize] {FPR};
+                \draw[->] (0,0) -- (0,1.12) node[above, font=\scriptsize] {TPR};
+                \draw[gray!50, dashed] (0,0) -- (1,1);
+                \draw[raiBlue, very thick] (0,0) .. controls (0.08,0.72) and (0.42,0.98) .. (1,1);
+                \draw[raiRed, very thick]  (0,0) .. controls (0.28,0.46) and (0.66,0.86) .. (1,1);
+                \fill[black] (0.478,0.62) circle (0.018);
+                \node[anchor=north west, font=\scriptsize, fill=white, inner sep=1pt] at (0.50,0.60)
+                    {reachable by both};
+                \draw[raiBlue, very thick] (0.58,0.27) -- +(0.12,0)
+                    node[right, font=\scriptsize, text=raiBlue] {Group A};
+                \draw[raiRed, very thick] (0.58,0.14) -- +(0.12,0)
+                    node[right, font=\scriptsize, text=raiRed] {Group B};
+            \end{tikzpicture}
+
+            \vspace{0.2em}
+            {\scriptsize Schematic drawn for this slide, after the construction in Hardt et al.\ (2016).\par}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.6em}
+    \begin{tcolorbox}[colback=raiAmber!5, colframe=raiAmber!70, title=Before you reach for this]
+        \scriptsize Per-group thresholds are the most \textbf{visible} intervention in this section:
+        two people with the same score get different outcomes, and you will have to say so out loud.
+        In many settings that alone rules it out. Treat it as a decision to be agreed and recorded,
+        not as a parameter to be tuned --- the statistically optimal fix is not always the
+        acceptable one.
+    \end{tcolorbox}
+\end{frame}

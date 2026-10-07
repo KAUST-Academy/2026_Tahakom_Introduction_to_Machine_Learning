@@ -1,0 +1,33 @@
+
+\begin{frame}[allowframebreaks]{You Cannot Have All Three}
+
+    \begin{block}{Chouldechova (2017), Equation (2.6)}
+        \[
+            \text{FPR} \;=\; \frac{p}{1-p}\cdot\frac{1-\text{PPV}}{\text{PPV}}\cdot\bigl(1-\text{FNR}\bigr)
+        \]
+        with $p$ the prevalence $\Pr(Y=1)$ in that group.
+    \end{block}
+
+    \vspace{0.6em}
+
+    Fix PPV to be equal across two groups. If $p_\GrpA \neq p_\GrpB$, the right-hand side differs,
+    so FPR and FNR \textbf{cannot both} be equal. Predictive parity and error-rate balance are
+    incompatible whenever base rates differ.
+
+    \vspace{0.8em}
+
+    \begin{itemize}\small
+        \setlength\itemsep{0.35em}
+        \item Kleinberg, Mullainathan and Raghavan (2016) prove the same tension for calibrated
+              \emph{scores}: except in degenerate cases (equal base rates, or a perfect predictor),
+              calibration and balance for both classes cannot hold together.
+        \item Nothing about this depends on the model, the features, or the amount of data. It is
+              arithmetic.
+    \end{itemize}
+
+    \vspace{0.3em}
+    {\scriptsize A.~Chouldechova, ``Fair prediction with disparate impact,'' \emph{Big Data} 5(2), 2017,
+    \href{https://arxiv.org/abs/1703.00056v1}{arXiv:1703.00056v1}. J.~Kleinberg, S.~Mullainathan and
+    M.~Raghavan, ``Inherent Trade-Offs in the Fair Determination of Risk Scores,'' ITCS 2017,
+    \href{https://arxiv.org/abs/1609.05807v2}{arXiv:1609.05807v2}.}
+\end{frame}

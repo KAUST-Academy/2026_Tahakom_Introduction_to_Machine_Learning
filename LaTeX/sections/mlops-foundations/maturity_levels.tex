@@ -1,0 +1,88 @@
+% --- SLIDE 6: LEVEL 0 ---
+\begin{frame}{Level 0: Manual Process}
+
+    \begin{columns}[T]
+        \begin{column}{0.53\textwidth}
+            \textbf{What it looks like}
+            \small
+            \begin{itemize}
+                \item Every step is manual, script-driven and interactive --- data prep, training and
+                      validation all live in a notebook.
+                \item A hard split between the people who \emph{build} the model and the people who
+                      \emph{serve} it: only the artifact is handed over.
+                \item Infrequent release iterations --- a handful of model changes a year.
+                \item No CI/CD: a model change is not a code change that anyone tests.
+                \item No active performance monitoring in production.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.43\textwidth}
+            \begin{tcolorbox}[colback=red!5, colframe=red!50, title=\small When level 0 is the right answer]
+                \small
+                \begin{itemize}
+                    \item The model is retrained rarely, or never.
+                    \item The world underneath it changes slowly.
+                    \item One person owns it end to end.
+                \end{itemize}
+                \vspace{0.3em}
+                \textit{Most pilots and proofs of concept should stay here.}
+            \end{tcolorbox}
+            \vspace{0.6em}
+            \begin{alertblock}{The trap}
+                \small Level 0 fails the moment the world moves faster than your release cadence --- and you
+                have no instrument that tells you it has.
+            \end{alertblock}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+% --- SLIDE 7: LEVELS 1 AND 2 ---
+\begin{frame}{Level 1: Pipeline Automation $\rightarrow$ Level 2: CI/CD}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=orange!6, colframe=orange!60!black, title=\scriptsize Level 1: ML pipeline automation]
+                \tiny
+                \textbf{Goal:} \emph{continuous training} --- the model retrains in production on fresh data.
+                \begin{itemize}
+                    \item Orchestrated, modular, containerised pipeline steps.
+                    \item \textbf{Data validation} and \textbf{model validation} steps inside the pipeline.
+                    \item \textbf{Experimental-operational symmetry}: the pipeline you develop with is the
+                          pipeline that runs in production.
+                    \item A metadata store; optionally a feature store.
+                    \item Triggers: on a schedule, on new data, on demand, or on measured degradation.
+                \end{itemize}
+                \textbf{Still manual:} deploying a \emph{new} pipeline.
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=green!6, colframe=green!50!black, title=\scriptsize Level 2: CI/CD pipeline automation]
+                \tiny
+                \textbf{Goal:} rapidly and safely explore new features, architectures and hyperparameters.
+                \begin{itemize}
+                    \item Source control triggers an automated \textbf{build and test} of pipeline components.
+                    \item \textbf{Continuous delivery} pushes the new pipeline to production.
+                    \item The deployed pipeline then performs continuous training on its own.
+                    \item Model registry and end-to-end lineage as first-class infrastructure.
+                \end{itemize}
+                \textbf{The unit of delivery is the pipeline}, not the model.
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.04em}
+    \begin{itemize}
+        \scriptsize
+        \item \textbf{Quarterly retrain, one owner, low stakes} $\rightarrow$ level 0 plus experiment tracking
+              is enough.
+        \item \textbf{Weekly retrain, several owners} $\rightarrow$ level 1, or you will spend your life
+              running notebooks by hand.
+        \item \textbf{Daily retrain, high-stakes or revenue-critical} $\rightarrow$ level 2, or you will not be
+              able to prove what shipped.
+    \end{itemize}
+
+    \vspace{0.03em}
+    {\scriptsize Level definitions from Google Cloud, ``MLOps: Continuous delivery and automation pipelines in machine learning,''
+    \href{https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning}{Cloud Architecture Center}, 2020.}
+
+\end{frame}

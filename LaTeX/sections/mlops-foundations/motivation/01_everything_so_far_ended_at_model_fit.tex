@@ -1,0 +1,40 @@
+\section{Why MLOps?}
+
+% --- SLIDE 1: THE FRAMING ---
+\begin{frame}{Everything So Far Ended at \texttt{model.fit()}}
+
+    \centering
+    \large
+    \textit{Every deck in this course stops at the same place: a trained model, in a notebook, on your laptop.}
+
+    \vspace{0.36em}
+
+    \begin{columns}[T]
+        \begin{column}{0.46\textwidth}
+            \begin{tcolorbox}[colback=blue!5, colframe=blue!50, title=What we have taught you]
+                \scriptsize
+                \begin{itemize}
+                    \item Split the data, pick a metric
+                    \item Fit a model, tune it a bit
+                    \item Report a validation score
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \begin{tcolorbox}[colback=red!5, colframe=red!50, title=What nobody taught you]
+                \scriptsize
+                \begin{itemize}
+                    \item Which run produced that number?
+                    \item Can you rebuild it in six months?
+                    \item Who calls the model, and what happens when it is wrong?
+                    \item How will you know it stopped working?
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.3em}
+    \scriptsize
+    \textbf{MLOps} is the set of practices that answers the right-hand column.
+
+\end{frame}

@@ -1,0 +1,23 @@
+
+\begin{frame}{Definition 3: Calibration and Predictive Parity (Sufficiency)}
+
+    \begin{block}{Calibration within groups}
+        \[
+            \Pr(Y = 1 \mid R = r,\, A = \GrpA) \;=\; \Pr(Y = 1 \mid R = r,\, A = \GrpB) \;=\; r
+        \]
+        A score of $0.7$ means a 70\% chance for everyone, whatever their group.
+        \textbf{Predictive parity} is the thresholded version: equal PPV across groups.
+    \end{block}
+
+    \vspace{0.8em}
+
+    \begin{itemize}
+        \setlength\itemsep{0.45em}
+        \item This is the criterion the COMPAS vendor pointed to, and it is a genuinely important
+              one: without it, a human reading the score is being misled about what it means.
+        \item Well-trained probabilistic models are often \emph{approximately} calibrated
+              within groups by default --- which is precisely why the conflict below is unavoidable
+              rather than exotic.
+        \item Check it with a \textbf{reliability diagram per group}, not with a single number.
+    \end{itemize}
+\end{frame}

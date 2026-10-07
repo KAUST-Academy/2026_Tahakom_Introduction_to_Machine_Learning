@@ -1,0 +1,34 @@
+
+% --- SLIDE 2: THE OPERATING LOOP ---
+\begin{frame}{The Part This Deck Is About: The Operating Loop}
+
+    \centering
+    \begin{tikzpicture}[
+        st/.style={rectangle, draw, rounded corners=3pt, minimum height=1.0cm, text width=1.9cm,
+                   align=center, font=\small},
+        arr/.style={-{Latex[length=2.2mm]}, very thick, gray!60!black}
+    ]
+        \node[st, fill=blue!12]   (exp)  at (0,0)      {Experiment};
+        \node[st, fill=blue!12]   (val)  at (3.0,0)    {Validate};
+        \node[st, fill=green!12]  (pack) at (6.0,0)    {Package};
+        \node[st, fill=orange!14] (depl) at (9.0,0)    {Deploy};
+        \node[st, fill=red!12]    (mon)  at (9.0,-1.9) {Monitor};
+        \node[st, fill=gray!16]   (ret)  at (3.0,-1.9) {Retrain};
+
+        \draw[arr] (exp)  -- (val);
+        \draw[arr] (val)  -- (pack);
+        \draw[arr] (pack) -- (depl);
+        \draw[arr] (depl) -- (mon);
+        \draw[arr] (mon)  -- node[above, font=\scriptsize] {drift or decay triggers} (ret);
+        \draw[arr] (ret)  -- (exp);
+    \end{tikzpicture}
+
+    \vspace{1.0em}
+    \begin{itemize}
+        \item Each arrow is a place work gets lost. Each box is a place something can silently break.
+        \item \textbf{The goal of MLOps is to shorten this loop}, not to add ceremony to it.
+        \item Rule of thumb: if one lap takes a week of manual effort, you will do it twice a year ---
+              and your model will spend most of its life stale.
+    \end{itemize}
+
+\end{frame}

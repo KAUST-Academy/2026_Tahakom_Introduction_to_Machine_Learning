@@ -1,0 +1,33 @@
+\section{Monitoring \& Drift}
+
+% --- SLIDE 1: FOUR WAYS TO GO WRONG ---
+\begin{frame}{Four Ways a Deployed Model Goes Wrong}
+
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    {\scriptsize
+    \begin{tabular}{p{2.9cm}|p{4.3cm}|p{4.3cm}}
+        \toprule
+        \textbf{What} & \textbf{Looks like} & \textbf{Timescale} \\
+        \midrule
+        \textbf{Upstream breakage} & A feature becomes all-null, all-zero, or wrongly typed &
+            Instant, catastrophic \\
+        \textbf{Data drift} & $P(X)$ moves: new customers, new devices, new regions &
+            Weeks to months \\
+        \textbf{Concept drift} & $P(Y \mid X)$ moves: the same inputs now imply a different answer &
+            Days to years \\
+        \textbf{Model staleness} & Nothing drifted much, but the model has not seen a year of new data &
+            Slow and boring \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.3em}
+    \begin{itemize}
+        \item \textbf{Upstream breakage is the most common and the most fixable.} It is a data engineering
+              bug, and a schema check catches it in minutes rather than months.
+        \item The other three cannot be prevented --- only detected and answered with a retrain.
+        \item \textbf{Server uptime tells you none of this.} A model service returning 200s at 8\,ms with
+              catastrophically wrong predictions is a perfectly healthy service.
+    \end{itemize}
+
+\end{frame}

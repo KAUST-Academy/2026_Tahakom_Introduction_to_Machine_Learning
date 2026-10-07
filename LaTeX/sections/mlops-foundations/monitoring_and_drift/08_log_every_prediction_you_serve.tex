@@ -1,0 +1,38 @@
+
+% --- SLIDE 8: LOGGING FOR AUDIT ---
+\begin{frame}{Log Every Prediction You Serve}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \small
+            \textbf{Record, per request}
+            \begin{itemize}
+                \item A request ID and a timestamp
+                \item The \textbf{input features as the model saw them} (post-preprocessing)
+                \item The raw output and the final decision
+                \item The \textbf{model version} and config version
+                \item Latency, and any fallback that fired
+            \end{itemize}
+            \vspace{0.4em}
+            Join the label in later, on the request ID. That join is what makes every metric on the previous
+            slides computable at all.
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=blue!5, colframe=blue!50, title=\small What this buys you]
+                \small
+                \begin{itemize}
+                    \item \textbf{Debugging:} replay the exact input that produced the complaint.
+                    \item \textbf{Training data:} today's production log is next quarter's training set.
+                    \item \textbf{Audit:} answer ``why was this person declined, by which model, on what
+                          inputs?''
+                \end{itemize}
+            \end{tcolorbox}
+            \vspace{0.4em}
+            \begin{alertblock}{\small Privacy is a design input}
+                \small Prediction logs contain personal data. Decide retention, access and pseudonymisation
+                \emph{before} you switch logging on, not after.
+            \end{alertblock}
+        \end{column}
+    \end{columns}
+
+\end{frame}

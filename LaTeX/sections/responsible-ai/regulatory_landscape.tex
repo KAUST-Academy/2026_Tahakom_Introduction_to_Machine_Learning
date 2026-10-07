@@ -1,0 +1,90 @@
+% Governance as law: the Saudi frame a model built in the Kingdom answers to, then the
+% international frameworks partners and vendors will cite. Facts checked October 2026:
+% SDAIA AI Ethics Principles (2023); PDPL per DLA Piper's Data Protection Laws of the
+% World; EU AI Act dates per Regulation (EU) 2026/1744 (the Digital Omnibus on AI).
+
+% --- SLIDE 1: THE SAUDI FRAME ---
+\begin{frame}{Governance Is Also Law: The Saudi Frame}
+
+    \begin{columns}[T]
+        \begin{column}{0.49\textwidth}
+            \begin{tcolorbox}[colback=raiBlue!5, colframe=raiBlue!60,
+                              title={SDAIA AI Ethics Principles (2023)}]
+                \scriptsize
+                \textbf{Seven principles:} fairness; privacy and security; humanity; social and
+                environmental benefits; reliability and safety; transparency and explainability;
+                accountability and responsibility.
+
+                \vspace{0.4em}
+                \textbf{Four risk tiers:}
+                \begin{itemize}
+                    \item \textbf{Little or no risk:} the principles are recommended.
+                    \item \textbf{Limited or high risk:} the principles are required, with additional
+                          controls for high risk.
+                    \item \textbf{Unacceptable risk:} prohibited, for example threats to the safety of
+                          life or the exploitation of children.
+                \end{itemize}
+                \vspace{0.2em}
+                Applies to developers, designers and users of AI systems, and to the people they affect.
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \begin{tcolorbox}[colback=gray!8, colframe=gray!60,
+                              title={Personal Data Protection Law (PDPL)}]
+                \scriptsize
+                \begin{itemize}
+                    \item In force since 14 September 2023; enforced by SDAIA since 14 September 2024.
+                    \item Training sets, prediction logs and monitoring data are \textbf{personal data}
+                          whenever they relate to identifiable people: they need a lawful basis, a stated
+                          purpose, and no more data than that purpose requires.
+                    \item Breaches are reported to SDAIA within \textbf{72 hours}; data leaves the Kingdom
+                          only under its transfer rules.
+                    \item Fines up to \textbf{SAR 5 million} per violation, doubled for repeat offences.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.5em}
+    \centering
+    \small \textit{This lecture's tools map onto them:} a disaggregated audit is evidence for
+    \emph{fairness}; a model card for \emph{transparency} and \emph{accountability}; and the
+    prediction-log retention decision in the MLOps lecture later today is a \emph{PDPL} decision.
+
+\end{frame}
+
+% --- SLIDE 2: INTERNATIONAL REFERENCE POINTS ---
+\begin{frame}{International Reference Points}
+
+    \centering
+    \renewcommand{\arraystretch}{1.35}
+    {\scriptsize
+    \begin{tabular}{p{2.8cm}|p{4.5cm}|p{4.5cm}}
+        \toprule
+                                       & \textbf{What it is} & \textbf{When it matters to you} \\
+        \midrule
+        \textbf{EU AI Act}\newline Regulation (EU) 2024/1689
+            & Binding EU law, with risk tiers close to SDAIA's: prohibited practices, high-risk systems,
+              transparency duties, minimal risk
+            & Any system sold or used in the EU. Prohibitions apply since February 2025; after the 2026
+              Digital Omnibus, high-risk duties start in December 2027 (August 2028 for AI inside
+              regulated products) \\
+        \textbf{NIST AI RMF 1.0}\newline (2023)
+            & Voluntary US framework built on four functions: Govern, Map, Measure, Manage
+            & A ready-made structure for an internal AI risk process \\
+        \textbf{ISO/IEC 42001:2023}
+            & Certifiable management-system standard for AI
+            & Showing a customer or regulator that the process exists and is audited \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.6em}
+    \begin{itemize}
+        \item \textbf{The common core is this lecture:} know the risk tier, test for disparate harm,
+              document intended and out-of-scope use, keep a named human accountable, and monitor
+              after release.
+        \item \textbf{Dates move.} These are as of October 2026; check the current text before you rely on
+              one.
+    \end{itemize}
+
+\end{frame}

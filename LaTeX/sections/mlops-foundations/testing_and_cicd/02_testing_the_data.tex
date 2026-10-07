@@ -1,0 +1,39 @@
+
+% --- SLIDE 2: TESTING DATA ---
+\begin{frame}[fragile]{Testing the Data}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \small
+            \textbf{Two layers}
+            \begin{itemize}
+                \item \textbf{Schema:} columns present, types correct, categories in the allowed set,
+                      nullability as declared. This is a hard failure --- stop the pipeline.
+                \item \textbf{Quality / statistics:} distributions within expected bounds, null rate below a
+                      ceiling, no duplicate keys, freshness within an SLA. This is usually a warning, and a
+                      gate on retraining.
+            \end{itemize}
+            \vspace{0.4em}
+            \textbf{Write the schema once} and reuse it at three points: training input, retraining input,
+            and serving input. That single artifact is your best defence against training/serving skew.
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \begin{lstlisting}[language=Python, basicstyle=\ttfamily\tiny]
+def validate(df: pd.DataFrame) -> None:
+    assert set(SCHEMA) <= set(df.columns), "missing column"
+    assert df["age"].between(18, 120).all()
+    assert df["contract"].isin(CONTRACTS).all()
+    assert df["monthly_charges"].isna().mean() < 0.01
+    assert df["id"].is_unique
+    assert (NOW - df["event_ts"].max()).days < 2   # freshness
+            \end{lstlisting}
+            \vspace{0.3em}
+            \begin{tcolorbox}[colback=gray!8, colframe=gray!60, boxrule=0.5pt]
+                \scriptsize Tools that formalise this: Great Expectations, Pandera, TensorFlow Data
+                Validation, \texttt{dbt} tests. Twenty lines of \texttt{assert} statements already capture
+                most of the value.
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+\end{frame}

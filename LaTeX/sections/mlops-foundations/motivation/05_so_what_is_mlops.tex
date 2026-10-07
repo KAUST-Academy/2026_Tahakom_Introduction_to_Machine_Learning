@@ -1,0 +1,41 @@
+
+% --- SLIDE 5: WHAT IS MLOPS ---
+\begin{frame}{So What Is MLOps?}
+
+    \begin{block}{Working definition}
+        \textbf{MLOps} applies DevOps practices --- version control, automated testing, continuous integration and
+        delivery, monitoring --- to machine learning systems, where the deliverable is not just code but
+        \textbf{code + data + model} together.
+    \end{block}
+
+    \vspace{0.5em}
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.6cm,
+        box/.style={rectangle, draw, rounded corners=2pt, minimum height=1.0cm, text width=2.6cm,
+                    align=center, font=\small},
+        lbl/.style={font=\scriptsize\itshape, text=gray!70!black}
+    ]
+        \node[box, fill=blue!10]  (code)  {\textbf{Code}};
+        \node[box, fill=green!10, right=of code]  (data)  {\textbf{Data}};
+        \node[box, fill=orange!10, right=of data] (model) {\textbf{Model}};
+        \node[box, fill=gray!12, right=of model]  (cfg)   {\textbf{Config}};
+
+        \node[lbl, below=1mm of code]  {git, reviewed};
+        \node[lbl, below=1mm of data]  {versioned, hashed};
+        \node[lbl, below=1mm of model] {registered, staged};
+        \node[lbl, below=1mm of cfg]   {declared, validated};
+
+        \node[font=\small, above=3mm of data, xshift=1.7cm]
+            {A deployment is a \emph{tuple} of all four --- not a single commit.};
+    \end{tikzpicture}
+
+    \vspace{1.2em}
+    \begin{itemize}
+        \item \textbf{Not} a product you buy. \textbf{Not} a job title you hire once. It is a set of habits plus
+              a small amount of tooling.
+        \item The habits matter more than the tools. A team with a spreadsheet and discipline beats a team with
+              a platform and none.
+    \end{itemize}
+
+\end{frame}

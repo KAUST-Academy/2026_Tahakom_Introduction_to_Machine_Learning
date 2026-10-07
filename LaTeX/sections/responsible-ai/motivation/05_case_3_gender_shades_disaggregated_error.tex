@@ -1,0 +1,55 @@
+
+% ---------------------------------------------------------------------------
+% Case 3: Gender Shades
+% ---------------------------------------------------------------------------
+\begin{frame}{Case 3: Gender Shades --- Disaggregated Error Rates (2018)}
+
+    Buolamwini and Gebru audited three \textbf{commercial} gender-classification APIs on the
+    \emph{Pilot Parliaments Benchmark} (PPB): 1{,}270 parliamentarians from three African and three
+    European countries, labelled by Fitzpatrick skin type and by binary gender.
+
+    \vspace{0.18em}
+    \centering
+    \scriptsize
+    \begin{tabular}{lccccc}
+        \toprule
+        \textbf{Classifier} & \textbf{All} & \textbf{Darker female} & \textbf{Darker male}
+        & \textbf{Lighter female} & \textbf{Lighter male} \\
+        \midrule
+        Microsoft & 6.3\%  & 20.8\% & 6.0\%  & 1.7\% & 0.0\% \\
+        Face++    & 10.0\% & 34.5\% & 0.7\%  & 9.8\% & 0.8\% \\
+        IBM       & 12.1\% & 34.7\% & 12.0\% & 7.1\% & 0.3\% \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{0.12em}
+    {\scriptsize Error rate $=1-$ true positive rate, evaluated April--May 2017.}
+
+    \vspace{0.18em}
+    \raggedright
+    \begin{columns}[T]
+        \begin{column}{0.51\textwidth}
+            \begin{itemize}\scriptsize
+                \setlength\itemsep{0.1em}
+                \item The aggregate column looks acceptable. The intersectional columns do not.
+                \item Marginal slices hide it: an 8.1\%--20.6\% gap by gender alone, 11.8\%--19.2\%
+                      by skin type alone.
+                \item Maximum reported error-rate gap between the best- and worst-classified
+                      subgroups: \textbf{34.4\%}.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.47\textwidth}
+            \begin{tcolorbox}[colback=raiBlue!5, colframe=raiBlue!60, boxrule=0.6pt]
+                \scriptsize
+                \textbf{Two lessons.} (1) Slice by every group \emph{and by combinations}, and
+                report the worst slice with its sample size. (2) Quote the study for what it
+                measured --- binary gender classification, one benchmark, three APIs, one point in
+                time --- not as ``face recognition does not work.''
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.12em}
+    {\scriptsize J.~Buolamwini and T.~Gebru, ``Gender Shades: Intersectional Accuracy Disparities in
+    Commercial Gender Classification,'' \emph{PMLR} 81:77--91, FAT* 2018, Table 4 and Section 4.1.}
+\end{frame}

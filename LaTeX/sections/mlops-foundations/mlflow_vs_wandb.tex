@@ -1,0 +1,77 @@
+% --- SLIDE 7: MLFLOW VS W&B ---
+\begin{frame}{MLflow and Weights \& Biases, Side by Side}
+
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    {\scriptsize
+    \begin{tabular}{p{2.9cm}|p{4.2cm}|p{4.2cm}}
+        \toprule
+                        & \textbf{MLflow} & \textbf{Weights \& Biases} \\
+        \midrule
+        Model           & Open source (Apache~2.0), self-hosted or managed & Hosted SaaS;
+                          self-hosting available \\
+        Cost            & Free; you run the server & Free tier for personal use (corporate use excluded);
+                          free Pro licences for academic research \\
+        Setup           & \texttt{pip install mlflow} --- works offline & Account plus API key; logs to the cloud
+                          by default \\
+        Strength        & Registry, packaging, deployment story; lives inside your infrastructure &
+                          Collaboration, reports, rich interactive dashboards, built-in sweeps \\
+        HPO             & Bring your own (Optuna, Ray Tune) & \texttt{wandb sweeps} built in \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.24em}
+    \begin{itemize}
+        \scriptsize
+        \item Both cover \textbf{runs, params, metrics, artifacts, registry}. The instrumentation in your
+              training script is a handful of lines either way --- switching later is cheap.
+        \item \textbf{Choose on constraints, not features:} can your data leave the building? Do you have
+              someone to run a server? Is the audience your team or your customer?
+        \item Others in the same shape: Neptune, Comet, ClearML, Aim, and the tracker built into most cloud
+              ML platforms.
+    \end{itemize}
+
+    \vspace{0.09em}
+    {\scriptsize Sources: \href{https://mlflow.org/docs/latest/}{MLflow documentation};
+    \href{https://wandb.ai/site/pricing/}{W\&B pricing} (accessed 2026).}
+
+\end{frame}
+
+% --- SLIDE 8: HONEST COMPARISON ---
+\begin{frame}{Comparing Runs Honestly}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{tcolorbox}[colback=red!5, colframe=red!50, title=\scriptsize Dishonest but common]
+                \scriptsize
+                \begin{itemize}
+                    \item Report the best of 50 runs on the validation set as if it were an unbiased estimate.
+                    \item Compare your tuned model against an untuned baseline.
+                    \item Change three things at once and attribute the gain to your favourite one.
+                    \item Report one seed.
+                    \item Quietly drop the runs that did not work.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \begin{tcolorbox}[colback=green!5, colframe=green!50!black, title=\scriptsize What to do instead]
+                \scriptsize
+                \begin{itemize}
+                    \item Keep a \textbf{frozen test set} touched once, at the end.
+                    \item Give the baseline the \emph{same} tuning budget.
+                    \item Change one thing per run; the tracker makes this cheap.
+                    \item Report mean $\pm$ spread over 3--5 seeds.
+                    \item Keep failed runs, tagged. They are evidence.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.21em}
+    \begin{alertblock}{The baseline rule}
+        Before any model goes to production, log a run for the \textbf{dumbest possible baseline}: predict
+        the majority class, predict last week's value, use the existing business rule. Surprisingly often it
+        wins --- and that is a result worth knowing before you build a serving stack.
+    \end{alertblock}
+
+\end{frame}

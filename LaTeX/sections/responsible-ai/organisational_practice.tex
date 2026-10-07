@@ -1,0 +1,50 @@
+\section{Governance in Practice}
+
+\begin{frame}{Organisational Practice}
+
+    \begin{columns}[T]
+        \begin{column}{0.49\textwidth}
+            \textbf{Review before release}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item A named reviewer who is \textbf{not} the model's author signs off the card
+                      and the disaggregated results.
+                \item Scale the review to the stakes: a recommender for internal search does not
+                      need a committee; a credit model does.
+                \item Record the decision \emph{and the trade-off accepted}, so it can be revisited.
+            \end{itemize}
+
+            \vspace{0.7em}
+            \textbf{Red-teaming}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item Deliberately try to make the system fail for a specific group or input type,
+                      before users do.
+                \item Give the red team the failure taxonomy from this lecture as a starting
+                      checklist.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \textbf{After release}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item \textbf{Incident reporting.} A defined path for ``the model did something
+                      harmful,'' with an owner and a deadline --- not a support ticket queue.
+                \item \textbf{Contestability.} A person affected by a decision can ask for it to be
+                      reviewed by a human, and the request is logged.
+                \item \textbf{Scheduled re-audit.} Put the date in the model card and treat it like
+                      a certificate expiry.
+                \item \textbf{A kill switch.} Know in advance how you turn the model off and what
+                      the fallback is.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.8em}
+    \begin{block}{}
+        \centering
+        \small The common failure is not the absence of a policy. It is a policy with no owner and
+        no date.
+    \end{block}
+\end{frame}
+

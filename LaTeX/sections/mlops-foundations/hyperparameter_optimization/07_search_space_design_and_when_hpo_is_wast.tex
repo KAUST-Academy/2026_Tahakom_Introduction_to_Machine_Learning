@@ -1,0 +1,43 @@
+
+% --- SLIDE 7: SEARCH SPACE + WHEN NOT TO ---
+\begin{frame}{Search-Space Design, and When HPO Is Wasted Compute}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=green!5, colframe=green!50!black, title=\scriptsize Designing the space]
+                \scriptsize
+                \begin{itemize}
+                    \item \textbf{Few parameters, wide ranges} beats many parameters with narrow ones.
+                    \item Log scale for anything multiplicative.
+                    \item Bound the space with physics and budget, not superstition: if a depth of 40 will not
+                          fit in memory, do not offer it.
+                    \item If the best value sits on a \textbf{boundary}, your range was wrong --- widen it and
+                          rerun.
+                    \item Tune the \emph{pipeline}, not only the model: imputation strategy and scaler often
+                          matter more than \texttt{n\_estimators}.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=red!5, colframe=red!50, title=\scriptsize When to skip HPO entirely]
+                \scriptsize
+                \begin{itemize}
+                    \item \textbf{The baseline is not built yet.} Tune nothing until a dumb model is logged.
+                    \item \textbf{The validation set is small.} With 200 samples, 500 trials just find the
+                          configuration that best overfits your split.
+                    \item \textbf{The gain is not decision-relevant.} $+0.3$ F1 points that change no
+                          business action is compute set on fire.
+                    \item \textbf{The data is the bottleneck.} A week of labelling usually beats a week of
+                          tuning.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.15em}
+    \begin{alertblock}{Guard the test set}
+        The HPO objective must be computed on \textbf{validation} data --- ideally cross-validated. A search
+        of 500 trials against a single small split is a very efficient overfitting machine.
+    \end{alertblock}
+
+\end{frame}

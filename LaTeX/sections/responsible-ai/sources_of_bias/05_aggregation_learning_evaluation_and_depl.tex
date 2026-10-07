@@ -1,0 +1,27 @@
+
+\begin{frame}{Aggregation, Learning, Evaluation and Deployment Bias}
+
+    \begin{itemize}
+        \setlength\itemsep{0.7em}
+        \item \textbf{Aggregation bias.} One model for populations that genuinely behave
+              differently. Suresh and Guttag point to medicine: patients of different sexes with
+              similar underlying conditions can present and progress differently, so one model is
+              optimal for neither.
+
+        \item \textbf{Learning bias.} The modelling choice itself amplifies a disparity.
+              Optimising average loss lets a large majority group dominate the gradient;
+              aggressive compression or regularisation tends to cost the tails most.
+
+        \item \textbf{Evaluation bias.} The benchmark does not represent the use population,
+              so the reported number is not the number you will get. This is exactly the
+              Gender Shades finding about existing face benchmarks.
+
+        \item \textbf{Deployment bias.} The model is used differently from how it was framed.
+              A risk score built to \emph{rank} people for services becomes a
+              \emph{decision} about their liberty; a triage aid becomes an autopilot.
+    \end{itemize}
+
+    \vspace{0.4em}
+    \centering
+    \textit{Four of the seven sources arise \emph{after} the data has been collected.}
+\end{frame}

@@ -1,0 +1,30 @@
+
+\begin{frame}{Case 1: The Disagreement That Followed}
+
+    Northpointe replied that its score was \textbf{equally accurate for both groups}: among
+    defendants given the same score, roughly the same fraction re-offended regardless of race.
+
+    \vspace{0.8em}
+
+    \begin{block}{Both sides were reporting true numbers}
+        ProPublica measured \textbf{error rates} conditioned on the true outcome
+        (who got wrongly flagged). Northpointe measured \textbf{calibration} conditioned on the
+        score (what a score means). These are different quantities.
+    \end{block}
+
+    \vspace{0.8em}
+
+    \begin{itemize}
+        \setlength\itemsep{0.4em}
+        \item Chouldechova (2017) and Kleinberg, Mullainathan and Raghavan (2016) showed
+              independently that when the two groups have \textbf{different base rates} of the
+              outcome, a score cannot satisfy both criteria at once, except in degenerate cases.
+        \item So this was not a bug that better engineering would fix. It was a
+              \textbf{choice between incompatible definitions of fair} --- and nobody had made it
+              explicitly.
+    \end{itemize}
+
+    \vspace{0.5em}
+    \centering
+    \textit{We return to this result in Section 4.}
+\end{frame}

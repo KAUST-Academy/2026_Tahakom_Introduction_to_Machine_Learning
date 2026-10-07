@@ -1,0 +1,96 @@
+\section{Feature Attribution: SHAP and LIME}
+
+\begin{frame}{Baseline: Permutation Importance}
+
+    \begin{block}{Recipe}
+        \begin{enumerate}
+            \item Measure the model's score on the validation set.
+            \item Shuffle one feature column, breaking its relationship with the target.
+            \item Re-score. The \textbf{drop} is that feature's importance.
+            \item Repeat several times and average; then restore the column and move on.
+        \end{enumerate}
+    \end{block}
+
+    \vspace{0.7em}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \textbf{Why start here}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item Model-agnostic, ten lines of code, needs only \texttt{predict()}.
+                \item Measures importance \textbf{for the metric you care about}.
+                \item Computed on \emph{held-out} data, so it reflects generalisation, not fit.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \textbf{Where it misleads}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item \textbf{Correlated features split the credit}, and each looks unimportant
+                      because the other covers for it.
+                \item Shuffling creates impossible rows (age 8, income \$200k), so you evaluate
+                      the model off its data manifold.
+                \item It is global only --- it says nothing about a single prediction.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{A Trap: Built-in Tree ``Feature Importance''}
+
+    \texttt{RandomForest.feature\_importances\_} is \textbf{mean decrease in impurity} (MDI),
+    accumulated on the \emph{training} data.
+
+    \vspace{0.8em}
+
+    \begin{itemize}
+        \setlength\itemsep{0.5em}
+        \item It is biased towards \textbf{high-cardinality} features: a continuous feature or a
+              random ID column offers many split points, so it looks informative even when it is
+              pure noise.
+        \item It is computed on training data, so it rewards features the model used to overfit.
+        \item Classic demonstration: add a column of random integers to your dataset and it can
+              outrank real predictors in MDI --- while permutation importance on held-out data
+              correctly gives it roughly zero.
+    \end{itemize}
+
+    \vspace{0.8em}
+    \begin{block}{}
+        \centering
+        \small Rule: never report \texttt{feature\_importances\_} as ``the model's feature
+        importance'' without saying which definition you used. Prefer permutation importance
+        or SHAP on held-out data.
+    \end{block}
+\end{frame}
+
+\begin{frame}{SHAP: Attribution as a Fair Payout}
+
+    \textbf{The analogy.} A team of players cooperates and earns a payout. How much of it does each
+    player deserve? Here the ``players'' are the features of one row, and the ``payout'' is
+    $f(x) - \mathbb{E}[f(X)]$: how far this prediction sits from the average prediction.
+
+    \vspace{0.8em}
+
+    \begin{block}{Shapley value (Shapley, 1953)}
+        Consider adding feature $i$ to a coalition $S$ of features already present, and record the
+        change in the prediction. The Shapley value $\phi_i$ is the \textbf{average of that change
+        over all possible orderings} in which features could be added:
+        \[
+            \phi_i \;=\; \sum_{S \subseteq N \setminus \{i\}}
+            \frac{|S|!\,\bigl(|N|-|S|-1\bigr)!}{|N|!}
+            \Bigl[\, v(S \cup \{i\}) - v(S) \,\Bigr]
+        \]
+    \end{block}
+
+    \vspace{0.5em}
+
+    \begin{itemize}\small
+        \setlength\itemsep{0.3em}
+        \item The averaging over orderings is what makes it symmetric: no feature is privileged by
+              being ``first''.
+        \item There are $2^{|N|}$ subsets, so the exact computation is exponential.
+              Everything practical in SHAP is an efficient approximation of this quantity.
+    \end{itemize}
+\end{frame}
+

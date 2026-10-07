@@ -1,0 +1,38 @@
+
+% --- SLIDE 3: TESTING MODELS ---
+\begin{frame}{Testing the Model}
+
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    {\scriptsize
+    \begin{tabular}{p{3.0cm}|p{8.4cm}}
+        \toprule
+        \textbf{Test type} & \textbf{What it asserts} \\
+        \midrule
+        \textbf{Smoke / shape}   & The model loads, accepts one row, returns a probability in $[0,1]$. Catches
+                                   most deployment breakage. \\
+        \textbf{Minimum functionality} & Cases so easy that failure is unambiguous: a customer who cancelled
+                                   last month must score high risk. \\
+        \textbf{Invariance}      & Perturbations that must \emph{not} change the prediction: reordering
+                                   columns, changing a customer ID, whitespace in a category. \\
+        \textbf{Directional}     & Perturbations with a known sign: raising the price should not \emph{lower}
+                                   predicted churn. \\
+        \textbf{Golden set}      & A fixed, curated set of examples with expected outputs, reviewed by a human
+                                   and version-controlled. \\
+        \textbf{Regression / slice} & Overall metric above a floor \emph{and} no important segment worse than
+                                   the incumbent by more than $\delta$. \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.21em}
+    \begin{itemize}
+        \scriptsize
+        \item \textbf{Slice tests matter more than the headline metric.} An overall $+1\%$ that hides
+              $-8\%$ for one region is a regression, not an improvement.
+        \item {\scriptsize The invariance/directional/minimum-functionality vocabulary is from Ribeiro et al.,
+              ``Beyond Accuracy: Behavioral Testing of NLP Models with CheckList,'' ACL 2020,
+              \href{https://arxiv.org/abs/2005.04118v1}{arXiv:2005.04118v1} --- the idea transfers directly to
+              tabular models.}
+    \end{itemize}
+
+\end{frame}

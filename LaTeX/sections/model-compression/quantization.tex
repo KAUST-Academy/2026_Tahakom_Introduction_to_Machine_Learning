@@ -1,0 +1,83 @@
+% --- SLIDE 2: QUANTISATION, THE MAPPING ---
+\begin{frame}{Quantisation: Fewer Bits per Number}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \small
+                \item Map each real value $x$ to an integer $x_q$ with a \textbf{scale} $s$ and a
+                      \textbf{zero-point} $z$:
+                      \[
+                          x_q = \mathrm{clip}\big(\mathrm{round}(x/s + z),\, q_{\min}, q_{\max}\big)
+                      \]
+                      and dequantising gives back $x \approx s\,(x_q - z)$.
+                \item \textbf{INT8} has 256 levels, so $s$ comes from the observed range of $x$.
+                      \textbf{Symmetric} quantisation fixes $z = 0$.
+                \item \textbf{Rounding and clipping lose information}, and dequantising does not get it back.
+                      One outlier stretches the range and wastes levels, which is why scales are often kept
+                      \textbf{per channel} rather than per tensor.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \centering
+            % Real values (orange) map to integer levels (green). Redrawn after Wang & Spindler,
+            % NVIDIA Technical Blog (2025), Figure 2: the original is too thin to read at this size.
+            \resizebox{\linewidth}{!}{%
+            \begin{tikzpicture}[>=Stealth, font=\small]
+                \node[anchor=west, font=\small\bfseries] at (0,3.55) {Affine (asymmetric)};
+                \draw[<->, thick, orange!85!black] (0,3.0) -- (6.2,3.0);
+                \draw[thick, green!45!black] (0.3,2.0) -- (5.9,2.0);
+                \foreach \t/\b/\tl/\bl in {1.0/0.3/x_{\min}/q_{\min}, 2.2/1.9/0/z, 3.8/3.9/x/x_q, 5.2/5.9/x_{\max}/q_{\max}} {
+                    \fill[orange!85!black] (\t,3.0) circle (1.8pt) node[above, black] {$\tl$};
+                    \fill[green!45!black] (\b,2.0) circle (1.8pt) node[below, black] {$\bl$};
+                    \draw[->, gray] (\t,2.92) -- (\b,2.09);
+                }
+                \node[anchor=west, font=\small\bfseries] at (0,1.15) {Symmetric};
+                \draw[<->, thick, orange!85!black] (0,0.6) -- (6.2,0.6);
+                \draw[thick, green!45!black] (0.3,-0.4) -- (5.9,-0.4);
+                \foreach \t/\b/\tl/\bl in {1.0/0.3/-x_{\max}/q_{\min}, 3.1/3.1/0/0, 4.2/4.6/x/x_q, 5.2/5.9/x_{\max}/q_{\max}} {
+                    \fill[orange!85!black] (\t,0.6) circle (1.8pt) node[above, black] {$\tl$};
+                    \fill[green!45!black] (\b,-0.4) circle (1.8pt) node[below, black] {$\bl$};
+                    \draw[->, gray] (\t,0.52) -- (\b,-0.31);
+                }
+            \end{tikzpicture}}\\[0.3em]
+            {\scriptsize Real values (top) to integer levels (bottom). After Wang \& Spindler, NVIDIA
+            Technical Blog (2025), Figure~2.}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+% --- SLIDE 3: QUANTISATION, WHICH METHOD ---
+\begin{frame}{Quantisation: When and How}
+
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    {\scriptsize
+    \begin{tabular}{p{3.0cm}|p{5.0cm}|p{3.6cm}}
+        \toprule
+        \textbf{Method} & \textbf{How it works} & \textbf{Use it when} \\
+        \midrule
+        Post-training, \textbf{dynamic}
+            & Weights are quantised ahead of time; activation scales are computed on the fly for each input
+            & A first try: needs no data. Linear- and LSTM-heavy models on CPU \\
+        Post-training, \textbf{static}
+            & A \textbf{calibration set} of representative inputs fixes the activation scales once
+            & Fastest at run time; CNNs and edge devices \\
+        \textbf{Quantisation-aware training}
+            & Training simulates the rounding (\emph{fake quantisation}, with gradients passed straight
+              through it), so the weights adapt to it
+            & Post-training loses too much accuracy, e.g.\ at 4 bits or on small models \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.6em}
+    \begin{itemize}
+        \item \textbf{The calibration set is training data for the quantiser.} Version it with the model, and
+              check it still looks like production when the inputs drift.
+        \item \textbf{Tools:} \textbf{torchao} for PyTorch (\texttt{torch.ao.quantization} is deprecated),
+              \textbf{ONNX Runtime} quantisation for exported models, \textbf{TensorRT} or
+              \textbf{OpenVINO} for NVIDIA or Intel targets.
+    \end{itemize}
+
+\end{frame}

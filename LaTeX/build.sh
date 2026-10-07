@@ -1,5 +1,6 @@
 #!/bin/bash
-# Build the lecture decks in LaTeX/Day_N/ into Slides/Day_N/.
+# Build the lecture decks in LaTeX/Day_N/ into Slides/Day_N/, and those in LaTeX/Day_N/Optional/
+# into Slides/Day_N/Optional/.
 #
 #   LaTeX/build.sh                                   # every deck
 #   LaTeX/build.sh Day_4/01_Reinforcement_Learning.tex   # one deck (path relative to LaTeX/)
@@ -40,7 +41,7 @@ command -v latexmk > /dev/null || { echo "latexmk not found: install TinyTeX (se
 cd "$LATEX_DIR" || exit 1
 
 if [ ${#DECKS[@]} -eq 0 ]; then
-  for f in Day_*/*.tex; do [ -f "$f" ] && DECKS+=("$f"); done
+  for f in Day_*/*.tex Day_*/Optional/*.tex; do [ -f "$f" ] && DECKS+=("$f"); done
 fi
 [ ${#DECKS[@]} -gt 0 ] || { echo "No decks found in LaTeX/Day_*/"; exit 1; }
 

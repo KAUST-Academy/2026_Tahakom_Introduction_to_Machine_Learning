@@ -1,0 +1,38 @@
+
+\begin{frame}{Definition 1: Demographic Parity (Independence)}
+
+    \begin{block}{Demographic parity / statistical parity}
+        \[
+            \Pr(\Yhat = 1 \mid A = \GrpA) \;=\; \Pr(\Yhat = 1 \mid A = \GrpB)
+        \]
+        The model selects the same \emph{proportion} of each group.
+    \end{block}
+
+    \vspace{0.6em}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \textbf{When it is the right question}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item Allocating an opportunity where you do not trust the label
+                      (advertising, outreach, shortlisting).
+                \item You believe the historical outcome $Y$ is itself contaminated.
+                \item A widely used convention: a selection-rate ratio below $0.8$ between groups
+                      is treated as a gap worth investigating. Most audit tooling flags it by
+                      default.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \textbf{Where it goes wrong}
+            \begin{itemize}\small
+                \setlength\itemsep{0.3em}
+                \item It ignores $Y$ entirely. A model can satisfy it by selecting qualified people
+                      from one group and arbitrary people from the other.
+                \item If the true base rates genuinely differ, enforcing it forces errors.
+                \item Measured as a \textbf{ratio} (disparate impact) or a \textbf{difference}
+                      --- report which.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}

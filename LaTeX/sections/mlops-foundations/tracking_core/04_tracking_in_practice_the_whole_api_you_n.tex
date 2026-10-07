@@ -1,0 +1,33 @@
+
+% --- SLIDE 4: MINIMAL TRACKING CODE ---
+\begin{frame}[fragile]{Tracking in Practice: The Whole API You Need}
+
+    \begin{lstlisting}[language=Python, basicstyle=\ttfamily\scriptsize]
+import mlflow, mlflow.sklearn
+
+mlflow.set_experiment("churn-baseline")
+
+with mlflow.start_run(run_name="rf-depth-sweep"):
+    mlflow.log_params({"n_estimators": 500, "max_depth": 12, "seed": 42})
+    mlflow.log_param("data_version", "2026-03-14")
+
+    model = RandomForestClassifier(n_estimators=500, max_depth=12,
+                                   random_state=42).fit(X_tr, y_tr)
+
+    proba = model.predict_proba(X_va)[:, 1]
+    mlflow.log_metric("val_f1",  f1_score(y_va, model.predict(X_va)))
+    mlflow.log_metric("val_auc", roc_auc_score(y_va, proba))
+    mlflow.log_artifact("confusion_matrix.png")
+    mlflow.sklearn.log_model(model, name="model")
+    \end{lstlisting}
+
+    \vspace{0.4em}
+    \begin{itemize}
+        \small
+        \item \texttt{mlflow ui} then serves everything on \texttt{localhost:5000}. Nothing else to install.
+        \item \textbf{Autologging} (\texttt{mlflow.autolog()}) captures parameters, metrics and the model for
+              many frameworks with one line --- useful, but log the \emph{data version} and \emph{seed}
+              yourself; no autologger can guess those.
+    \end{itemize}
+
+\end{frame}

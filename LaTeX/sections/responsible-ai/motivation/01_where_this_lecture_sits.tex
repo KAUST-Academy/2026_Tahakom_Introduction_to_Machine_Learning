@@ -1,0 +1,34 @@
+\section{Why Responsible AI}
+
+\begin{frame}{Where This Lecture Sits}
+
+    So far the course has optimised a single number: accuracy, F1, RMSE. That number is computed
+    \textbf{over the whole test set}.
+
+    \vspace{1em}
+
+    \begin{block}{The gap this lecture closes}
+        A model that is accurate \emph{on average} can still be systematically wrong for a
+        particular group of people, and can be right for reasons you would not accept if you
+        could see them.
+    \end{block}
+
+    \vspace{1em}
+
+    \begin{itemize}
+        \setlength\itemsep{0.5em}
+        \item \textbf{Part 1 --- Fairness:} how to find and reduce systematic error across groups.
+        \item \textbf{Part 2 --- Interpretability:} how to find out what a model is actually using.
+        \item \textbf{Part 3 --- Documentation and governance:} how to write it down and who checks it.
+    \end{itemize}
+
+    \vspace{0.5em}
+    \centering
+    \small
+    \textit{Not covered here:} agent- and LLM-specific safety --- prompt injection, tool misuse,
+    excessive agency --- which is the subject of a dedicated lecture in \textbf{the Advanced NLP track (Phase 2B)}.
+
+    \vspace{0.6em}
+    \normalsize
+    \textit{We start with four documented cases. Each one failed in a different place in the pipeline.}
+\end{frame}

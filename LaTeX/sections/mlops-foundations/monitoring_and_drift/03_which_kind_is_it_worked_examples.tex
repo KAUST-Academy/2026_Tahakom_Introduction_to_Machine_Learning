@@ -1,0 +1,31 @@
+
+% --- SLIDE 3: EXAMPLES ---
+\begin{frame}{Which Kind Is It? Worked Examples}
+
+    \centering
+    \renewcommand{\arraystretch}{1.35}
+    {\small
+    \begin{tabular}{p{6.4cm}|p{5.0cm}}
+        \toprule
+        \textbf{Situation} & \textbf{Diagnosis} \\
+        \midrule
+        A demand forecaster trained pre-pandemic, run during a lockdown &
+            Both --- $P(X)$ and $P(Y\mid X)$ moved together \\
+        A fraud model: fraudsters read your rules and adapt &
+            Concept drift, \emph{adversarial} and fast \\
+        A churn model after marketing enters a new country &
+            Covariate shift --- new customer mix, same mechanism \\
+        A sensor is recalibrated and now reports Celsius, not Fahrenheit &
+            Upstream breakage disguised as drift \\
+        A recommender trained on its own logged clicks &
+            Feedback loop --- the model is shifting its own $P(X)$ \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.9em}
+    \begin{alertblock}{Diagnose before you retrain}
+        Retraining on a broken pipeline bakes the breakage into the model. \textbf{Always check for upstream
+        breakage first} --- it is the cheapest hypothesis and the most common cause.
+    \end{alertblock}
+
+\end{frame}

@@ -1,0 +1,44 @@
+
+% --- SLIDE 3: CONTAINERS ---
+\begin{frame}[fragile]{Containers, in One Slide}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+FROM python:3.12-slim
+
+WORKDIR /app
+COPY requirements.lock .
+RUN pip install --no-cache-dir \
+        --require-hashes -r requirements.lock
+
+COPY serve.py model.skops ./
+EXPOSE 8000
+CMD ["uvicorn", "serve:app", \
+     "--host", "0.0.0.0", "--port", "8000"]
+            \end{lstlisting}
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \small
+            \begin{itemize}
+                \setlength\itemsep{0.4em}
+                \item A container freezes the OS libraries, the Python version and the packages
+                      \textbf{together}. That is the part a lockfile alone cannot do.
+                \item Refer to images by \textbf{digest} (\texttt{@sha256:\ldots}), not by the tag
+                      \texttt{latest}. Tags move; digests do not.
+                \item \textbf{Do not bake giant model files into the image} if they change often --- pull them
+                      from the registry at start-up, by version.
+                \item GPU serving adds a CUDA-matched base image; the driver on the host must be new enough.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.6em}
+    \begin{block}{What a container does \emph{not} give you}
+        Reproducible \emph{training}. Same image, unseeded run, different model. Containers pin the
+        environment; seeds and data versions pin the result.
+    \end{block}
+
+\end{frame}
+
+\subsection{Serving Patterns}

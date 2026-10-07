@@ -1,0 +1,37 @@
+
+% --- SLIDE 2: SERIALISATION FORMATS ---
+\begin{frame}{Serialisation Formats: What to Save It As}
+
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    {\scriptsize
+    \begin{tabular}{p{2.0cm}|p{3.2cm}|p{3.0cm}|p{3.0cm}}
+        \toprule
+        \textbf{Format} & \textbf{Stores} & \textbf{Good} & \textbf{Bad} \\
+        \midrule
+        \texttt{pickle} / \texttt{joblib} & Arbitrary Python objects &
+            Works for anything; zero friction & \textbf{Executes code on load}; breaks across library versions \\
+        \texttt{skops} & scikit-learn estimators &
+            Contents inspectable before loading; safer than pickle & scikit-learn ecosystem only \\
+        \texttt{safetensors} & Tensors + a JSON header &
+            No code execution; fast zero-copy load & Tensors only --- no pipeline logic \\
+        \texttt{ONNX} & A computation graph &
+            Serve without Python; portable across runtimes & Not every estimator or op converts \\
+        Framework native & \texttt{.pt}, \texttt{SavedModel}, \texttt{.ubj} &
+            Full fidelity; official support & Ties you to that framework's version \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.7em}
+    \begin{alertblock}{The pickle warning, in scikit-learn's own words}
+        \small ``\texttt{pickle} (and \texttt{joblib} and \texttt{cloudpickle} by extension) has many
+        documented security vulnerabilities by design and should only be used if the artifact \ldots\ is
+        coming from a trusted and verified source. You should never load a pickle file from an untrusted
+        source, similarly to how you should never execute code from an untrusted source.''
+    \end{alertblock}
+
+    \vspace{0.3em}
+    {\scriptsize Source: scikit-learn documentation, ``Model persistence,''
+    \href{https://scikit-learn.org/stable/model_persistence.html}{scikit-learn.org/stable/model\_persistence.html}.}
+
+\end{frame}

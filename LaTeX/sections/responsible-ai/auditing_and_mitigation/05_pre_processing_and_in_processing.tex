@@ -1,0 +1,49 @@
+
+\begin{frame}{Pre-processing and In-processing}
+
+    \begin{columns}[T]
+        \begin{column}{0.49\textwidth}
+            \textbf{Pre-processing} --- change the data so the disparity is not there to be learned.
+            \vspace{0.4em}
+            \begin{itemize}\scriptsize
+                \setlength\itemsep{0.32em}
+                \item \textbf{Reweighing} (Kamiran \& Calders, 2012): weight each
+                      $(\text{group},\text{label})$ cell so group and label become independent in
+                      the weighted sample. Works with any estimator taking
+                      \texttt{sample\_weight}.
+                \item \textbf{Resampling}: same effect, but duplicates or discards rows.
+                \item \textbf{Targeted data collection}: usually the highest-value intervention,
+                      and the one most often skipped because it costs money rather than code.
+                \item \textbf{Representation transforms}: learn an encoding from which $A$ cannot
+                      be predicted.
+            \end{itemize}
+            \vspace{0.4em}
+            {\scriptsize Model-agnostic and done once --- but you optimise a proxy, and the
+            downstream model can partly undo it.}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \textbf{In-processing} --- put the requirement into the training objective.
+            \vspace{0.4em}
+            \begin{itemize}\scriptsize
+                \setlength\itemsep{0.32em}
+                \item \textbf{Constrained optimisation}: minimise loss subject to
+                      $|\text{TPR}_\GrpA - \text{TPR}_\GrpB| \leq \varepsilon$. Agarwal et al.\ (2018)
+                      reduce this to a sequence of ordinary cost-sensitive fits, so any learner
+                      works --- this is \texttt{fairlearn}'s \texttt{ExponentiatedGradient}.
+                \item \textbf{Regularisation}: add $\lambda \cdot (\text{disparity})$ to the loss;
+                      $\lambda$ is an explicit dial on the trade-off.
+                \item \textbf{Adversarial debiasing}: train the predictor against an adversary
+                      trying to recover $A$ from the prediction or representation.
+            \end{itemize}
+            \vspace{0.4em}
+            {\scriptsize Enforced where the model is fitted --- but needs training access, adds
+            tuning, and holds on the \emph{training} distribution.}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.4em}
+    {\scriptsize F.~Kamiran and T.~Calders, \emph{Knowledge and Information Systems} 33(1), 2012.
+    A.~Agarwal, A.~Beygelzimer, M.~Dud\accent19 ik, J.~Langford and H.~Wallach, ``A Reductions
+    Approach to Fair Classification,'' ICML 2018,
+    \href{https://arxiv.org/abs/1803.02453v3}{arXiv:1803.02453v3}.}
+\end{frame}

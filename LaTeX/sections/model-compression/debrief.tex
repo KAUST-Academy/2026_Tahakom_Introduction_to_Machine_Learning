@@ -1,0 +1,26 @@
+% Day 5's single deck: the debrief to show at the end of the day. The numbers are the labs' results
+% as measured on the instructor's laptop (an Apple M5 Pro); students' numbers will differ, the
+% speed-ups most of all.
+\begin{frame}{After the Labs: What Compression Cost and Bought}
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    {\scriptsize
+    \begin{tabular}{>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{1.7cm}>{\raggedright\arraybackslash}p{4.0cm}}
+        \toprule
+        \textbf{Variant} & \textbf{Size} & \textbf{Accuracy} & \textbf{Note} \\
+        \midrule
+        CNN, FP32                         & 1.69 MB               & 89.1\%    & Lab 1's baseline \\
+        CNN, INT8 with ONNX Runtime       & 0.43 MB               & 89.1\%    & $2.6\times$ faster on a batch \\
+        YOLO11s, everything INT8          & 10.2 MB               & mAP 0.000 & one scale for pixels and probabilities \\
+        YOLO11s, INT8, head kept in FP32  & 10.2 MB               & mAP 0.561 & FP32: 38.1 MB, mAP 0.575 \\
+        Teacher pruned 95\% + fine-tune   & 1.69 MB, zipped 0.20 MB & 89.9\%    & the zeros are still stored \\
+        Student alone, 1,000 labels       & 0.43 MB               & 82.3\%    & 37.5\% on shirts \\
+        Student distilled, INT8           & \textbf{0.12 MB}      & \textbf{88.0\%} & shipped: $14\times$ smaller than the teacher \\
+        \bottomrule
+    \end{tabular}}
+    \vspace{0.5em}
+    \begin{block}{Live: YOLO11m on the instructor's laptop}
+        Frames processed per second: 16 in FP32 and 27 in INT8 on the CPU, 77 for the smaller YOLO11n, and 134 in FP16
+        on the laptop's GPU. Yours will differ, which is why you benchmark on the target hardware.
+    \end{block}
+\end{frame}

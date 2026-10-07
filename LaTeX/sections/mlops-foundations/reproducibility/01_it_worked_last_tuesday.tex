@@ -1,0 +1,46 @@
+\section{Reproducibility}
+
+% --- SLIDE 1: WHAT REPRODUCIBLE MEANS ---
+\begin{frame}{``It Worked Last Tuesday''}
+
+    \centering
+    \large
+    \textit{A result you cannot rebuild is a rumour, not a result.}
+    \vspace{0.3em}
+
+    \scriptsize
+    \begin{columns}[T]
+        \begin{column}{0.31\textwidth}
+            \begin{tcolorbox}[colback=green!6, colframe=green!50!black, title=\scriptsize 1. Repeatable]
+                \scriptsize
+                \textbf{You}, same machine, same code, same data, next week $\rightarrow$ same number.
+                \vspace{0.09em}
+                \\ \textit{This is the bar for this course.}
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.31\textwidth}
+            \begin{tcolorbox}[colback=blue!6, colframe=blue!50!black, title=\scriptsize 2. Reproducible]
+                \scriptsize
+                \textbf{A colleague}, different machine, your code and data $\rightarrow$ the same number.
+                \vspace{0.09em}
+                \\ \textit{This is the bar for a team.}
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.31\textwidth}
+            \begin{tcolorbox}[colback=orange!6, colframe=orange!60!black, title=\scriptsize 3. Replicable]
+                \scriptsize
+                \textbf{A stranger}, their own implementation $\rightarrow$ the same \emph{conclusion}.
+                \vspace{0.09em}
+                \\ \textit{This is the bar for science.}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.36em}
+    \begin{itemize}
+        \item Level 1 is almost free and almost nobody does it. Get level 1 before worrying about the rest.
+        \item Reproducibility is not a research nicety --- it is what lets you \textbf{roll back} when a
+              deployment goes wrong.
+    \end{itemize}
+
+\end{frame}

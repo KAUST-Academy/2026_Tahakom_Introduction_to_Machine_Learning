@@ -1,0 +1,70 @@
+\begin{frame}{A Filled Example (1/2) --- Invented for Teaching}
+
+    \begin{tcolorbox}[colback=gray!4, colframe=raiBlue!60,
+                      title={Model card --- \texttt{loan-default-v3}}, fonttitle=\bfseries]
+        \scriptsize
+        \textbf{Model details.} Gradient-boosted trees (LightGBM, 400 trees, depth 6). Owner:
+        Credit Risk team. Version 3.1, trained 2026-05-14 on applications from 2021--2025.
+        Contact: \texttt{risk-ml@example.org}.
+
+        \vspace{0.35em}
+        \textbf{Intended use.} Produces a default-probability score used to \emph{prioritise manual
+        review} of personal-loan applications between \$1k and \$25k in Market X.
+        Primary users: underwriting analysts.
+
+        \vspace{0.35em}
+        \textbf{Out of scope.} Not for automatic decline without human review. Not for business
+        loans, mortgages, or other markets. Not for pricing. Not valid for applicants under 21
+        (fewer than 300 in training).
+
+        \vspace{0.35em}
+        \textbf{Factors.} Reported over: age band, gender, region, income decile, thin-file vs
+        thick-file credit history, and the region\,$\times$\,thin-file intersection.
+
+        \vspace{0.35em}
+        \textbf{Metrics.} AUC and recall at the operating threshold $0.31$, chosen to keep the
+        manual-review queue at 20\% of volume. 95\% intervals from 1{,}000 bootstrap resamples.
+
+        \vspace{0.35em}
+        \textbf{Fairness criterion adopted.} Equal opportunity on the review decision
+        (equal TPR across region and thin-file status). Demographic parity was
+        \textbf{not} targeted, because base default rates differ materially by region;
+        this trade-off was signed off by the Model Risk Committee on 2026-05-02.
+    \end{tcolorbox}
+\end{frame}
+
+\begin{frame}{A Filled Example (2/2) --- Invented for Teaching}
+
+    \begin{tcolorbox}[colback=gray!4, colframe=raiBlue!60,
+                      title={Model card --- \texttt{loan-default-v3} (continued)}, fonttitle=\bfseries]
+        \scriptsize
+        \textbf{Quantitative analyses.}
+
+        \vspace{0.3em}
+        \centering
+        \begin{tabular}{lrrrr}
+            \toprule
+            \textbf{Slice} & \textbf{$n$} & \textbf{AUC} & \textbf{TPR @ 0.31} & \textbf{FPR @ 0.31} \\
+            \midrule
+            Overall              & 42{,}300 & 0.81 & 0.74 & 0.18 \\
+            Region North         & 31{,}500 & 0.82 & 0.76 & 0.17 \\
+            Region South         & 10{,}800 & 0.77 & 0.66 & 0.21 \\
+            Thin file            &  6{,}100 & 0.71 & 0.58 & 0.24 \\
+            \textbf{South $\times$ thin file} &  1{,}450 & \textbf{0.68} & \textbf{0.52} & \textbf{0.27} \\
+            \bottomrule
+        \end{tabular}
+
+        \vspace{0.5em}
+        \raggedright
+        \textbf{Ethical considerations.} Region correlates with an attribute protected in Market X.
+        Region is not an input, but postcode-derived features are; a proxy audit is run quarterly.
+        A wrongly high score delays access to credit, so recall on the worst slice is the primary
+        fairness metric.
+
+        \vspace{0.35em}
+        \textbf{Caveats and recommendations.} The worst slice is 3.4\% of volume and is
+        \textbf{materially worse} than overall --- route it to a specialist queue rather than the
+        standard one. Not validated after a policy change to income verification (2026-03).
+        Re-audit on 2026-11-14 or after any change to the acquisition channel.
+    \end{tcolorbox}
+\end{frame}

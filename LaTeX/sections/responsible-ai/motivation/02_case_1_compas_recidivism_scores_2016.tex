@@ -1,0 +1,45 @@
+
+% ---------------------------------------------------------------------------
+% Case 1: COMPAS
+% ---------------------------------------------------------------------------
+\begin{frame}{Case 1: COMPAS Recidivism Scores (2016)}
+
+    \textbf{The system.} COMPAS is a commercial risk-assessment tool (Northpointe, now Equivant)
+    that scores a criminal defendant's likelihood of re-offending on a 1--10 scale. US courts have
+    used such scores to inform bail, sentencing, and parole decisions.
+
+    \vspace{0.8em}
+
+    \textbf{The analysis.} ProPublica journalists obtained scores for more than 7{,}000 people
+    arrested in Broward County, Florida in 2013--2014 and checked, two years later, who actually
+    re-offended.
+
+    \vspace{0.8em}
+
+    \begin{columns}[T]
+        \begin{column}{0.52\textwidth}
+            \centering
+            \small
+            \begin{tabular}{p{3.5cm}cc}
+                \toprule
+                & \textbf{White} & \textbf{Black} \\
+                \midrule
+                Labelled higher risk, but did \emph{not} re-offend & 23.5\% & 44.9\% \\
+                \addlinespace
+                Labelled lower risk, yet \emph{did} re-offend & 47.7\% & 28.0\% \\
+                \bottomrule
+            \end{tabular}
+        \end{column}
+        \begin{column}{0.44\textwidth}
+            \begin{itemize}\small
+                \item Overall, 61\% of those scored likely to re-offend were arrested for some
+                      crime within two years.
+                \item Of those predicted to commit a \emph{violent} crime, 20\% did.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.5em}
+    {\scriptsize J.~Angwin, J.~Larson, S.~Mattu and L.~Kirchner, ``Machine Bias,'' \emph{ProPublica},
+    23 May 2016, \href{https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing}{propublica.org}.}
+\end{frame}

@@ -1,0 +1,24 @@
+
+% --- SLIDE 2: SOURCES OF NONDETERMINISM ---
+\begin{frame}{Five Places Nondeterminism Hides}
+
+    \begin{enumerate}
+        \setlength\itemsep{0.45em}
+        \item \textbf{Random number generators.} Weight initialisation, shuffling, dropout, data
+              augmentation, train/test splits, bootstrap sampling in random forests.
+        \item \textbf{Parallelism.} Floating-point addition is not associative; sum the same numbers in a
+              different order on a different thread and you get a different last bit --- which compounds.
+        \item \textbf{Library and hardware versions.} A minor release changes a default; a different GPU
+              picks a different convolution kernel.
+        \item \textbf{The data itself.} A table that is updated in place has no version. ``The training
+              set'' is not a thing unless you make it one.
+        \item \textbf{Configuration.} The flag you changed by hand at 11pm and did not commit.
+    \end{enumerate}
+
+    \vspace{0.8em}
+    \begin{block}{Order of attack}
+        Seeds and data versioning buy you the most for the least effort. Bit-exact determinism on GPU is
+        the most expensive and usually the least valuable.
+    \end{block}
+
+\end{frame}

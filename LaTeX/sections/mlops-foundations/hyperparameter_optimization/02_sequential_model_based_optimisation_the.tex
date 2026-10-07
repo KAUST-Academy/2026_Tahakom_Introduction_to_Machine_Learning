@@ -1,0 +1,32 @@
+
+% --- SLIDE 2: SMBO ---
+\begin{frame}{Sequential Model-Based Optimisation: The Idea}
+
+    \centering
+    \begin{tikzpicture}[
+        b/.style={rectangle, draw, rounded corners=3pt, minimum height=1.0cm, text width=2.5cm,
+                  align=center, font=\scriptsize},
+        arr/.style={-{Latex[length=2.2mm]}, thick, gray!60!black}
+    ]
+        \node[b, fill=blue!12]   (hist) at (0,0)     {\textbf{History}\\$(x_i, y_i)$ so far};
+        \node[b, fill=green!12]  (surr) at (3.4,0)   {\textbf{Surrogate model}\\cheap guess of\\$y$ given $x$};
+        \node[b, fill=orange!12] (acq)  at (6.8,0)   {\textbf{Acquisition}\\where is the next\\trial worth most?};
+        \node[b, fill=red!10]    (eval) at (10.2,0)  {\textbf{Evaluate}\\actually train\\the model};
+
+        \draw[arr] (hist) -- (surr);
+        \draw[arr] (surr) -- (acq);
+        \draw[arr] (acq)  -- (eval);
+        \draw[arr] (eval.south) -- ++(0,-0.85) -| node[pos=0.25, below, font=\scriptsize] {append} (hist.south);
+    \end{tikzpicture}
+
+    \vspace{1.0em}
+    \begin{itemize}
+        \item Training one configuration is \emph{expensive}; evaluating a surrogate is \emph{free}. So spend
+              compute on the surrogate to decide where to spend compute on training.
+        \item The acquisition function balances \textbf{exploitation} (near the best point seen) against
+              \textbf{exploration} (where the surrogate is uncertain).
+        \item Gaussian-process Bayesian optimisation is the textbook version. \textbf{TPE} is the version
+              that scales to messy, conditional, mixed-type search spaces --- which is what real projects have.
+    \end{itemize}
+
+\end{frame}

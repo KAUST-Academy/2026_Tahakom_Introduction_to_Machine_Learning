@@ -1,0 +1,33 @@
+
+\begin{frame}[allowframebreaks]{Definition 2: Equalised Odds (Separation)}
+
+    \begin{block}{Equalised odds --- Hardt, Price and Srebro (2016)}
+        \[
+            \Pr(\Yhat = 1 \mid Y = y,\, A = \GrpA) \;=\; \Pr(\Yhat = 1 \mid Y = y,\, A = \GrpB)
+            \qquad \text{for } y \in \{0,1\}
+        \]
+        Equal \textbf{TPR} and equal \textbf{FPR} across groups.
+    \end{block}
+
+    \vspace{0.5em}
+
+    \begin{block}{Equal opportunity --- the one-sided version}
+        Only $\Pr(\Yhat = 1 \mid Y = 1)$ must match: among people who \emph{would} have succeeded,
+        each group has the same chance of being selected.
+    \end{block}
+
+    \vspace{0.6em}
+
+    \begin{itemize}\small
+        \setlength\itemsep{0.35em}
+        \item This is the ProPublica criterion: their complaint was unequal FPR and FNR.
+        \item Use it when the burden of a \textbf{mistake} is what matters --- a wrongly denied
+              loan, a wrongly flagged defendant, a missed diagnosis.
+        \item It conditions on $Y$, so it inherits whatever bias is in the label. If $Y$ is
+              ``was arrested,'' equalised odds equalises errors against a biased ground truth.
+    \end{itemize}
+
+    \vspace{0.3em}
+    {\scriptsize M.~Hardt, E.~Price and N.~Srebro, ``Equality of Opportunity in Supervised Learning,''
+    NeurIPS 2016, \href{https://arxiv.org/abs/1610.02413v1}{arXiv:1610.02413v1}.}
+\end{frame}

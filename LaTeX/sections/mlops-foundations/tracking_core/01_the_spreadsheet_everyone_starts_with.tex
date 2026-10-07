@@ -1,0 +1,41 @@
+\section{Experiment Tracking}
+
+% --- SLIDE 1: THE PROBLEM ---
+\begin{frame}{The Spreadsheet Everyone Starts With}
+
+    \centering
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{tcolorbox}[colback=red!5, colframe=red!50, title=\small \texttt{results\_final\_v3\_REAL.xlsx}]
+                \scriptsize
+                \begin{tabular}{lll}
+                    \textbf{run} & \textbf{lr} & \textbf{acc} \\
+                    \hline
+                    exp1        & 0.01  & 0.83 \\
+                    exp1b       & 0.01  & 0.86 \\
+                    exp2\_new   & 0.001 & 0.91 \\
+                    final       & ?     & 0.94 \\
+                    final2      & ?     & 0.93 \\
+                \end{tabular}
+                \vspace{0.5em}
+                \\ \textit{Which commit? Which data? Which split? Which preprocessing?}
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \small
+            \textbf{What always goes wrong}
+            \begin{itemize}
+                \item The best number belongs to a run nobody can rebuild.
+                \item Two rows differ by something that was never written down.
+                \item Someone edits a cell after the fact.
+                \item The file lives on one laptop.
+            \end{itemize}
+            \vspace{0.5em}
+            \begin{block}{\small The fix}
+                \small Make the \emph{run} a first-class object that the code writes to, automatically, and
+                that nobody can retro-edit.
+            \end{block}
+        \end{column}
+    \end{columns}
+
+\end{frame}

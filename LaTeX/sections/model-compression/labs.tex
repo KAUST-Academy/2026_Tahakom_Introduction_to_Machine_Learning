@@ -1,0 +1,23 @@
+% Day 5's single deck: the hand-off to the two labs and the live demo.
+\begin{frame}{Today's Labs}
+    \centering
+    \renewcommand{\arraystretch}{1.35}
+    {\small
+    \begin{tabular}{>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{10.4cm}}
+        \toprule
+        \textbf{Lab 1} & \textbf{Quantisation, fewer bits per number.} Quantise Day 2's Fashion-MNIST CNN by hand
+                         (symmetric vs affine, per tensor vs per channel, 8 bits down to 2), run it in INT8 with ONNX
+                         Runtime, then quantise a YOLO11 detector and find out what can go wrong. \\
+        \textbf{Live demo} & On your own laptop, \texttt{python yolo\_live\_demo.py}: YOLO11m at FP32 and INT8, the
+                         smaller YOLO11n, and FP16 on a GPU, switched live on your webcam. \\
+        \textbf{Lab 2} & \textbf{Pruning and distillation, then ship one.} Prune the CNN to 95\% sparsity and recover
+                         it, distil it into a $4\times$ smaller student from 1,000 labels, then gate every variant per
+                         class, on size and on speed, log them to MLflow and register the release. \\
+        \bottomrule
+    \end{tabular}}
+    \vspace{0.6em}
+    \begin{block}{Where to run them}
+        On Colab or your own laptop's CPU; no GPU needed. The live demo needs your own laptop, because Colab cannot
+        reach your webcam.
+    \end{block}
+\end{frame}

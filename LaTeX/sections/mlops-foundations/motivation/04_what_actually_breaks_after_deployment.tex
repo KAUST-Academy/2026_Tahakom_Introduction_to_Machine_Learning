@@ -1,0 +1,29 @@
+
+% --- SLIDE 4: WHAT ACTUALLY BREAKS ---
+\begin{frame}{What Actually Breaks After Deployment}
+
+    \centering
+    \textit{None of these are modelling problems. All of them are engineering problems.}
+    \vspace{0.18em}
+
+    \renewcommand{\arraystretch}{1.35}
+    {\scriptsize
+    \begin{tabular}{p{4.0cm}|p{7.4cm}}
+        \toprule
+        \textbf{Symptom} & \textbf{Actual cause} \\
+        \midrule
+        Accuracy fell off a cliff overnight & An upstream team renamed a column; your feature is now all-null \\
+        Accuracy decayed slowly over a year & The world changed; your training distribution did not \\
+        ``Works on my machine'' & Unpinned dependency; a minor version bumped a default \\
+        Cannot reproduce last quarter's model & The training data was overwritten in place \\
+        Two teams report different numbers & Different splits, different seeds, different preprocessing \\
+        Nobody noticed for three months & Nothing was monitored except server uptime \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.24em}
+    {\scriptsize See Paleyes, Urma \& Lawrence, ``Challenges in Deploying Machine Learning: a Survey of Case Studies,''
+    \textit{ACM Computing Surveys}, 2022, \href{https://arxiv.org/abs/2011.09926v3}{arXiv:2011.09926v3}, for a
+    catalogue of these from published industry post-mortems.}
+
+\end{frame}

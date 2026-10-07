@@ -1,0 +1,44 @@
+
+% --- SLIDE 6: REST VS GRPC + LATENCY ---
+\begin{frame}{Protocols and Latency Budgets}
+
+    \begin{columns}[T]
+        \begin{column}{0.46\textwidth}
+            \small
+            \textbf{REST/JSON vs gRPC}
+            \begin{itemize}
+                \item \textbf{REST + JSON:} human-readable, debuggable with \texttt{curl}, works with every
+                      client. Verbose; parsing costs real time on large payloads.
+                \item \textbf{gRPC + protobuf:} compact binary, schema-checked, streaming, faster for
+                      high-volume internal traffic. Harder to inspect.
+                \item \textbf{Pick REST first.} Move to gRPC when profiling says serialisation is your
+                      bottleneck --- rarely true for a scikit-learn model.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{tcolorbox}[colback=blue!5, colframe=blue!50, title=\small Budget the whole request]
+                \scriptsize
+                \begin{tabular}{lr}
+                    Network in/out        & 5--20\,ms \\
+                    Feature lookup (DB / feature store) & 5--50\,ms \\
+                    Preprocessing         & 1--5\,ms \\
+                    \textbf{Model forward pass} & \textbf{1--10\,ms} \\
+                    Post-processing, logging & 1--5\,ms \\
+                \end{tabular}
+                \vspace{0.4em}
+                \\ The model is often the \emph{smallest} term. Optimise what you measured, not what you
+                assumed.
+            \end{tcolorbox}
+            \vspace{0.4em}
+            \small \textbf{Quote p95 and p99, never the mean.} The tail is what users experience and what
+            times out upstream.
+        \end{column}
+    \end{columns}
+
+    \vspace{0.5em}
+    \begin{block}{Throughput vs latency}
+        \small Batching requests on the server raises throughput and \emph{raises} latency. Pick which one
+        the product actually needs, then set the batch window accordingly.
+    \end{block}
+
+\end{frame}

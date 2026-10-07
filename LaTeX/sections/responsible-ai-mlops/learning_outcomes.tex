@@ -1,0 +1,48 @@
+% Day 5's single deck: learning outcomes, the day's plan, and the contents.
+\begin{frame}{Learning Outcomes}
+    \begin{itemize}
+        \setlength\itemsep{0.55em}
+        \item Find where bias enters an ML system, audit a model with disaggregated metrics, and explain why the main
+              fairness definitions cannot all hold at once.
+        \item Explain a model's predictions with permutation importance, SHAP, LIME and Grad-CAM, and know when not to
+              trust the explanation.
+        \item Document a model with a model card, and place it within SDAIA's AI Ethics Principles and the PDPL.
+        \item Take a model from experiment to production: reproducible runs, experiment tracking, and a registry with
+              versions and aliases.
+        \item Deploy and monitor a model: choose a serving pattern, detect drift before the labels arrive, and release
+              behind shadow and canary tests.
+        \item Make a model smaller and faster with quantisation, pruning and distillation, and gate the compressed
+              version like any other release.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Today: Two Lectures, Two Labs}
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    {\small
+    \begin{tabular}{>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{7.6cm}>{\raggedright\arraybackslash}p{3.6cm}}
+        \toprule
+        \textbf{Block} & \textbf{Content} & \textbf{Proposal topic} \\
+        \midrule
+        Lecture 1 & Part 1: Bias and Fairness \newline Part 2: Interpretability \newline
+                    Part 3: Documentation and Governance
+                  & Responsible AI: bias, fairness, AI governance \\
+        Lecture 2 & Part 4: From Experiment to Production \newline Part 5: Lifecycle and Versioning \newline
+                    Part 6: Deployment and Monitoring \newline Part 7: Compression and Efficient Inference
+                  & MLOps concepts; lifecycle and versioning; deployment and monitoring; compression \\
+        Lab 1     & Quantisation: by hand, with ONNX Runtime, then on a YOLO11 detector, live on a webcam
+                  & Efficient inference \\
+        Lab 2     & Pruning and distillation, then ship one through a release gate and an MLflow registry
+                  & Compression; lifecycle and versioning \\
+        \bottomrule
+    \end{tabular}}
+    \vspace{0.5em}
+    \begin{block}{Optional labs, on the course site under Day 5}
+        A Responsible AI audit (fairness metrics, SHAP and LIME, a model card), and an end-to-end MLOps loop
+        (track, tune, deploy, monitor, roll back).
+    \end{block}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Table of Contents}
+    \tableofcontents
+\end{frame}

@@ -1,0 +1,46 @@
+
+\begin{frame}{Bias Lives in Learned Representations Too}
+
+    Word embeddings trained on news text place words in a space where a
+    \textbf{gender direction} is recoverable, and gender-neutral occupation words project onto it.
+
+    \vspace{0.12em}
+    \centering
+    \begin{tikzpicture}[scale=0.61, font=\scriptsize]
+        \draw[{Latex[length=2mm]}-{Latex[length=2mm]}, thick, raiRed] (-4.7,0) -- (4.7,0);
+        \node[font=\scriptsize\bfseries, text=raiRed, anchor=east] at (-4.85,0) {she};
+        \node[font=\scriptsize\bfseries, text=raiRed, anchor=west] at ( 4.85,0) {he};
+        \node[font=\scriptsize\itshape, text=raiRed] at (0,-0.95)
+            {gender direction $\approx \overrightarrow{\text{he}} - \overrightarrow{\text{she}}$};
+
+        \foreach \x/\w in {-4.2/homemaker, -2.8/nurse, -1.4/receptionist,
+                            1.4/financier, 2.8/architect, 4.2/philosopher} {
+            \fill[raiBlue] (\x,0) circle (2.2pt);
+            \node[text=raiBlue!80!black, font=\tiny, rotate=35, anchor=west, xshift=3pt] at (\x,0.06) {\w};
+        }
+        \fill[gray] (0,0) circle (1.8pt);
+        \node[text=gray, anchor=north] at (0,-0.15) {neutral};
+    \end{tikzpicture}
+
+    \vspace{0.27em}
+
+    \begin{itemize}\scriptsize
+        \setlength\itemsep{0.1em}
+        \item Bolukbasi et al.\ showed the analogy solver completes
+              \emph{man\,:\,computer programmer\,::\,woman\,:\,X} with ``homemaker,''
+              and proposed a projection-based debiasing method.
+        \item \textbf{Caveat worth teaching:} later work (Gonen \& Goldberg, 2019) showed such
+              projection mainly \emph{hides} the bias --- debiased vectors still cluster by
+              stereotype, so the association is recoverable.
+        \item Practical reading: a fix that makes a metric go down has not necessarily made the
+              system fair.
+    \end{itemize}
+
+    \vspace{0.09em}
+    {\scriptsize Schematic drawn for this slide; the gender direction, the analogy result and the
+    six occupation words (from the paper's extreme ``she''/``he'' lists) are from Bolukbasi, Chang,
+    Zou, Saligrama \& Kalai, ``Man is to Computer Programmer as Woman is to Homemaker? Debiasing
+    Word Embeddings,'' NeurIPS 2016, \href{https://arxiv.org/abs/1607.06520v1}{arXiv:1607.06520v1},
+    Figure 1. Follow-up: Gonen \& Goldberg, ``Lipstick on a Pig,'' NAACL 2019,
+    \href{https://arxiv.org/abs/1903.03862v2}{arXiv:1903.03862v2}.}
+\end{frame}

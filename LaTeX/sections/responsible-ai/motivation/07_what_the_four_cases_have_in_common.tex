@@ -1,0 +1,31 @@
+
+\begin{frame}{What the Four Cases Have in Common}
+
+    \centering
+    \small
+    \begin{tabular}{p{2.6cm} p{4.4cm} p{4.6cm}}
+        \toprule
+        \textbf{Case} & \textbf{Where it broke} & \textbf{What would have caught it} \\
+        \midrule
+        COMPAS & Conflicting fairness criteria, never chosen explicitly
+               & Naming the fairness criterion before deployment \\
+        \addlinespace
+        Resume screening & Target definition (``past hires'') and proxies
+               & Asking what the label actually measures \\
+        \addlinespace
+        Gender Shades & Benchmark composition and unreported slices
+               & Disaggregated, intersectional evaluation \\
+        \addlinespace
+        Health risk score & Proxy label (cost for need)
+               & Auditing the label against the real outcome \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{1.2em}
+
+    \begin{block}{}
+        \centering
+        None of these were caused by a bad optimiser or a small test set. All four were
+        \textbf{specification} problems that a standard evaluation report would not surface.
+    \end{block}
+\end{frame}

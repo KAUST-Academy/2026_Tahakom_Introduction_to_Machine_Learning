@@ -24,7 +24,7 @@ hand-edit, and hand-editing it is always wrong — the next build overwrites it.
 
 ## Where the material comes from
 
-**The Day 3 and Day 4 decks are built here**, from the LaTeX modules in
+**The Day 3 to Day 5 decks are built here**, from the LaTeX modules in
 [`LaTeX/`](LaTeX/README.md): edit a module, run `LaTeX/build.sh`, and the PDF in
 `Slides/Day_N/` is rebuilt. Never edit those PDFs directly; the next build
 overwrites them.
@@ -43,7 +43,7 @@ Day 1, and its reinforcement learning day is split over Days 3 and 4.
 | `Day_2_<Title>/` | Day 1, numbered after Day 1's files: its `Labs/01_PyTorchBasics.ipynb` is `Labs/Day_1/04_PyTorchBasics.ipynb` |
 | `Day_3_<Title>/` | Day 2, same file names |
 | `Day_4_<Title>/` | Days 3 and 4, with labs numbered across both days: its Labs 1 and 2 are Labs 1 and 3 here, its Lab 3 is Lab 4; decks built from `LaTeX/` |
-| `Day_5_<Title>/` | Day 5, same file names |
+| `Day_5_<Title>/` | Day 5; decks built from `LaTeX/` |
 
 Within a day, `Lectures/` is `Slides/Day_N/`, `Labs/` is `Labs/Day_N/`, and
 `Optional/Lectures/` and `Optional/Labs/` are the `Optional/` subfolder of each.
@@ -72,7 +72,7 @@ The rest of this file is the template's manual.
 ├── build.py                    # the generator. Standard library only — no pip install.
 ├── requirements.txt            # the lab environment students install
 ├── OFFLINE.md                  # classroom delivery runbook (no internet)
-├── LaTeX/                      # sources of the Day 3-4 decks; LaTeX/build.sh builds them into Slides/
+├── LaTeX/                      # sources of the Day 3-5 decks; LaTeX/build.sh builds them into Slides/
 ├── theme/                      # the KAUST Academy theme. Copied to _site/assets/.
 │   ├── css/style.css           #   ported verbatim from the existing course sites
 │   ├── img/                    #   logo

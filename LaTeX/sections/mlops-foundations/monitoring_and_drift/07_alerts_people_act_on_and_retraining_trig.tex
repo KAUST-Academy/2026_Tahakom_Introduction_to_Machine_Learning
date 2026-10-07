@@ -1,0 +1,42 @@
+
+% --- SLIDE 7: ALERTS AND TRIGGERS ---
+\begin{frame}{Alerts People Act On, and Retraining Triggers}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=red!5, colframe=red!50, title=\scriptsize Alerting rules that survive contact]
+                \scriptsize
+                \begin{itemize}
+                    \item Every alert names an \textbf{owner} and a \textbf{first action}. An alert with
+                          neither will be muted within a month.
+                    \item Page on \textbf{breakage}; e-mail a weekly digest for \textbf{drift}. They are
+                          different urgencies.
+                    \item Alert on a \textbf{sustained} threshold crossing (e.g.\ 3 days), not on one noisy
+                          window.
+                    \item Track how often each alert was actionable. Delete the ones that never were.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[colback=green!5, colframe=green!50!black, title=\scriptsize When to retrain]
+                \scriptsize
+                \begin{itemize}
+                    \item \textbf{Scheduled} --- weekly or monthly. Boring, predictable, and correct far more
+                          often than people expect. Start here.
+                    \item \textbf{Volume-based} --- every $N$ new labelled examples.
+                    \item \textbf{Performance-based} --- metric falls below a floor. Requires labels.
+                    \item \textbf{Drift-based} --- input distance exceeds a threshold. Available immediately,
+                          but noisier.
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.18em}
+    \begin{alertblock}{Automatic retraining needs a gate}
+        A retrain that ships without a \textbf{validation gate} is an automated way to deploy a worse model.
+        The new candidate must beat the incumbent on a held-out set before it is promoted --- and the
+        pipeline must be able to refuse.
+    \end{alertblock}
+
+\end{frame}

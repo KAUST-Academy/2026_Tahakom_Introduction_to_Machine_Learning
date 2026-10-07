@@ -1,0 +1,44 @@
+\section{Sources of Bias}
+
+\begin{frame}{First: ``Bias'' Means Three Different Things}
+
+    \begin{columns}[T]
+        \begin{column}{0.32\textwidth}
+            \begin{tcolorbox}[colback=gray!8, colframe=gray!60, title=Statistical bias]
+                \small
+                $\mathbb{E}[\hat{\theta}] - \theta \neq 0$.
+
+                \vspace{0.4em}
+                The estimator is systematically off. Neutral term; half of the
+                bias--variance trade-off.
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \begin{tcolorbox}[colback=raiBlue!5, colframe=raiBlue!60, title=Inductive bias]
+                \small
+                The assumptions a model class makes.
+
+                \vspace{0.4em}
+                Convolutions assume locality; linear models assume additivity.
+                \textbf{Necessary} --- without it there is no generalisation.
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \begin{tcolorbox}[colback=raiRed!5, colframe=raiRed!70, title=Societal / harmful bias]
+                \small
+                Systematically different quality of service or outcome across groups of people.
+
+                \vspace{0.4em}
+                \textbf{This lecture's subject.}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{1.2em}
+
+    \begin{block}{}
+        \centering
+        The three are unrelated. A model can be statistically unbiased and still harmful; a strong
+        inductive bias can either mask or expose a societal one.
+    \end{block}
+\end{frame}

@@ -1,0 +1,46 @@
+
+% --- SLIDE 4: ML TEST SCORE ---
+\begin{frame}{A Rubric to Audit Yourself: The ML Test Score}
+
+    \begin{block}{Breck et al., IEEE Big Data 2017}
+        \textbf{28 actionable tests} for production readiness, seven in each of four sections:
+        \textbf{Features and Data}, \textbf{Model Development}, \textbf{ML Infrastructure}, and
+        \textbf{Monitoring}.
+    \end{block}
+
+    \vspace{0.15em}
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{tcolorbox}[colback=green!5, colframe=green!50!black, title=\scriptsize How it is scored]
+                \scriptsize
+                \begin{itemize}
+                    \item \textbf{Half a point} per test executed manually, with the result documented and
+                          distributed.
+                    \item \textbf{A full point} if a system runs that test automatically and repeatedly.
+                    \item Sum within each of the four sections.
+                    \item \textbf{The final score is the \emph{minimum} of the four section scores.}
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \scriptsize
+            \textbf{Why the minimum?}
+            \begin{itemize}
+                \item Because all four areas are necessary. Beautiful model development with zero monitoring
+                      scores zero.
+                \item It is deliberately hard to game by doing more of what you already enjoy.
+            \end{itemize}
+            \vspace{0.12em}
+            \begin{tcolorbox}[colback=yellow!8, colframe=yellow!50!black, boxrule=0.5pt]
+                \scriptsize Run this on your own project this week. Most teams score well under 1 --- and the
+                exercise tells you exactly which section to invest in next.
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.12em}
+    {\scriptsize Source: Breck, Cai, Nielsen, Salib \& Sculley, ``The ML Test Score: A Rubric for ML Production
+    Readiness and Technical Debt Reduction,'' \textit{Proc.\ IEEE Big Data}, 2017.
+    \href{https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/}{Paper}.}
+
+\end{frame}

@@ -1,0 +1,57 @@
+% Day 5, optional reading: the full MLOps deck. Day 5's lecture deck,
+% Day_5/01_Responsible_AI_and_MLOps_Foundations.tex, keeps about half of it. The MLOps deck with a model-compression section after
+% serving (pruning, quantisation, distillation: the proposal's efficient-inference
+% topic), and four slides trimmed for time: who does what, the two maturity-level
+% detail slides, and the MLflow vs W&B comparison.
+\documentclass[10pt,aspectratio=169]{beamer}
+
+% Include preamble files
+\input{preamble/packages}
+\input{preamble/commands}
+\input{preamble/beamer_settings}
+
+% Deck-specific packages and macros
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+% Do not load algorithm/algpseudocode here: the shared preamble already loads
+% algorithm2e, and algorithm.sty redefines \listofalgorithms, which is a hard error.
+\usetikzlibrary{positioning,arrows.meta,calc,fit,backgrounds}
+\usepackage[utf8]{inputenc}
+\usepackage{pifont}
+\usepackage{newunicodechar}
+\newunicodechar{✓}{\ding{51}}
+\newunicodechar{✗}{\ding{55}}
+
+\title[MLOps Foundations]{MLOps Foundations: From Notebook to Production}
+
+\begin{document}
+
+% Include sections
+\input{sections/cover}
+
+\input{sections/mlops-foundations/learning_outcomes}
+\input{sections/mlops-foundations/motivation}
+% ml_lifecycle without "Who Does What" and the level 0 / level 1-2 detail slides
+\input{sections/mlops-foundations/lifecycle_loop}
+\input{sections/mlops-foundations/maturity_overview}
+\input{sections/mlops-foundations/reproducibility}
+% experiment_tracking without the MLflow vs W&B comparison
+\input{sections/mlops-foundations/tracking_core}
+\input{sections/mlops-foundations/hyperparameter_optimization}
+\input{sections/mlops-foundations/packaging_and_deployment}
+\input{sections/model-compression/motivation}
+\input{sections/model-compression/quantization}
+\input{sections/model-compression/pruning}
+\input{sections/model-compression/distillation}
+\input{sections/model-compression/release}
+\input{sections/mlops-foundations/monitoring_and_drift}
+\input{sections/mlops-foundations/testing_and_cicd}
+\input{sections/mlops-foundations/versioning_and_governance}
+\input{sections/mlops-foundations/summary}
+\input{sections/mlops-foundations/references}
+
+\end{document}

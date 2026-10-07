@@ -1,0 +1,22 @@
+% Day 5's single deck: what turns quantisation into real speed, before Lab 1.
+\begin{frame}{Real Speed Needs Integer Kernels}
+    \begin{itemize}
+        \setlength\itemsep{0.45em}
+        \item \textbf{Fake quantisation} rounds the weights to the integer grid and straight back to floats. The model
+              still computes in FP32, so it is no smaller and no faster. It is how you \emph{measure the accuracy
+              cost} before deploying anything, and how quantisation-aware training works.
+        \item \textbf{Real gains need a runtime with integer kernels:} ONNX Runtime on CPUs, TensorRT on NVIDIA GPUs,
+              Core ML on Apple devices, OpenVINO on Intel. You export the model (for example to ONNX), quantise it
+              with a calibration set, and run it there.
+        \item \textbf{How much faster depends on the chip.} CPUs with INT8 dot-product instructions gain the most.
+              Benchmark on the device you will ship to.
+        \item \textbf{Not every layer should be quantised.} A tensor that mixes values of very different sizes loses
+              the small ones to a single shared scale. Keep such layers in float, and re-measure accuracy after
+              every change.
+    \end{itemize}
+    \vspace{0.3em}
+    \begin{block}{In Lab 1}
+        You quantise a CNN by hand, then for real with ONNX Runtime, then a YOLO11 object detector, and compare the
+        versions live on a webcam.
+    \end{block}
+\end{frame}

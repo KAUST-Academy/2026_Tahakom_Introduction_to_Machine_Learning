@@ -1,0 +1,20 @@
+% Day 5's single deck: hyperparameter tuning in one slide, before the last frame of
+% hyperparameter_optimization (search-space design, and when tuning is wasted). The full
+% section, with TPE and Optuna's pruners, is in the optional MLOps deck.
+\begin{frame}{Tuning: From Grid Search to Smarter Search}
+    \begin{itemize}
+        \setlength\itemsep{0.45em}
+        \item \textbf{Grid search} tries every combination of a few values per hyperparameter. \textbf{Random search}
+              samples combinations instead, and at the same budget it usually wins: only a few hyperparameters
+              matter, and random search tries more values of each (Bergstra \& Bengio, 2012).
+        \item Both are \textbf{memoryless}: trial 90 learns nothing from trials 1--89, and an obviously bad trial
+              still runs to the end.
+        \item \textbf{Model-based (Bayesian) search} fixes the first: a cheap model of ``settings $\rightarrow$ score''
+              proposes where to try next. \textbf{Optuna}'s default sampler, TPE, picks settings that look like the
+              best trials so far.
+        \item \textbf{Pruning bad trials} fixes the second: stop a trial early when it lags the others at the same
+              step. In the Optuna paper's experiments, pruning was the bigger win.
+        \item \textbf{Every trial is a run}: log it to the tracker, so the search can be compared, reproduced and
+              audited. Hyperparameter optimisation (HPO) is experiment tracking on autopilot.
+    \end{itemize}
+\end{frame}

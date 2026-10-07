@@ -1,0 +1,43 @@
+
+\begin{frame}{``Just Drop the Sensitive Attribute'' Does Not Work}
+
+    \textbf{Fairness through unawareness:} remove race, gender, age from the feature set and
+    declare the model neutral.
+
+    \vspace{0.8em}
+
+    \begin{columns}[T]
+        \begin{column}{0.55\textwidth}
+            \begin{itemize}\small
+                \setlength\itemsep{0.4em}
+                \item Real features are \textbf{correlated} with the removed attribute: postcode,
+                      first name, school, device type, browsing history, purchase categories.
+                \item A capable model \emph{reconstructs} the attribute from the proxies. Removing
+                      the column removes your ability to \textbf{measure} the disparity, not the
+                      disparity itself.
+                \item The Amazon reporting is exactly this: no gender field, gendered signal.
+                \item Corollary: you often need the sensitive attribute --- held securely and used
+                      only for auditing --- in order to check for harm.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.43\textwidth}
+            \centering
+            \begin{tikzpicture}[scale=0.9,
+                n/.style={circle, draw, minimum size=0.85cm, font=\scriptsize, align=center},
+                arr/.style={-{Latex[length=2mm]}, thick}]
+                \node[n, fill=raiRed!15] (g)  at (0,2)     {$A$};
+                \node[n, fill=gray!12]   (z1) at (-1.6,0.6) {zip};
+                \node[n, fill=gray!12]   (z2) at (0,0.6)    {name};
+                \node[n, fill=gray!12]   (z3) at (1.6,0.6)  {club};
+                \node[n, fill=raiBlue!15](y)  at (0,-1.1)   {$\hat{Y}$};
+                \draw[arr] (g) -- (z1); \draw[arr] (g) -- (z2); \draw[arr] (g) -- (z3);
+                \draw[arr] (z1) -- (y); \draw[arr] (z2) -- (y); \draw[arr] (z3) -- (y);
+                \draw[arr, dashed, raiRed] (g.east) .. controls +(3.6,0) and +(3.6,0) .. (y.east)
+                    node[pos=0.5, fill=white, inner sep=1pt, font=\scriptsize, text=raiRed] {removed};
+            \end{tikzpicture}
+
+            \vspace{0.2em}
+            {\scriptsize Cutting the direct edge leaves every indirect path intact.\par}
+        \end{column}
+    \end{columns}
+\end{frame}

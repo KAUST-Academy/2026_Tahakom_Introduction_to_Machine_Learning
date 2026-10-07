@@ -1,0 +1,40 @@
+
+% --- SLIDE 4: DETERMINISM AND ITS COST ---
+\begin{frame}{The Limits of Determinism}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{alertblock}{What frameworks actually promise}
+                \small PyTorch: ``Completely reproducible results are not guaranteed across PyTorch
+                releases, individual commits, or different platforms'' --- nor, it adds, between CPU and
+                GPU executions, even with identical seeds.
+            \end{alertblock}
+            \vspace{0.4em}
+            \begin{block}{And what it costs}
+                \small ``Deterministic operations are often slower than nondeterministic operations, so
+                single-run performance may decrease for your model.''
+            \end{block}
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \small
+            \textbf{The pragmatic policy}
+            \begin{itemize}
+                \item Turn strict determinism \textbf{on} while chasing a regression --- it turns a
+                      statistical question into a deterministic one.
+                \item Turn it \textbf{off} for long production training runs and instead report the
+                      \textbf{mean and spread over 3--5 seeds}.
+                \item \textbf{A result that only holds for one seed is not a result.} Before believing a
+                      $+0.5\%$ improvement, measure how much the score moves when you change nothing but
+                      the seed.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.6em}
+    {\scriptsize Source: PyTorch documentation, ``Reproducibility,''
+    \href{https://docs.pytorch.org/docs/stable/notes/randomness.html}{docs.pytorch.org/docs/stable/notes/randomness.html}.
+    The deep-learning switches themselves (\texttt{use\_deterministic\_algorithms}, cuDNN flags,
+    \texttt{DataLoader} worker seeding, checkpoint discipline) are covered hands-on in
+    Day 1's Practical Deep Learning lecture; here we stay framework-agnostic.}
+
+\end{frame}

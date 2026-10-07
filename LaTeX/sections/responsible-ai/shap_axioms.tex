@@ -1,0 +1,28 @@
+\begin{frame}[allowframebreaks]{Why This Particular Formula: The Axioms}
+
+    Lundberg and Lee (2017) define a class of \emph{additive feature attribution} methods and show
+    that within it exactly \textbf{one} solution satisfies three properties --- the Shapley values.
+    They also show that several earlier methods (LIME with a particular kernel, DeepLIFT,
+    layer-wise relevance propagation) are members of that same class.
+
+    \vspace{0.8em}
+
+    \begin{itemize}
+        \setlength\itemsep{0.5em}
+        \item \textbf{Local accuracy (efficiency).} The parts add up to the whole:
+              \[
+                  f(x) \;=\; \underbrace{\mathbb{E}[f(X)]}_{\text{base value}} \;+\; \sum_{i} \phi_i
+              \]
+              This is what makes a SHAP plot readable: the bars literally sum to the prediction.
+        \item \textbf{Missingness.} A feature that is absent from the model gets $\phi_i = 0$.
+        \item \textbf{Consistency.} If you change the model so that a feature's marginal
+              contribution never decreases, its attribution cannot decrease. Common tree importance
+              measures (gain, split count) violate this --- the formal reason to prefer SHAP for
+              tree models.
+    \end{itemize}
+
+    \vspace{0.3em}
+    {\scriptsize S.~M.~Lundberg and S.-I.~Lee, ``A Unified Approach to Interpreting Model
+    Predictions,'' NeurIPS 2017, \href{https://arxiv.org/abs/1705.07874v2}{arXiv:1705.07874v2}.}
+\end{frame}
+

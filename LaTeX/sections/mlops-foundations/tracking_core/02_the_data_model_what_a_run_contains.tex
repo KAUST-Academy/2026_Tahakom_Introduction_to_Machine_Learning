@@ -1,0 +1,39 @@
+
+% --- SLIDE 2: THE DATA MODEL ---
+\begin{frame}{The Data Model: What a ``Run'' Contains}
+
+    \centering
+    \begin{tikzpicture}[
+        b/.style={rectangle, draw, rounded corners=2pt, minimum height=1.0cm, text width=2.6cm,
+                  align=center, font=\scriptsize, inner sep=2pt},
+        arr/.style={-{Latex[length=2mm]}, thick, gray!70!black}
+    ]
+        \node[b, fill=blue!6, minimum height=1.5cm, text width=2.1cm] (exp) at (-3.4,0)
+            {\textbf{Experiment}\\a named group\\of related runs};
+        \node[b, fill=blue!14, minimum height=1.5cm, text width=2.1cm] (run) at (0,0)
+            {\textbf{Run}\\one execution\\of your code};
+
+        \node[b, fill=gray!12]   (par) at (3.9,1.65)  {\textbf{Parameters}\\lr, depth, seed, commit, data hash};
+        \node[b, fill=green!12]  (met) at (3.9,0.55)  {\textbf{Metrics}\\loss, F1 --- over \emph{steps}};
+        \node[b, fill=orange!12] (art) at (3.9,-0.55) {\textbf{Artifacts}\\model file, plots};
+        \node[b, fill=red!10]    (tag) at (3.9,-1.65) {\textbf{Tags \& notes}\\author, purpose};
+
+        \draw[arr] (exp) -- (run);
+        \draw[arr] (run) -- (par);
+        \draw[arr] (run) -- (met);
+        \draw[arr] (run) -- (art);
+        \draw[arr] (run) -- (tag);
+    \end{tikzpicture}
+
+    \vspace{0.21em}
+    \begin{itemize}
+        \scriptsize
+        \item \textbf{A run is append-only by convention.} You add to it, you do not edit it --- so the
+              record cannot drift away from what actually happened.
+        \item Log metrics \textbf{per step}, not only at the end: a learning curve diagnoses ten times more
+              than a single number.
+        \item Log the \textbf{inputs} (commit, config, data hash) as parameters. Without them a run is a
+              number without provenance.
+    \end{itemize}
+
+\end{frame}

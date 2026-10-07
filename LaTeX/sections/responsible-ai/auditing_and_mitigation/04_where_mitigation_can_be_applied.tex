@@ -1,0 +1,34 @@
+
+\begin{frame}{Where Mitigation Can Be Applied}
+
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.0cm,
+        stage/.style={rectangle, draw, rounded corners, minimum height=1.0cm, text width=2.4cm,
+                      align=center, font=\small\bfseries},
+        note/.style={align=center, font=\scriptsize, text width=3.1cm},
+        arr/.style={-{Latex[length=2.5mm]}, thick}
+    ]
+        \node[stage, fill=raiBlue!12]  (data)  {Data};
+        \node[stage, fill=raiAmber!15, right=of data] (train) {Training};
+        \node[stage, fill=raiGreen!12, right=of train] (out)  {Outputs};
+
+        \draw[arr] (data) -- (train);
+        \draw[arr] (train) -- (out);
+
+        \node[note, below=0.45cm of data]  {\textbf{Pre-processing}\\ reweigh, resample, transform features};
+        \node[note, below=0.45cm of train] {\textbf{In-processing}\\ fairness constraint or penalty in the objective};
+        \node[note, below=0.45cm of out]   {\textbf{Post-processing}\\ adjust thresholds or scores per group};
+    \end{tikzpicture}
+
+    \vspace{1.4em}
+
+    \raggedright
+    \begin{itemize}\small
+        \setlength\itemsep{0.35em}
+        \item \textbf{Access decides the option.} Third-party model behind an API: post-processing
+              only. Your own training loop: all three.
+        \item \textbf{None of them repair a bad label or a missing population.} Those are data
+              problems, and mitigation applied on top will only redistribute the error.
+    \end{itemize}
+\end{frame}

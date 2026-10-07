@@ -1,0 +1,36 @@
+
+% --- SLIDE 3: HIDDEN TECHNICAL DEBT ---
+\begin{frame}{Hidden Technical Debt}
+
+    \begin{block}{The core argument (Sculley et al., NeurIPS 2015)}
+        Building an ML system is fast and cheap. \textbf{Maintaining} it is slow and expensive.
+        The debt is \emph{hidden} because it lives at the system level, not in the code, so ordinary
+        code review and unit tests do not find it.
+    \end{block}
+
+    \vspace{0.5em}
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \small
+            \textbf{Boundary erosion}
+            \begin{itemize}
+                \item \textbf{Entanglement (CACE):} \textit{Changing Anything Changes Everything}. Change one
+                      feature's distribution and every other weight shifts.
+                \item \textbf{Correction cascades:} a model that patches another model's output --- now you cannot
+                      improve either one alone.
+                \item \textbf{Undeclared consumers:} someone reads your predictions off a log and you never find out.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \small
+            \textbf{System-level anti-patterns}
+            \begin{itemize}
+                \item \textbf{Glue code:} 95\% of the repository is plumbing around a 5\% library call.
+                \item \textbf{Pipeline jungles:} scrapes and joins accreted over years; nobody can rerun them.
+                \item \textbf{Configuration debt:} a hundred flags, no schema, no review.
+                \item \textbf{Feedback loops:} the model influences the data it will next be trained on.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+\end{frame}

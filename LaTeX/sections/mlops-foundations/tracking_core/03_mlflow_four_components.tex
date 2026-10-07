@@ -1,0 +1,37 @@
+
+% --- SLIDE 3: MLFLOW COMPONENTS ---
+\begin{frame}{MLflow: Four Components}
+
+    \centering
+    \renewcommand{\arraystretch}{1.35}
+    {\scriptsize
+    \begin{tabular}{p{2.6cm}|p{9.0cm}}
+        \toprule
+        \textbf{Component} & \textbf{What it is} \\
+        \midrule
+        \textbf{Tracking}   & An API and UI for logging parameters, code versions, metrics and artifacts
+                              when you run ML code, and for visualising the results afterwards. \\
+        \textbf{Projects}   & A standard format for packaging and sharing reproducible data-science code,
+                              with its entry points and environment declared, so someone else can rerun it. \\
+        \textbf{Models}     & A standard packaging format with ``flavours''. Anything supporting the
+                              \texttt{python\_function} flavour can be served as a REST endpoint, batch-scored
+                              in Spark, or exported to a cloud serving platform. \\
+        \textbf{Model Registry} & A centralised model store with versioning, aliases, tags and
+                              annotations, plus lineage back to the run that produced each version. \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.24em}
+    \begin{itemize}
+        \scriptsize
+        \item They are designed to work together but each one is usable alone. \textbf{Start with Tracking}
+              --- it is three lines of code and it is where all the value is at first.
+        \item MLflow is open source and runs entirely on your laptop: no account, no network, no cost.
+    \end{itemize}
+
+    \vspace{0.09em}
+    {\scriptsize Source: MLflow documentation, \href{https://mlflow.org/docs/latest/ml/}{mlflow.org/docs/latest/ml}.
+    See also Zaharia et al., ``Accelerating the Machine Learning Lifecycle with MLflow,''
+    \textit{IEEE Data Engineering Bulletin} 41(4), 2018.}
+
+\end{frame}

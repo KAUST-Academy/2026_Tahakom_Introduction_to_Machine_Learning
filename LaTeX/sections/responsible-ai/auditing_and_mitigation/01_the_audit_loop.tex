@@ -1,0 +1,35 @@
+\section{Auditing and Mitigation}
+
+\begin{frame}{The Audit Loop}
+
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        node distance=0.65cm,
+        auditstep/.style={rectangle, draw, rounded corners, minimum height=1.15cm, text width=2.35cm,
+                     align=center, font=\scriptsize\bfseries, fill=raiBlue!10},
+        arr/.style={-{Latex[length=2.2mm]}, thick}
+    ]
+        \node[auditstep] (a) {1. Name the harm and the affected groups};
+        \node[auditstep, right=of a] (b) {2. Choose the metric(s) and the criterion};
+        \node[auditstep, right=of b] (c) {3. Measure per slice, with sample sizes};
+        \node[auditstep, right=of c] (d) {4. Diagnose \emph{why} the gap exists};
+        \node[auditstep, right=of d] (e) {5. Mitigate and re-measure};
+        \node[auditstep, right=of e, fill=raiGreen!12] (f) {6. Document and monitor};
+
+        \foreach \x/\y in {a/b, b/c, c/d, d/e, e/f} \draw[arr] (\x) -- (\y);
+        \draw[arr, dashed] (f.south) .. controls +(0,-1.0) and +(0,-1.0) .. (c.south);
+    \end{tikzpicture}}
+
+    \vspace{1.2em}
+
+    \raggedright
+    \begin{itemize}
+        \setlength\itemsep{0.45em}
+        \item Step 4 is the one people skip. A gap caused by \textbf{too few samples} needs data;
+              a gap caused by a \textbf{proxy label} needs a new label; a gap caused by a
+              \textbf{threshold} needs a threshold. The fixes are not interchangeable.
+        \item Step 6 is not optional: distributions move, and a model that was audited in March is
+              not audited in December.
+    \end{itemize}
+\end{frame}

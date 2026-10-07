@@ -1,0 +1,39 @@
+
+% --- SLIDE 6: DATA VERSIONING ---
+\begin{frame}{Versioning the Data}
+
+    \begin{block}{The problem}
+        Git is built for text files of a few kilobytes. Your training set is 40\,GB of Parquet, and someone
+        just overwrote it in place. The code from March still runs; it just trains on different data now.
+    \end{block}
+
+    \vspace{0.4em}
+    \centering
+    \begin{tikzpicture}[
+        b/.style={rectangle, draw, rounded corners=2pt, minimum height=0.85cm, text width=2.5cm,
+                  align=center, font=\scriptsize},
+        arr/.style={-{Latex[length=2mm]}, thick, gray!70!black}
+    ]
+        \node[b, fill=blue!10]   (repo)  at (0,0)   {git repository\\\texttt{train.py}, \texttt{data.dvc}};
+        \node[b, fill=gray!14]   (ptr)   at (3.6,0) {pointer file\\\texttt{md5: a91f\ldots}};
+        \node[b, fill=green!12]  (store) at (7.6,0) {content-addressed store\\(S3 / disk cache)};
+        \node[b, fill=orange!12] (data)  at (11.2,0) {the actual\\40\,GB of data};
+
+        \draw[arr] (repo) -- (ptr);
+        \draw[arr] (ptr)  -- node[above, font=\tiny] {resolves to} (store);
+        \draw[arr] (store) -- (data);
+    \end{tikzpicture}
+
+    \vspace{0.8em}
+    \begin{itemize}
+        \small
+        \item \textbf{The idea (DVC, git-lfs, lakeFS, Delta Lake all share it):} commit a small
+              \emph{pointer} that contains a content hash; keep the bytes somewhere cheap. Checking out an
+              old commit now checks out the matching data.
+        \item \textbf{The cheap version, if you adopt no tool at all:} write data to immutable, dated paths
+              (\texttt{s3://bucket/train/2026-03-14/}) and never overwrite. Log the path with the run.
+        \item \textbf{Never} version a mutable database table by referring to ``the customers table''. Refer
+              to a snapshot, or to a query plus an as-of timestamp.
+    \end{itemize}
+
+\end{frame}

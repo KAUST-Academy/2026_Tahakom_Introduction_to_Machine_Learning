@@ -1,0 +1,55 @@
+% --- SLIDE 5: DISTILLATION, SOFT TARGETS ---
+\begin{frame}{Knowledge Distillation: A Small Student Learns from a Large Teacher}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \small
+                \item Train a large \textbf{teacher} for accuracy, then train a small \textbf{student} to
+                      reproduce the teacher's \emph{output probabilities}, not just the labels (Hinton,
+                      Vinyals \& Dean, 2015).
+                \item A softmax with temperature $T$ softens those probabilities:
+                      \[
+                          q_i = \frac{\exp(z_i / T)}{\sum_j \exp(z_j / T)}
+                      \]
+                \item The soft targets carry what the teacher knows about \textbf{which wrong answers are
+                      nearly right}. A hard label throws that away.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \centering
+            \setlength{\tabcolsep}{0.3em}
+            \renewcommand{\arraystretch}{1.2}
+            \begin{tabular}{l|cccc}
+                & \footnotesize cow & \footnotesize car & \footnotesize dog & \footnotesize cat \\
+                \hline
+                \footnotesize Label          & $0$        & $1$    & $0$    & $0$ \\
+                \footnotesize Teacher, $T{=}1$ & $10^{-6}$ & $0.9$  & $0.1$  & $10^{-9}$ \\
+                \footnotesize Teacher, $T{=}5$ & $0.04$    & $0.58$ & $0.37$ & $0.01$ \\
+            \end{tabular}\\[0.5em]
+            {\scriptsize At $T{=}1$ cow and cat both look like zero; at $T{=}5$ the student can see that the
+            teacher ranks cow well above cat. Adapted from Hinton, Vinyals \& Dean (2015).}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+% --- SLIDE 6: DISTILLATION, THE LOSS ---
+\begin{frame}{Distillation: The Loss, and What It Buys}
+
+    \begin{itemize}
+        \item The student minimises a mix of two cross-entropies:
+              \[
+                  L = \lambda\, \underbrace{\mathrm{CE}\big(y,\; q_S^{(T=1)}\big)}_{\text{match the labels}}
+                  \;+\; (1-\lambda)\, T^2\, \underbrace{\mathrm{CE}\big(p_T^{(T)},\; q_S^{(T)}\big)}_{\text{match the teacher}}
+              \]
+        \item The soft term's gradients shrink as $1/T^2$, hence the $T^2$: without it, raising $T$ would
+              quietly weaken the teacher's signal.
+        \item \textbf{What it buys:} you choose the student's architecture, so it can be sized for the
+              device. DistilBERT keeps 97\% of BERT's language-understanding performance with 40\% fewer
+              parameters, and runs 60\% faster (Sanh et al., 2019).
+        \item \textbf{What it costs:} a full training run, and the teacher's training data. The student also
+              inherits the teacher's mistakes, including its weak slices.
+    \end{itemize}
+
+\end{frame}

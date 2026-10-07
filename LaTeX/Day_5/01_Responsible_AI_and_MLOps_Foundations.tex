@@ -1,0 +1,145 @@
+% Day 5: the single deck, in the order of the proposal sent to Tahakom. Lecture 1 is Parts 1-3
+% (Responsible AI: bias and fairness, interpretability, documentation and governance); lecture 2 is
+% Parts 4-7 (MLOps and compression). It is built from the modules of the two full decks in
+% Day_5/Optional/, keeping some frames of each: modules split into one file per frame let it pick
+% them (see LaTeX/README.md). Frames written for this deck are in sections/responsible-ai-mlops/,
+% plus four in model-compression/ and mlops-foundations/.
+\documentclass[10pt,aspectratio=169]{beamer}
+
+% Include preamble files
+\input{preamble/packages}
+\input{preamble/commands}
+\input{preamble/beamer_settings}
+
+% Deck-specific packages and macros: the union of the two full decks'
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+% Do not load algorithm/algpseudocode here: the shared preamble already loads
+% algorithm2e, and algorithm.sty redefines \listofalgorithms, which is a hard error.
+\usetikzlibrary{positioning,arrows.meta,calc,fit,backgrounds}
+\usepackage[utf8]{inputenc}
+\usepackage{pifont}
+\usepackage{newunicodechar}
+\newunicodechar{✓}{\ding{51}}
+\newunicodechar{✗}{\ding{55}}
+
+% Local palette of the Responsible AI modules
+\definecolor{raiRed}{RGB}{160,32,40}
+\definecolor{raiBlue}{RGB}{0,96,158}
+\definecolor{raiGreen}{RGB}{0,120,90}
+\definecolor{raiAmber}{RGB}{168,101,12}
+
+% Group A / group B shorthand used throughout the fairness section
+\newcommand{\Yhat}{\hat{Y}}
+\newcommand{\GrpA}{\text{A}}
+\newcommand{\GrpB}{\text{B}}
+
+\title[Responsible AI \& MLOps]{Responsible AI and MLOps Foundations}
+
+\begin{document}
+
+% Include sections
+\input{sections/cover}
+
+% Every module opens with its own \section (two also have a \subsection). In this deck the seven
+% parts are the sections, so the modules' own are switched off.
+\NewCommandCopy\daysection\section
+\RenewDocumentCommand\section{s o m}{}
+\RenewDocumentCommand\subsection{s o m}{}
+
+\input{sections/responsible-ai-mlops/learning_outcomes}
+
+\daysection{Part 1: Bias and Fairness}
+\input{sections/responsible-ai/motivation/02_case_1_compas_recidivism_scores_2016}
+\input{sections/responsible-ai/motivation/03_case_1_the_disagreement_that_followed}
+\input{sections/responsible-ai/motivation/04_case_2_a_resume_screening_tool_reuters_r}
+\input{sections/responsible-ai/motivation/05_case_3_gender_shades_disaggregated_error}
+\input{sections/responsible-ai/sources_of_bias/01_first_bias_means_three_different_things}
+\input{sections/responsible-ai/sources_of_bias/02_bias_enters_at_every_stage_not_just_the}
+\input{sections/responsible-ai/sources_of_bias/03_historical_and_representation_bias}
+\input{sections/responsible-ai/sources_of_bias/04_measurement_bias_the_label_is_a_proxy}
+\input{sections/responsible-ai/sources_of_bias/06_feedback_loops_the_model_changes_its_own}
+\input{sections/responsible-ai/sources_of_bias/07_just_drop_the_sensitive_attribute_does_n}
+\input{sections/responsible-ai/fairness_definitions/02_the_object_everything_is_computed_from}
+\input{sections/responsible-ai/fairness_definitions/03_definition_1_demographic_parity_independ}
+\input{sections/responsible-ai/fairness_definitions/04_definition_2_equalised_odds_separation}
+\input{sections/responsible-ai/fairness_definitions/05_definition_3_calibration_and_predictive}
+\input{sections/responsible-ai/fairness_definitions/06_you_cannot_have_all_three}
+\input{sections/responsible-ai/fairness_definitions/07_seeing_the_conflict_on_a_toy_example}
+\input{sections/responsible-ai/fairness_definitions/09_so_which_definition_do_you_use}
+\input{sections/responsible-ai/auditing_and_mitigation/02_disaggregated_evaluation_the_core_techni}
+\input{sections/responsible-ai/auditing_and_mitigation/04_where_mitigation_can_be_applied}
+\input{sections/responsible-ai/auditing_and_mitigation/06_post_processing_group_specific_threshold}
+\input{sections/responsible-ai/auditing_and_mitigation/07_trade_offs_monitoring_and_tooling}
+
+\daysection{Part 2: Interpretability}
+\input{sections/responsible-ai/interpretability_landscape}
+\input{sections/responsible-ai/feature_attribution_basics}
+\input{sections/responsible-ai/shap_plots_and_lime}
+\input{sections/responsible-ai/lime_text_and_images}
+\input{sections/responsible-ai/attribution_pitfalls}
+\input{sections/responsible-ai/saliency_gradcam_sanity}
+
+\daysection{Part 3: Documentation and Governance}
+\input{sections/responsible-ai/model_cards_and_datasheets}
+\input{sections/responsible-ai/organisational_practice}
+\input{sections/responsible-ai/regulatory_landscape}
+
+\daysection{Part 4: From Experiment to Production}
+\input{sections/mlops-foundations/motivation/02_the_ml_code_is_the_small_box}
+\input{sections/mlops-foundations/motivation/04_what_actually_breaks_after_deployment}
+\input{sections/mlops-foundations/motivation/05_so_what_is_mlops}
+\input{sections/mlops-foundations/lifecycle_loop/01_the_lifecycle_stage_by_stage}
+\input{sections/mlops-foundations/lifecycle_loop/03_one_failure_mode_per_stage}
+\input{sections/mlops-foundations/maturity_overview}
+\input{sections/mlops-foundations/reproducibility/02_five_places_nondeterminism_hides}
+\input{sections/mlops-foundations/reproducibility/07_configuration_and_a_checklist_to_steal}
+\input{sections/mlops-foundations/tracking_core/02_the_data_model_what_a_run_contains}
+\input{sections/mlops-foundations/tracking_core/03_mlflow_four_components}
+\input{sections/mlops-foundations/tracking_core/04_tracking_in_practice_the_whole_api_you_n}
+\input{sections/mlops-foundations/tracking_core/05_where_does_the_tracking_data_actually_li}
+\input{sections/mlops-foundations/hyperparameter_tuning_short}
+\input{sections/mlops-foundations/hyperparameter_optimization/07_search_space_design_and_when_hpo_is_wast}
+
+\daysection{Part 5: Lifecycle and Versioning}
+\input{sections/mlops-foundations/versioning_and_governance}
+
+\daysection{Part 6: Deployment and Monitoring}
+\input{sections/mlops-foundations/packaging_and_deployment/01_ship_the_model_ship_what_exactly}
+\input{sections/mlops-foundations/packaging_and_deployment/02_serialisation_formats_what_to_save_it_as}
+\input{sections/mlops-foundations/packaging_and_deployment/04_batch_online_streaming}
+\input{sections/mlops-foundations/packaging_and_deployment/06_protocols_and_latency_budgets}
+\input{sections/mlops-foundations/packaging_and_deployment/07_cpu_or_gpu_the_serving_economics}
+\input{sections/mlops-foundations/monitoring_and_drift/01_four_ways_a_deployed_model_goes_wrong}
+\input{sections/mlops-foundations/monitoring_and_drift/02_drift_formally}
+\input{sections/mlops-foundations/monitoring_and_drift/05_detecting_drift_before_the_labels_arrive}
+\input{sections/mlops-foundations/monitoring_and_drift/06_the_label_lag_problem}
+\input{sections/mlops-foundations/monitoring_and_drift/07_alerts_people_act_on_and_retraining_trig}
+\input{sections/mlops-foundations/monitoring_and_drift/08_log_every_prediction_you_serve}
+\input{sections/mlops-foundations/testing_and_cicd/02_testing_the_data}
+\input{sections/mlops-foundations/testing_and_cicd/03_testing_the_model}
+\input{sections/mlops-foundations/testing_and_cicd/06_never_flip_the_switch_shadow_canary_a_b}
+
+\daysection{Part 7: Compression and Efficient Inference}
+\input{sections/model-compression/motivation}
+\input{sections/model-compression/quantization}
+\input{sections/model-compression/integer_kernels}
+\input{sections/model-compression/pruning}
+\input{sections/model-compression/distillation}
+\input{sections/model-compression/release}
+\input{sections/model-compression/labs}
+
+\daysection{Summary}
+\input{sections/responsible-ai-mlops/summary}
+\input{sections/model-compression/debrief}
+
+\daysection{References}
+\input{sections/responsible-ai/references}
+\input{sections/mlops-foundations/references}
+
+\end{document}

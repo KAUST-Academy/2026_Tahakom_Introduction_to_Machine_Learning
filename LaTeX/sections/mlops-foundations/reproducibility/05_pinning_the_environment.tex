@@ -1,0 +1,39 @@
+
+% --- SLIDE 5: ENVIRONMENT PINNING ---
+\begin{frame}[fragile]{Pinning the Environment}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \small
+            \textbf{The ladder, weakest to strongest}
+            \begin{enumerate}
+                \item \texttt{pip install pandas} --- no pin. Broken by definition.
+                \item \texttt{requirements.txt} with \texttt{==} --- pins your \emph{direct} dependencies only.
+                \item \textbf{A lockfile} (\texttt{uv.lock}, \texttt{poetry.lock}, \texttt{conda-lock.yml})
+                      --- pins the whole transitive graph, with hashes.
+                \item \textbf{A container image} referenced by digest --- pins the OS, the CUDA driver stack
+                      and the Python packages together.
+            \end{enumerate}
+            \vspace{0.4em}
+            Steps 3 and 4 are the ones that matter. Steps 1--2 fail six months later, quietly.
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+# resolve once, commit the lockfile
+uv lock
+uv sync --frozen
+
+# record what actually ran
+pip freeze > run_env.txt
+nvidia-smi --query-gpu=name,driver_version \
+           --format=csv > run_gpu.txt
+            \end{lstlisting}
+            \vspace{0.2em}
+            \begin{tcolorbox}[colback=blue!5, colframe=blue!40, boxrule=0.5pt]
+                \scriptsize \textbf{Minimum viable habit:} log the lockfile hash and the git commit as
+                parameters of every training run. Two lines of code; saves entire quarters.
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+\end{frame}

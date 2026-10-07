@@ -14,7 +14,7 @@
 # but the days follow the schedule as taught: its Days 1 and 2 are Day 1 here
 # (its Day 2 files renumbered after Day 1's), its Day 3 is Day 2, and its
 # reinforcement learning day is split over Days 3 and 4. README.md has the full
-# mapping. The Day 3 and 4 decks are built from LaTeX/. Each day's lectures are in
+# mapping. The Day 3-5 decks are built from LaTeX/. Each day's lectures are in
 # Slides/Day_N/, its labs in Labs/Day_N/, and Optional/ material in an Optional/
 # subfolder of each.
 # =============================================================================
@@ -446,21 +446,14 @@ icon  = "ri-robot-line"
 slug  = "day5"
 label = "Day 5"
 title = "Responsible AI and MLOps Foundations"
-blurb = "Bias, fairness and interpretability, then tracking, deploying, monitoring and retiring a model in production."
+blurb = "Bias, fairness, interpretability and AI governance, then tracking, deploying, compressing and monitoring a model in production."
 icon  = "ri-shield-check-line"
 
   [[days.resources]]
-  name   = "Responsible AI and Model Interpretability"
-  detail = "Sources of bias, fairness definitions, SHAP and LIME, explaining deep models, model cards and governance"
+  name   = "Responsible AI and MLOps Foundations"
+  detail = "One deck in seven parts. Lecture 1: bias and fairness, interpretability (SHAP, LIME, Grad-CAM), documentation and governance (SDAIA, PDPL). Lecture 2: from experiment to production, lifecycle and versioning, deployment and monitoring, compression and efficient inference"
   kind   = "slides"
-  file   = "Slides/Day_5/01_Responsible_AI_and_Model_Interpretability.pdf"
-  status = "ready"
-
-  [[days.resources]]
-  name   = "MLOps Foundations"
-  detail = "The ML lifecycle, reproducibility, experiment tracking, deployment, monitoring and drift, testing and CI/CD"
-  kind   = "slides"
-  file   = "Slides/Day_5/02_MLOps_Foundations.pdf"
+  file   = "Slides/Day_5/01_Responsible_AI_and_MLOps_Foundations.pdf"
   status = "ready"
 
   [[days.resources]]
@@ -469,6 +462,20 @@ icon  = "ri-shield-check-line"
   kind   = "lab"
   file   = "Labs/Day_5/01_MLOps_Deploy_Monitor_and_Retire_a_Model.ipynb"
   colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_5/01_MLOps_Deploy_Monitor_and_Retire_a_Model.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: Responsible AI and Model Interpretability (Full Deck)"
+  detail = "Reading: the full deck that Lecture 1 draws from, with all four opening cases, every source of bias and the full fairness and governance sections"
+  kind   = "slides"
+  file   = "Slides/Day_5/Optional/01_Responsible_AI_and_Model_Interpretability.pdf"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: MLOps Foundations (Full Deck)"
+  detail = "Reading: the full deck that Lecture 2 draws from, including hyperparameter optimisation with Optuna, containers, and CI/CD for ML"
+  kind   = "slides"
+  file   = "Slides/Day_5/Optional/02_MLOps_Foundations.pdf"
   status = "ready"
 
 # -----------------------------------------------------------------------------

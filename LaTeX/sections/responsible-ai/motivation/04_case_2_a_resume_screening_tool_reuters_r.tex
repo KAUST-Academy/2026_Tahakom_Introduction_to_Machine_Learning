@@ -1,0 +1,41 @@
+
+% ---------------------------------------------------------------------------
+% Case 2: Amazon hiring tool
+% ---------------------------------------------------------------------------
+\begin{frame}[allowframebreaks]{Case 2: A Resume-Screening Tool (Reuters reporting, 2018)}
+
+    \begin{tcolorbox}[colback=raiAmber!5, colframe=raiAmber!70, title=Note on evidence]
+        \small This case comes from \textbf{news reporting based on anonymous sources}, not from a
+        published study. Treat the mechanism as illustrative and the details as journalistic.
+    \end{tcolorbox}
+
+    \vspace{0.6em}
+
+    According to Reuters, a team at Amazon built experimental tools from 2014 that scored job
+    applicants one to five stars. By 2015 the team found the system was not rating candidates for
+    software-developer roles in a gender-neutral way.
+
+    \vspace{0.6em}
+
+    \begin{itemize}
+        \setlength\itemsep{0.4em}
+        \item The models were trained on resumes submitted to the company over roughly a decade ---
+              a pool that was predominantly male in technical roles.
+        \item The reporting states the system penalised resumes containing the word
+              ``women's'' and downgraded graduates of two all-women's colleges.
+        \item Amazon said the tool was never used by recruiters to evaluate candidates, and the
+              project was abandoned.
+    \end{itemize}
+
+    \vspace{0.5em}
+
+    \begin{block}{The mechanism, stated plainly}
+        \small The label was not ``a good engineer.'' It was ``a person this company hired
+        before.'' Removing the gender field does not help, because the model finds
+        \textbf{proxies}. The learning worked; the \textbf{target definition} was the defect.
+    \end{block}
+
+    \vspace{0.3em}
+    {\scriptsize J.~Dastin, ``Amazon scraps secret AI recruiting tool that showed bias against
+    women,'' \emph{Reuters}, 10 October 2018.}
+\end{frame}

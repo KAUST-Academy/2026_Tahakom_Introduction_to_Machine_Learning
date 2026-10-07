@@ -1,0 +1,42 @@
+
+% --- SLIDE 7: CONFIG + CHECKLIST ---
+\begin{frame}{Configuration, and a Checklist to Steal}
+
+    \begin{columns}[T]
+        \begin{column}{0.46\textwidth}
+            \textbf{Configuration as code}
+            \scriptsize
+            \begin{itemize}
+                \item Hyperparameters and paths belong in a \emph{declared} config file (YAML, or a
+                      framework such as Hydra), not in argparse defaults scattered across three scripts.
+                \item The config is committed, diffable and reviewable. ``What changed between run 41 and
+                      run 42?'' becomes a \texttt{diff}.
+                \item Validate the config on load --- a typo in a key name should crash, not silently fall
+                      back to a default.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{tcolorbox}[colback=green!5, colframe=green!50!black, title=\scriptsize Log with every run]
+                \scriptsize
+                \begin{itemize}
+                    \item git commit hash \textbf{and} whether the tree was dirty
+                    \item the full resolved config
+                    \item random seed(s)
+                    \item dataset identifier or content hash
+                    \item lockfile hash / image digest
+                    \item metrics, and the evaluation code version
+                \end{itemize}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.18em}
+    {\scriptsize The community version of this list is the \textit{ML Reproducibility Checklist}: Pineau et al.,
+    ``Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program),''
+    2020, \href{https://arxiv.org/abs/2003.12206v4}{arXiv:2003.12206v4}.}
+
+    \vspace{0.12em}
+    {\scriptsize \textbf{Good news:} once you adopt experiment tracking --- the next section --- five of these six
+    items are logged for you automatically.}
+
+\end{frame}

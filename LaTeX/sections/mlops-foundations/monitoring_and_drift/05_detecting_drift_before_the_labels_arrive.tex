@@ -1,0 +1,37 @@
+
+% --- SLIDE 5: DETECTING WITHOUT LABELS ---
+\begin{frame}{Detecting Drift Before the Labels Arrive}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \small
+            \textbf{What you can measure today}
+            \begin{itemize}
+                \item \textbf{Schema and range checks} --- type, nullability, allowed categories, min/max.
+                      Cheap, and catches the common case.
+                \item \textbf{Per-feature distribution distance} against a fixed reference window:
+                      Kolmogorov--Smirnov for continuous, chi-square or PSI for categorical.
+                \item \textbf{Prediction distribution.} If your model predicted ``churn'' for 4\% of users
+                      all year and today it says 19\%, something changed --- even if you cannot yet say
+                      whether it was right.
+                \item \textbf{Confidence / entropy} of predictions, and the rate of out-of-range inputs.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.46\textwidth}
+            \begin{tcolorbox}[colback=gray!8, colframe=gray!60, title=\small Population Stability Index]
+                \small
+                \[ \mathrm{PSI} = \sum_{b} (p_b - q_b)\,\ln\!\frac{p_b}{q_b} \]
+                over bins $b$ of a feature; $p$ is the reference, $q$ the current window.
+                \vspace{0.3em}
+                \\ \scriptsize Credit-scoring rule of thumb: $<0.1$ stable, $0.1$--$0.25$ moderate shift,
+                $>0.25$ significant. A convention, not a theorem --- calibrate it on your own history.
+            \end{tcolorbox}
+            \vspace{0.4em}
+            \begin{alertblock}{\small The large-$n$ trap}
+                \small With a million rows per day, every statistical test rejects. Alert on
+                \textbf{effect size} and on a \textbf{trend}, not on a $p$-value.
+            \end{alertblock}
+        \end{column}
+    \end{columns}
+
+\end{frame}

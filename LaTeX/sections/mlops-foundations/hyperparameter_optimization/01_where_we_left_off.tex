@@ -1,0 +1,35 @@
+\section{Hyperparameter Optimization}
+
+% --- SLIDE 1: WHERE WE LEFT OFF ---
+\begin{frame}{Where We Left Off}
+
+    \begin{block}{From hyperparameters to search}
+        The course has already introduced \emph{what} a hyperparameter is (structural versus
+        optimisation). The two baseline strategies for choosing them: \textbf{grid search} enumerates
+        a discretised product of ranges, \textbf{random search} draws configurations independently
+        from them, and both score each candidate on a validation split.
+    \end{block}
+
+    \vspace{0.18em}
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    {\scriptsize
+    \begin{tabular}{p{3.1cm}|p{4.0cm}|p{4.0cm}}
+        \toprule
+                        & \textbf{Grid search} & \textbf{Random search} \\
+        \midrule
+        Cost            & Exponential in the number of parameters & You choose the budget \\
+        Uses past trials & No & No \\
+        Continuous ranges & Awkward --- you discretise & Natural \\
+        Good when        & 2--3 parameters, few values each & A first sweep of anything \\
+        \bottomrule
+    \end{tabular}}
+
+    \vspace{0.3em}
+    \begin{alertblock}{The gap}
+        Both are \textbf{memoryless}: trial 90 knows nothing about trials 1--89, and a trial that is
+        obviously hopeless at epoch 2 still runs to epoch 50. \textbf{Bayesian search} fixes the first,
+        \textbf{pruning} the second.
+    \end{alertblock}
+
+\end{frame}

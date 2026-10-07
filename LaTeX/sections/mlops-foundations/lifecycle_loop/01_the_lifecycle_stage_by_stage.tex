@@ -1,0 +1,59 @@
+\section{The ML Lifecycle}
+
+% --- SLIDE 1: THE NINE STAGES ---
+\begin{frame}{The Lifecycle, Stage by Stage}
+
+    \centering
+    \resizebox{0.97\textwidth}{!}{%
+    \begin{tikzpicture}[
+        stage/.style={rectangle, draw, rounded corners=2pt, minimum height=0.95cm, text width=1.75cm,
+                      align=center, font=\scriptsize, inner sep=2pt},
+        arr/.style={-{Latex[length=2mm]}, thick, gray!70!black}
+    ]
+        % Row 1: requirements + data work
+        \node[stage, fill=gray!12]   (req)   at (0,0)      {Model\\Requirements};
+        \node[stage, fill=green!12]  (coll)  at (2.4,0)    {Data\\Collection};
+        \node[stage, fill=green!12]  (clean) at (4.8,0)    {Data\\Cleaning};
+        \node[stage, fill=green!12]  (label) at (7.2,0)    {Data\\Labeling};
+        \node[stage, fill=green!12]  (feat)  at (9.6,0)    {Feature\\Engineering};
+
+        % Row 2 (right to left): model work + operations
+        \node[stage, fill=blue!12]   (train) at (9.6,-1.9) {Model\\Training};
+        \node[stage, fill=blue!12]   (eval)  at (7.2,-1.9) {Model\\Evaluation};
+        \node[stage, fill=orange!14] (depl)  at (4.8,-1.9) {Model\\Deployment};
+        \node[stage, fill=orange!14] (mon)   at (2.4,-1.9) {Model\\Monitoring};
+
+        \draw[arr] (req)   -- (coll);
+        \draw[arr] (coll)  -- (clean);
+        \draw[arr] (clean) -- (label);
+        \draw[arr] (label) -- (feat);
+        \draw[arr] (feat)  -- (train);
+        \draw[arr] (train) -- (eval);
+        \draw[arr] (eval)  -- (depl);
+        \draw[arr] (depl)  -- (mon);
+
+        % Small feedback: training can loop back to feature engineering
+        \draw[arr, dashed, blue!60!black]
+            (train.east) -- (11.4,-1.9) -- (11.4,0) -- (feat.east);
+        \node[font=\tiny, blue!60!black, align=center, anchor=west] at (11.5,-0.95)
+            {representation\\learning};
+
+        % Large feedback: monitoring loops back to any earlier stage
+        \draw[arr, dashed, red!70!black]
+            (mon.west) -- (-1.9,-1.9) -- (-1.9,0) -- (req.west);
+        \node[font=\tiny, red!70!black, align=center] at (0.2,-1.1)
+            {evaluation and monitoring loop back\\to \emph{any} earlier stage};
+    \end{tikzpicture}}
+
+    \vspace{0.5em}
+    {\scriptsize Stages after Amershi et al., ``Software Engineering for Machine Learning: A Case Study,''
+    ICSE-SEIP 2019, Figure~1.
+    \href{https://www.microsoft.com/en-us/research/publication/software-engineering-for-machine-learning-a-case-study/}{Paper}.}
+
+    \vspace{0.5em}
+    \begin{itemize}
+        \item \textbf{Green} is data work, \textbf{blue} is model work, \textbf{orange} is operations.
+        \item The dashed arrows are why a linear project plan always slips.
+    \end{itemize}
+
+\end{frame}

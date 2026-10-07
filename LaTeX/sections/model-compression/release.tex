@@ -1,0 +1,24 @@
+% --- SLIDE 7: SHIP IT LIKE ANY OTHER MODEL ---
+\begin{frame}{Compression Is a Model Change: Gate It Like One}
+
+    \begin{itemize}
+        \item A quantised, pruned or distilled model is a \textbf{new model version}. Track it as a run
+              (method, bit-width, sparsity, calibration-set hash) and register it next to the original.
+        \item \textbf{Re-run the full evaluation, per slice}, not just the headline metric. Compression tends
+              to cost the rare cases most: the Responsible AI lecture's \emph{learning bias}, now in
+              deployment.
+        \item \textbf{Benchmark on the target hardware} with production-shaped inputs: p95 latency, memory,
+              energy. A laptop benchmark says little about an embedded camera.
+        \item \textbf{Ship it like any release:} shadow it against the original, then canary it. The
+              uncompressed version stays in the registry as the rollback target.
+    \end{itemize}
+
+    \vspace{0.4em}
+    \begin{block}{Order of effort}
+        Post-training quantisation first (minutes, no retraining) $\rightarrow$ quantisation-aware training,
+        or structured pruning plus a fine-tune $\rightarrow$ distillation into a smaller architecture. Stop
+        as soon as the target is met. Han et al.\ (2016) combined pruning, quantisation and Huffman coding to
+        shrink AlexNet $35\times$ and VGG-16 $49\times$ with no loss of accuracy.
+    \end{block}
+
+\end{frame}
