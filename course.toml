@@ -372,7 +372,7 @@ icon  = "ri-robot-line"
 
   [[days.resources]]
   name   = "Lab 4: GRPO on Flappy Bird"
-  detail = "Exercise: implement Group Relative Policy Optimization in PyTorch and train it to play Flappy Bird"
+  detail = "Exercise: implement Group Relative Policy Optimization in PyTorch and train it to play Flappy Bird, then put the critic back to get PPO and race the two on the same budget"
   kind   = "lab"
   file   = "Labs/Day_4/04_GRPO_Flappy_Bird_Exercise.ipynb"
   colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/04_GRPO_Flappy_Bird_Exercise.ipynb"
@@ -388,7 +388,7 @@ icon  = "ri-robot-line"
 
   [[days.resources]]
   name   = "Optional: GRPO on Flappy Bird (Solution)"
-  detail = "Worked solution to the GRPO exercise"
+  detail = "Worked solution to the GRPO and PPO exercise"
   kind   = "lab"
   file   = "Labs/Day_4/Optional/01_GRPO_Flappy_Bird_Solution.ipynb"
   colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/Optional/01_GRPO_Flappy_Bird_Solution.ipynb"
