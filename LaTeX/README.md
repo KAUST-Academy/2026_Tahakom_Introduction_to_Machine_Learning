@@ -107,8 +107,8 @@ deck rebuilt through the wrapper is unchanged.
   `vanilla-policy-gradient` and `policy-optimization` modules, before Lab 3),
   then *RL in the Real World* (Part III: RLHF, RLAIF and RLVR, the DPO
   overview without its derivation, multi-agent RL and robotics).
-- **Day 5 is one deck**, *Responsible AI and MLOps Foundations*, in the
-  order of the proposal: bias and fairness, interpretability, documentation and
+- **Day 5 is one deck**, *Responsible AI and MLOps Foundations*, in seven
+  parts: bias and fairness, interpretability, documentation and
   governance (lecture 1); from experiment to production, lifecycle and
   versioning, deployment and monitoring, compression and efficient inference
   (lecture 2). It keeps all of interpretability and about two thirds of the
