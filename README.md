@@ -52,7 +52,8 @@ Lab 2 (policies by hand), Lab 5 (RLHF) and the optional REINFORCE and DPO labs
 come instead from `Labs/Reinforcement_Learning/` in
 [`Artificial-Intelligence-Courses`](https://github.com/KAUST-Academy/Artificial-Intelligence-Courses),
 with their references to that course's other lectures pointed at this one. Lab 2
-adds two challenges to that course's policy demo.
+adds two challenges to that course's policy demo. The optional MountainCarContinuous
+lab was written for this course.
 
 Files are numbered in teaching order within each day. Optional material is
 listed on its day's page, marked *Optional*.

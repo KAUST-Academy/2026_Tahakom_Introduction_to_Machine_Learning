@@ -434,6 +434,14 @@ icon  = "ri-robot-line"
   colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/Optional/06_DPO_TinyLM_Solution.ipynb"
   status = "ready"
 
+  [[days.resources]]
+  name   = "Optional: Continuous Control with PPO"
+  detail = "Worked lab: PPO with a Gaussian policy on MountainCarContinuous. Plain PPO learns to do nothing; energy-based reward shaping that keeps the best policy gets it to about 94, above the solved bar of 90"
+  kind   = "lab"
+  file   = "Labs/Day_4/Optional/07_PPO_MountainCarContinuous.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Introduction_to_Machine_Learning/blob/main/Labs/Day_4/Optional/07_PPO_MountainCarContinuous.ipynb"
+  status = "ready"
+
 [[days]]
 slug  = "day5"
 label = "Day 5"
